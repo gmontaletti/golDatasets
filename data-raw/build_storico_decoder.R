@@ -225,7 +225,10 @@ for (i in seq_len(nrow(scaffold))) {
     }
   }
 
-  # Tema F: politiche
+  # Tema F: politiche.
+  # Limita l'attribuzione delle variabili "in_formazione", "con_politica_avviata",
+  # "in_tirocinio" alle prime 3 col_index (1, 2, 3) per evitare l'over-matching
+  # quando il caption_title contiene queste keyword.
   if (s$tema == "F") {
     h <- s$header_modal
     if (s$col_index == 0L) {
@@ -237,7 +240,10 @@ for (i in seq_len(nrow(scaffold))) {
           confidenza = "high"
         )
       ]
-    } else if (grepl("politica\\s*avviata|con\\s*politica", h)) {
+    } else if (
+      s$col_index <= 3L &&
+        grepl("politica\\s*avviata|con\\s*politica", h)
+    ) {
       scaffold[
         i,
         `:=`(
@@ -246,7 +252,10 @@ for (i in seq_len(nrow(scaffold))) {
           confidenza = "medium"
         )
       ]
-    } else if (grepl("formazione", h, ignore.case = TRUE)) {
+    } else if (
+      s$col_index <= 3L &&
+        grepl("formazione", h, ignore.case = TRUE)
+    ) {
       scaffold[
         i,
         `:=`(
@@ -255,7 +264,10 @@ for (i in seq_len(nrow(scaffold))) {
           confidenza = "medium"
         )
       ]
-    } else if (grepl("tirocinio|tirocini", h, ignore.case = TRUE)) {
+    } else if (
+      s$col_index <= 3L &&
+        grepl("tirocinio|tirocini", h, ignore.case = TRUE)
+    ) {
       scaffold[
         i,
         `:=`(

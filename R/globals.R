@@ -80,5 +80,8 @@ utils::globalVariables(c(
   "gol_storia_esiti",
   # inapp_focus_mappers
   "V1",
-  "percorso_id"
+  "percorso_id",
+  # dedup_storia
+  ".__has_value",
+  ".__prio"
 ))

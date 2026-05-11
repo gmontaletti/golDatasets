@@ -1,3 +1,57 @@
+# golDatasets 0.9.0
+
+## Deduplicazione dei dataset storia
+
+Osservazione: `dev/explore.R` mostrava punti sovrapposti per la stessa
+data (fino a 28 valori al medesimo `data_riferimento`). Investigazione
+ha rivelato tre cause distinte:
+
+1. **Bug decoder F**: il pattern regex `grepl("formazione", header_modal)`
+   matchava tutto il `caption_title` invece della singola colonna,
+   producendo 14 col_index decodificati come `in_formazione` per ogni
+   report.
+2. **Stessi dati da 3 fonti parallele**: il rimpiazzo INAPP A1/1.2
+   (v0.4.0) + i mapper INAPP focus 1.3 (v0.7.0) hanno generato
+   triplicati `storico_MLPS` + `storico_INAPP` + `inapp_focus` con
+   valore identico.
+3. **Misure consolidate da enti diversi**: 1 caso 2025-01-31 con
+   `storico_INAPP` + `storico_MLPS` per stesso fatto (valori diversi).
+
+## Fix
+
+**Decoder F** (`data-raw/build_storico_decoder.R`):
+- Pattern `formazione`, `politica avviata`, `tirocinio` limitati ai
+  primi 3 col_index per evitare match sul `caption_title`.
+- I col_index 4+ vanno al safety net `raw_col_N` con
+  `confidenza = low`.
+
+**Nuova utility `dedup_storia(data, keys)`** in `R/dedup_storia.R`:
+- Regola 1: scarta righe con `valore == 0` o `NA` se esiste alternativa
+  valorizzata.
+- Regola 2: per chiave duplicata con valori uguali, tieni 1 riga
+  (priorita' fonte).
+- Regola 3: per chiave duplicata con valori diversi, tieni la riga
+  della fonte di priorita' piu' alta:
+  `inapp_focus_*` > `storico_INAPP` > `storico_MLPS` > `storico_ANPAL`
+  > `storico_ALTRO`.
+
+**Integrazione automatica** nei 3 builder
+(`R/build_storia_lunga.R`): `dedup_storia()` applicato in coda a ogni
+helper `.build_gol_storia_*`.
+
+## Risultati
+
+| Dataset | v0.8.0 | v0.9.0 | Δ |
+|---|---:|---:|---:|
+| `gol_storia_volumi` | 9.194 | **5.570** | -3.624 |
+| `gol_storia_caratteristiche` | 9.767 | **6.894** | -2.873 |
+| `gol_storia_esiti` | 15.515 | **7.316** | -8.199 |
+
+Nessun duplicato residuo: ogni chiave logica `(data, regione, ...)` ha
+esattamente una riga. Copertura analitica preservata: ogni serie
+prodotta da `gol_storia_*_series()` ha ora una sola osservazione per
+data.
+
 # golDatasets 0.8.0
 
 ## Nuovi mapper INAPP focus_gol_all

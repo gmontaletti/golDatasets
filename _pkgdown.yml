@@ -21,6 +21,7 @@ reference:
   - gol_decode_storico
   - cob_compute_indicators
   - build_inapp_focus_long
+  - dedup_storia
 
 - title: Visualizzazione
   desc: Timeline regionali con annotazione delle rotture metodologiche.

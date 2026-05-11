@@ -92,6 +92,10 @@
       "post_2025"
     )
   ]
+  out <- dedup_storia(
+    out,
+    keys = c("data_riferimento", "regione", "variabile", "percorso")
+  )
   data.table::setkey(out, data_riferimento, regione, percorso, variabile)
   out[]
 }
@@ -138,6 +142,16 @@
     )
   ]
   parte_storico[, rescan_severity := "ok"]
+  parte_storico <- dedup_storia(
+    parte_storico,
+    keys = c(
+      "data_riferimento",
+      "regione",
+      "caratteristica",
+      "modalita",
+      "percorso"
+    )
+  )
   data.table::setkey(
     parte_storico,
     data_riferimento,
@@ -238,6 +252,10 @@
     )
   ]
   out[, rescan_severity := "ok"]
+  out <- dedup_storia(
+    out,
+    keys = c("data_riferimento", "regione", "variabile", "percorso")
+  )
   data.table::setkey(out, data_riferimento, regione, variabile)
   out[]
 }
