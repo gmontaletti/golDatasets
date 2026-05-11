@@ -11,10 +11,15 @@ reference:
   contents:
   - build_gol_datasets
 
-- title: Indicatori e visualizzazione
-  desc: Trasformazione dei flussi COB in indicatori derivati e timeline regionali con annotazione delle rotture metodologiche.
+- title: Estrazione e indicatori
+  desc: Helper per pivotare i dataset long in serie pronte per la visualizzazione.
   contents:
+  - gol_extract_series
   - cob_compute_indicators
+
+- title: Visualizzazione
+  desc: Timeline regionali con annotazione delle rotture metodologiche.
+  contents:
   - plot_timeline
 
 - title: Dataset

@@ -15,6 +15,8 @@ utils::globalVariables(c(
   "etichetta",
   "variabile",
   "percorso",
+  "dimensione",
+  "unita_misura",
   # gol_storico_regionale
   "quality_flag",
   "anchor",

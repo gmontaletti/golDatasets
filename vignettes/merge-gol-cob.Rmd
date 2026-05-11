@@ -112,6 +112,74 @@ plot_timeline(
 )
 ```
 
+## 5.1 Estrazione strutturata: `gol_extract_series()`
+
+Per evitare di scrivere ogni volta i filtri sulla long table, l'helper `gol_extract_series()` produce una serie pronta per `plot_timeline()` data la `variabile` (la tavola viene inferita automaticamente).
+
+```{r plot-gol-multi-regione}
+serie_multi <- gol_extract_series(
+  variabile = "occupati_totale",
+  etichetta = c("Lombardia", "Lazio", "Campania", "Sicilia")
+)
+plot_timeline(
+  serie_multi,
+  group    = "regione",
+  ruptures = gol_method_ruptures,
+  title    = "Occupati GOL - confronto multi-regione",
+  subtitle = "Tavola 2.2, valore assoluto",
+  y_label  = "N. occupati"
+)
+```
+
+Decomposizione per **percorso GOL**: la tavola 1.2 codifica i 5 percorsi come colonne `variabile`, ricomponiamo la serie in long con un piccolo `rbindlist`.
+
+```{r plot-gol-multi-percorso}
+percorsi_ass <- c("1_reinserimento_lavorativo_ass",
+                  "2_aggiornamento_upskilling_ass",
+                  "3_riqualificazione_reskilling_ass",
+                  "4_lavoro_inclusione_ass",
+                  "5_ricollocazione_collettiva_ass")
+
+serie_perc <- rbindlist(lapply(percorsi_ass, function(v) {
+  s <- gol_extract_series(variabile = v,
+                          etichetta = "Emilia-Romagna",
+                          tavola    = 1.2)
+  s[, percorso := sub("_ass$", "", v)]
+  s[]
+}))
+
+plot_timeline(
+  serie_perc,
+  group    = "percorso",
+  ruptures = gol_method_ruptures,
+  title    = "Presi in carico per percorso - Emilia-Romagna",
+  subtitle = "Tavola 1.2, valori assoluti",
+  y_label  = "N. presi in carico"
+)
+```
+
+Confronto **prestazioni LEP** (tav 2.1) per una singola regione, stesso pattern di `rbindlist`.
+
+```{r plot-gol-lep}
+leps <- c("lep_e", "lep_f1", "lep_f2", "lep_h", "lep_j")
+serie_lep <- rbindlist(lapply(leps, function(v) {
+  s <- gol_extract_series(variabile = v, etichetta = "Lombardia")
+  s[, lep := v]
+  s[]
+}))
+
+plot_timeline(
+  serie_lep,
+  group    = "lep",
+  ruptures = gol_method_ruptures,
+  title    = "Prestazioni LEP - Lombardia",
+  subtitle = "Tavola 2.1, conteggio individui interessati",
+  y_label  = "N. individui"
+)
+```
+
+## 5.2 Plot COB
+
 Per le serie COB (che non hanno rotture metodologiche note) il parametro `ruptures` rimane `NULL` e si usa una palette CVD-safe (Okabe-Ito) per il confronto multi-regione.
 
 ```{r plot-cob}
