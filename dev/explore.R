@@ -276,15 +276,17 @@ plot_timeline(
   date_breaks = "2 months"
 )
 
-# 6.7 Formazione - 4 categorie LEP
+# 6.7 Formazione - 4 categorie LEP con etichette parlanti
 form_vars <- c(
-  "c07_form_incl_dig",
-  "c11_form_no_dig",
-  "c12_form_spec_dig",
-  "tirocinio_co"
+  c07_form_incl_dig = "Formazione con competenze digitali",
+  c11_form_no_dig = "Formazione non digitale",
+  c12_form_spec_dig = "Formazione specialistica digitale",
+  tirocinio_co = "Tirocini extracurriculari"
 )
-serie_form <- rbindlist(lapply(form_vars, function(v) {
-  gol_storia_esiti_series(variabile = v, regione = "Totale")[, metrica := v]
+serie_form <- rbindlist(lapply(names(form_vars), function(v) {
+  gol_storia_esiti_series(variabile = v, regione = "Totale")[,
+    metrica := form_vars[[v]]
+  ]
 }))
 plot_timeline(
   serie_form,
