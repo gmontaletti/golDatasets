@@ -41,11 +41,11 @@ d[tema == "A1" & confidenza == "high",
 #>    4:       2022-12-31 Abruzzo presi_in_carico_ass
 #>    5:       2022-12-31 Abruzzo  presi_in_carico_pc
 #>   ---                                             
-#> 4611:       2025-01-31  Veneto  presi_in_carico_pc
-#> 4612:       2025-01-31  Veneto presi_in_carico_ass
-#> 4613:       2025-01-31  Veneto  presi_in_carico_pc
-#> 4614:       2025-01-31  Veneto presi_in_carico_ass
-#> 4615:       2025-01-31  Veneto  presi_in_carico_pc
+#> 5073:       2025-01-31  Veneto  presi_in_carico_pc
+#> 5074:       2025-01-31  Veneto presi_in_carico_ass
+#> 5075:       2025-01-31  Veneto  presi_in_carico_pc
+#> 5076:       2025-01-31  Veneto presi_in_carico_ass
+#> 5077:       2025-01-31  Veneto  presi_in_carico_pc
 #>                            percorso valore_num
 #>                              <char>      <num>
 #>    1:    1_reinserimento_lavorativo     5165.0
@@ -54,9 +54,9 @@ d[tema == "A1" & confidenza == "high",
 #>    4:           4_lavoro_inclusione      260.0
 #>    5:    1_reinserimento_lavorativo       51.8
 #>   ---                                         
-#> 4611: 3_riqualificazione_reskilling       48.5
-#> 4612:           4_lavoro_inclusione       41.5
-#> 4613:           4_lavoro_inclusione        6.7
-#> 4614:   5_ricollocazione_collettiva        3.1
-#> 4615:   5_ricollocazione_collettiva        0.2
+#> 5073: 3_riqualificazione_reskilling       48.5
+#> 5074:           4_lavoro_inclusione       41.5
+#> 5075:           4_lavoro_inclusione        6.7
+#> 5076:   5_ricollocazione_collettiva        3.1
+#> 5077:   5_ricollocazione_collettiva        0.2
 ```
