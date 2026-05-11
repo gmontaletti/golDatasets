@@ -202,6 +202,9 @@ visualizzazione.
 - [`build_inapp_focus_long()`](https://gmontaletti.github.io/golDatasets/reference/build_inapp_focus_long.md)
   : Costruisce il long format delle tabelle INAPP focus_gol_all
 
+- [`dedup_storia()`](https://gmontaletti.github.io/golDatasets/reference/dedup_storia.md)
+  : Deduplica un dataset di storia lunga GOL
+
 ## Visualizzazione
 
 Timeline regionali con annotazione delle rotture metodologiche.

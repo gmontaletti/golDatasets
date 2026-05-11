@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golDatasets</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +35,45 @@
 
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.9.0" id="goldatasets-090">golDatasets 0.9.0<a class="anchor" aria-label="anchor" href="#goldatasets-090"></a></h2>
+<div class="section level3">
+<h3 id="deduplicazione-dei-dataset-storia-0-9-0">Deduplicazione dei dataset storia<a class="anchor" aria-label="anchor" href="#deduplicazione-dei-dataset-storia-0-9-0"></a></h3>
+<p>Osservazione: <code>dev/explore.R</code> mostrava punti sovrapposti per la stessa data (fino a 28 valori al medesimo <code>data_riferimento</code>). Investigazione ha rivelato tre cause distinte:</p>
+<ol style="list-style-type: decimal"><li>
+<strong>Bug decoder F</strong>: il pattern regex <code>grepl("formazione", header_modal)</code> matchava tutto il <code>caption_title</code> invece della singola colonna, producendo 14 col_index decodificati come <code>in_formazione</code> per ogni report.</li>
+<li>
+<strong>Stessi dati da 3 fonti parallele</strong>: il rimpiazzo INAPP A1/1.2 (v0.4.0) + i mapper INAPP focus 1.3 (v0.7.0) hanno generato triplicati <code>storico_MLPS</code> + <code>storico_INAPP</code> + <code>inapp_focus</code> con valore identico.</li>
+<li>
+<strong>Misure consolidate da enti diversi</strong>: 1 caso 2025-01-31 con <code>storico_INAPP</code> + <code>storico_MLPS</code> per stesso fatto (valori diversi).</li>
+</ol></div>
+<div class="section level3">
+<h3 id="fix-0-9-0">Fix<a class="anchor" aria-label="anchor" href="#fix-0-9-0"></a></h3>
+<p><strong>Decoder F</strong> (<code>data-raw/build_storico_decoder.R</code>): - Pattern <code>formazione</code>, <code>politica avviata</code>, <code>tirocinio</code> limitati ai primi 3 col_index per evitare match sul <code>caption_title</code>. - I col_index 4+ vanno al safety net <code>raw_col_N</code> con <code>confidenza = low</code>.</p>
+<p><strong>Nuova utility <code>dedup_storia(data, keys)</code></strong> in <code>R/dedup_storia.R</code>: - Regola 1: scarta righe con <code>valore == 0</code> o <code>NA</code> se esiste alternativa valorizzata. - Regola 2: per chiave duplicata con valori uguali, tieni 1 riga (priorita’ fonte). - Regola 3: per chiave duplicata con valori diversi, tieni la riga della fonte di priorita’ piu’ alta: <code>inapp_focus_*</code> &gt; <code>storico_INAPP</code> &gt; <code>storico_MLPS</code> &gt; <code>storico_ANPAL</code> &gt; <code>storico_ALTRO</code>.</p>
+<p><strong>Integrazione automatica</strong> nei 3 builder (<code>R/build_storia_lunga.R</code>): <code><a href="../reference/dedup_storia.html">dedup_storia()</a></code> applicato in coda a ogni helper <code>.build_gol_storia_*</code>.</p>
+</div>
+<div class="section level3">
+<h3 id="risultati-0-9-0">Risultati<a class="anchor" aria-label="anchor" href="#risultati-0-9-0"></a></h3>
+<table class="table"><thead><tr><th>Dataset</th>
+<th align="right">v0.8.0</th>
+<th align="right">v0.9.0</th>
+<th align="right">Δ</th>
+</tr></thead><tbody><tr><td><code>gol_storia_volumi</code></td>
+<td align="right">9.194</td>
+<td align="right"><strong>5.570</strong></td>
+<td align="right">-3.624</td>
+</tr><tr><td><code>gol_storia_caratteristiche</code></td>
+<td align="right">9.767</td>
+<td align="right"><strong>6.894</strong></td>
+<td align="right">-2.873</td>
+</tr><tr><td><code>gol_storia_esiti</code></td>
+<td align="right">15.515</td>
+<td align="right"><strong>7.316</strong></td>
+<td align="right">-8.199</td>
+</tr></tbody></table><p>Nessun duplicato residuo: ogni chiave logica <code>(data, regione, ...)</code> ha esattamente una riga. Copertura analitica preservata: ogni serie prodotta da <code>gol_storia_*_series()</code> ha ora una sola osservazione per data.</p>
+</div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.0" id="goldatasets-080">golDatasets 0.8.0<a class="anchor" aria-label="anchor" href="#goldatasets-080"></a></h2>
 <div class="section level3">
