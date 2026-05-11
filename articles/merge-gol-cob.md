@@ -194,6 +194,90 @@ plot_timeline(
 
 ![](merge-gol-cob_files/figure-html/plot-gol-1.png)
 
+### 5.1 Estrazione strutturata: `gol_extract_series()`
+
+Per evitare di scrivere ogni volta i filtri sulla long table, l’helper
+[`gol_extract_series()`](https://gmontaletti.github.io/golDatasets/reference/gol_extract_series.md)
+produce una serie pronta per
+[`plot_timeline()`](https://gmontaletti.github.io/golDatasets/reference/plot_timeline.md)
+data la `variabile` (la tavola viene inferita automaticamente).
+
+``` r
+
+serie_multi <- gol_extract_series(
+  variabile = "occupati_totale",
+  etichetta = c("Lombardia", "Lazio", "Campania", "Sicilia")
+)
+plot_timeline(
+  serie_multi,
+  group    = "regione",
+  ruptures = gol_method_ruptures,
+  title    = "Occupati GOL - confronto multi-regione",
+  subtitle = "Tavola 2.2, valore assoluto",
+  y_label  = "N. occupati"
+)
+```
+
+![](merge-gol-cob_files/figure-html/plot-gol-multi-regione-1.png)
+
+Decomposizione per **percorso GOL**: la tavola 1.2 codifica i 5 percorsi
+come colonne `variabile`, ricomponiamo la serie in long con un piccolo
+`rbindlist`.
+
+``` r
+
+percorsi_ass <- c("1_reinserimento_lavorativo_ass",
+                  "2_aggiornamento_upskilling_ass",
+                  "3_riqualificazione_reskilling_ass",
+                  "4_lavoro_inclusione_ass",
+                  "5_ricollocazione_collettiva_ass")
+
+serie_perc <- rbindlist(lapply(percorsi_ass, function(v) {
+  s <- gol_extract_series(variabile = v,
+                          etichetta = "Emilia-Romagna",
+                          tavola    = 1.2)
+  s[, percorso := sub("_ass$", "", v)]
+  s[]
+}))
+
+plot_timeline(
+  serie_perc,
+  group    = "percorso",
+  ruptures = gol_method_ruptures,
+  title    = "Presi in carico per percorso - Emilia-Romagna",
+  subtitle = "Tavola 1.2, valori assoluti",
+  y_label  = "N. presi in carico"
+)
+```
+
+![](merge-gol-cob_files/figure-html/plot-gol-multi-percorso-1.png)
+
+Confronto **prestazioni LEP** (tav 2.1) per una singola regione, stesso
+pattern di `rbindlist`.
+
+``` r
+
+leps <- c("lep_e", "lep_f1", "lep_f2", "lep_h", "lep_j")
+serie_lep <- rbindlist(lapply(leps, function(v) {
+  s <- gol_extract_series(variabile = v, etichetta = "Lombardia")
+  s[, lep := v]
+  s[]
+}))
+
+plot_timeline(
+  serie_lep,
+  group    = "lep",
+  ruptures = gol_method_ruptures,
+  title    = "Prestazioni LEP - Lombardia",
+  subtitle = "Tavola 2.1, conteggio individui interessati",
+  y_label  = "N. individui"
+)
+```
+
+![](merge-gol-cob_files/figure-html/plot-gol-lep-1.png)
+
+### 5.2 Plot COB
+
 Per le serie COB (che non hanno rotture metodologiche note) il parametro
 `ruptures` rimane `NULL` e si usa una palette CVD-safe (Okabe-Ito) per
 il confronto multi-regione.
@@ -245,7 +329,7 @@ str(ind[1])
 #>  $ yoy_avviamenti       : num NA
 #>  $ yoy_cessazioni       : num NA
 #>  $ yoy_saldo            : num NA
-#>  - attr(*, ".internal.selfref")=<pointer: 0x557cede26010> 
+#>  - attr(*, ".internal.selfref")=<pointer: 0x55e1c5306010> 
 #>  - attr(*, "sorted")= chr [1:3] "regione" "anno" "trimestre"
 ```
 

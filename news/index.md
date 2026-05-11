@@ -1,5 +1,23 @@
 # Changelog
 
+## golDatasets 0.3.0
+
+### Funzioni
+
+- [`gol_extract_series()`](https://gmontaletti.github.io/golDatasets/reference/gol_extract_series.md):
+  pivota `gol_inapp_mensile` in serie pronte per
+  [`plot_timeline()`](https://gmontaletti.github.io/golDatasets/reference/plot_timeline.md).
+  Inferenza automatica della tavola dalla `variabile`, supporto
+  multi-regione (aggiunge la colonna `regione` quando le etichette sono
+  piu’ di una), filtro opzionale su `percorso` e `unita_misura`.
+
+### Documentazione
+
+- Vignette `merge-gol-cob` estesa con tre nuovi grafici GOL: confronto
+  multi-regione di `occupati_totale`, decomposizione per percorso (tav
+  1.2) di Emilia-Romagna, confronto prestazioni LEP (tav 2.1) di
+  Lombardia.
+
 ## golDatasets 0.2.0
 
 ### Funzioni

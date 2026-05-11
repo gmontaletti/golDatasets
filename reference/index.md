@@ -9,13 +9,23 @@ Funzioni per rigenerare i .rda dai CSV grezzi.
 
   Costruisce i tre dataset canonici GOL e li scrive in `data/`
 
-## Indicatori e visualizzazione
+## Estrazione e indicatori
 
-Trasformazione dei flussi COB in indicatori derivati e timeline
-regionali con annotazione delle rotture metodologiche.
+Helper per pivotare i dataset long in serie pronte per la
+visualizzazione.
+
+- [`gol_extract_series()`](https://gmontaletti.github.io/golDatasets/reference/gol_extract_series.md)
+  :
+
+  Estrai una serie temporale pronta per plot da `gol_inapp_mensile`
 
 - [`cob_compute_indicators()`](https://gmontaletti.github.io/golDatasets/reference/cob_compute_indicators.md)
   : Calcola indicatori derivati dai flussi COB
+
+## Visualizzazione
+
+Timeline regionali con annotazione delle rotture metodologiche.
+
 - [`plot_timeline()`](https://gmontaletti.github.io/golDatasets/reference/plot_timeline.md)
   : Disegna una timeline con eventuali annotazioni di rotture di metodo
 

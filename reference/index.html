@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golDatasets</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,9 +51,9 @@
         </dt>
         <dd>Costruisce i tre dataset canonici GOL e li scrive in <code>data/</code></dd>
       </dl></div><div class="section level2">
-      <h2 id="indicatori-e-visualizzazione">Indicatori e visualizzazione<a class="anchor" aria-label="anchor" href="#indicatori-e-visualizzazione"></a></h2>
+      <h2 id="estrazione-e-indicatori">Estrazione e indicatori<a class="anchor" aria-label="anchor" href="#estrazione-e-indicatori"></a></h2>
 
-      <div class="section-desc"><p>Trasformazione dei flussi COB in indicatori derivati e timeline regionali con annotazione delle rotture metodologiche.</p></div>
+      <div class="section-desc"><p>Helper per pivotare i dataset long in serie pronte per la visualizzazione.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -62,12 +62,28 @@
 
       <dl><dt>
 
+          <code><a href="gol_extract_series.html">gol_extract_series()</a></code>
+
+        </dt>
+        <dd>Estrai una serie temporale pronta per plot da <code>gol_inapp_mensile</code></dd>
+
+        <dt>
+
           <code><a href="cob_compute_indicators.html">cob_compute_indicators()</a></code>
 
         </dt>
         <dd>Calcola indicatori derivati dai flussi COB</dd>
+      </dl></div><div class="section level2">
+      <h2 id="visualizzazione">Visualizzazione<a class="anchor" aria-label="anchor" href="#visualizzazione"></a></h2>
 
-        <dt>
+      <div class="section-desc"><p>Timeline regionali con annotazione delle rotture metodologiche.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
 
           <code><a href="plot_timeline.html">plot_timeline()</a></code>
 
