@@ -80,17 +80,54 @@ RX_ANAGRAFICA <- list(
   )
 )
 
-# Unita di misura
 classify_unita <- function(header, caption) {
   txt <- paste(header, caption, sep = " | ")
-  if (grepl("tasso|%\\)|[Vv]alori\\s*%|incidenza|percentuale", txt)) {
-    return("percentage")
-  }
-  if (grepl("[Vv]alori\\s*assoluti|v\\.a\\.|numero", txt)) {
-    return("count")
-  }
-  "count" # default
+  out <- rep("count", length(txt))
+  out[grepl(
+    "tasso|%\\)|[Vv]alori\\s*%|incidenza|percentuale",
+    txt
+  )] <- "percentage"
+  out
 }
+
+# 2bis. Mapping posizionale per tema B (caption 3 e 1.3/1.4) -----------------
+# Lo schema di B (anagrafiche × regione) ha 12 colonne canoniche:
+#   0=Maschi 1=Femmine 2=Totale_g 3=15-29 4=30-54 5=55+ 6=Totale_e
+#   7=Italiana 8=Straniera 9=Totale_c 10=>=6mesi 11=>=12mesi
+# Per caption_num == "3" e "1.3"/"1.4" il col_index e' stabile.
+.B_POSITIONAL <- list(
+  list(carat = "genere", mod = "Maschi", col = 0L),
+  list(carat = "genere", mod = "Femmine", col = 1L),
+  list(carat = "genere", mod = "Totale", col = 2L),
+  list(carat = "classe_eta", mod = "15-29", col = 3L),
+  list(carat = "classe_eta", mod = "30-54", col = 4L),
+  list(carat = "classe_eta", mod = "55+", col = 5L),
+  list(carat = "classe_eta", mod = "Totale", col = 6L),
+  list(carat = "cittadinanza", mod = "Italiana", col = 7L),
+  list(carat = "cittadinanza", mod = "Straniera", col = 8L),
+  list(carat = "cittadinanza", mod = "Totale", col = 9L),
+  list(carat = "durata_disoccupazione", mod = "ge_6mesi", col = 10L),
+  list(carat = "durata_disoccupazione", mod = "ge_12mesi", col = 11L)
+)
+
+# Mapping posizionale per tema H caption 2.2 ---------------------------------
+# Header tipico: "Occupati alla data di riferimento | Individui raggiunti | ..."
+# col 0=presi/raggiunti, 1=occupati_totale, 2=di_cui_nuovi, 3=quota_nuovi_pc, ...
+.H_22_POSITIONAL <- list(
+  list(var = "raggiunti", unit = "count", col = 0L),
+  list(var = "occupati_totale", unit = "count", col = 1L),
+  list(var = "nuovi_occupati", unit = "count", col = 2L),
+  list(var = "occupati_pc", unit = "rate", col = 3L),
+  list(var = "quota_nuovi_su_occ", unit = "rate", col = 4L),
+  list(var = "gia_occupati", unit = "count", col = 5L)
+)
+
+# Mapping posizionale per tema F caption 2.1 ---------------------------------
+.F_21_POSITIONAL <- list(
+  list(var = "presi_in_carico_totale", unit = "count", col = 0L),
+  list(var = "con_politica_avviata", unit = "count", col = 1L),
+  list(var = "con_politica_avviata_pc", unit = "rate", col = 2L)
+)
 
 # 3. Auto-derivazione semantica ----------------------------------------------
 
@@ -275,6 +312,62 @@ for (i in seq_len(nrow(scaffold))) {
     }
   }
 }
+
+# 3bis. Fallback posizionale per le righe ancora NA --------------------------
+# Per i temi con schema stabile, applica i mapping posizionali dichiarati
+# in cima al file. La condizione `is.na(variabile)` evita di sovrascrivere
+# le righe gia' classificate dai pattern regex.
+
+# Tema B: caption_num "3" e "1.3"/"1.4" hanno la stessa griglia anagrafica
+for (m in .B_POSITIONAL) {
+  scaffold[
+    tema == "B" &
+      caption_num %in% c("3", "1.3", "1.4") &
+      col_index == m$col &
+      is.na(variabile),
+    `:=`(
+      variabile = "presi_in_carico",
+      caratteristica = m$carat,
+      modalita = m$mod,
+      unita = classify_unita(header_modal, caption_title_modal),
+      confidenza = "high"
+    )
+  ]
+}
+
+# Tema H caption 2.2 (formato INAPP / MLPS post-2024)
+for (m in .H_22_POSITIONAL) {
+  scaffold[
+    tema == "H" & caption_num == "2.2" & col_index == m$col & is.na(variabile),
+    `:=`(
+      variabile = m$var,
+      unita = m$unit,
+      confidenza = "medium"
+    )
+  ]
+}
+
+# Tema F caption 2.1 col 0-2 (formato ANPAL standard)
+for (m in .F_21_POSITIONAL) {
+  scaffold[
+    tema == "F" & caption_num == "2.1" & col_index == m$col & is.na(variabile),
+    `:=`(
+      variabile = m$var,
+      unita = m$unit,
+      confidenza = "medium"
+    )
+  ]
+}
+
+# Tema A1 col 0 = totale gia' presa in carico per qualsiasi caption
+scaffold[
+  tema == "A1" & col_index == 0L & is.na(variabile),
+  `:=`(
+    variabile = "presi_in_carico_totale",
+    unita = "count",
+    confidenza = "high"
+  )
+]
 
 # 4. Safety net per le righe ancora NA ---------------------------------------
 

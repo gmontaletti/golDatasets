@@ -1,6 +1,6 @@
 Package: golDatasets
 Title: Dataset canonici del Programma GOL
-Version: 0.5.0
+Version: 0.6.0
 Authors@R: 
     person("Giampaolo", "Montaletti", , "giampaolo.montaletti@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0002-5327-1122"))
