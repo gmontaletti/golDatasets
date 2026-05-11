@@ -143,9 +143,14 @@
       citt_str <- NA_real_
     }
     # Durata: ultima cella della riga, "ge6 ge12" fuso
+    # Durata: ultima cella della riga puo' contenere 2 valori
+    # ("ge6 ge12") oppure 3 ("totale_cittadinanza ge6 ge12") nei report
+    # con struttura ibrida. In ogni caso ge_6mesi e ge_12mesi sono gli
+    # ULTIMI due valori.
     dur_split <- .split_multi_values(r[n])
-    dur_6 <- if (length(dur_split) >= 1L) dur_split[1] else NA_real_
-    dur_12 <- if (length(dur_split) >= 2L) dur_split[2] else NA_real_
+    n_dur <- length(dur_split)
+    dur_6 <- if (n_dur >= 2L) dur_split[n_dur - 1L] else NA_real_
+    dur_12 <- if (n_dur >= 1L) dur_split[n_dur] else NA_real_
 
     out_list[[i]] <- data.table::data.table(
       data_riferimento = data_riferimento,
