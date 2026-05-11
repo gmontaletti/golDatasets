@@ -87,6 +87,24 @@
 <td>ANPAL / MLPS / INAPP, temi A1, B, F, H</td>
 </tr>
 <tr>
+<td><code>gol_storia_volumi</code></td>
+<td>2022-09 → 2025-12 (~25 date)</td>
+<td>data × regione × percorso × variabile</td>
+<td>storico decodificato + INAPP mensile</td>
+</tr>
+<tr>
+<td><code>gol_storia_caratteristiche</code></td>
+<td>2022-09 → 2025-12</td>
+<td>data × regione × caratteristica × modalità</td>
+<td>storico + INAPP focus_gol_all</td>
+</tr>
+<tr>
+<td><code>gol_storia_esiti</code></td>
+<td>2022-12 → 2025-12</td>
+<td>data × regione × percorso × variabile</td>
+<td>storico + INAPP mensile + focus_gol_all</td>
+</tr>
+<tr>
 <td><code>cob_regionale_trimestrale</code></td>
 <td>2017-Q1 → 2025-Q3 (35 trimestri)</td>
 <td>regione × anno × trimestre × flusso</td>
@@ -94,7 +112,255 @@
 </tr>
 </tbody>
 </table>
+<p>Dataset metadati:</p>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>Dataset</th>
+<th>Descrizione</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>storico_decoder</code></td>
+<td>Mappa <code>(tema, caption_num, col_index, era)</code> → semantica per <code>gol_storico_regionale</code>
+</td>
+</tr>
+<tr>
+<td><code>gol_method_ruptures</code></td>
+<td>3 rotture metodologiche del 2025 (cambio unità, regola regionale, 4→5 percorsi)</td>
+</tr>
+<tr>
+<td><code>gol_rescan_recommendations</code></td>
+<td>File PDF da ri-estrarre per copertura regionale incompleta</td>
+</tr>
+</tbody>
+</table>
 <p>I nomi regionali sono armonizzati alle 22 etichette canoniche (21 regioni / PPAA + <code>Totale</code>/<code>Italia</code>).</p>
+</div>
+<div class="section level2">
+<h2 id="variabili-disponibili-e-copertura">Variabili disponibili e copertura<a class="anchor" aria-label="anchor" href="#variabili-disponibili-e-copertura"></a>
+</h2>
+<div class="section level3">
+<h3 id="gol_inapp_mensile-10922-righe-12-date-2024-06--2025-12-22-regioni">
+<code>gol_inapp_mensile</code> (10.922 righe, 12 date 2024-06 → 2025-12, 22 regioni)<a class="anchor" aria-label="anchor" href="#gol_inapp_mensile-10922-righe-12-date-2024-06--2025-12-22-regioni"></a>
+</h3>
+<p><strong>Tavola 1.1 — Presi in carico per anno</strong> <code>2022</code>, <code>2023</code>, <code>2024</code>, <code>2025</code>, <code>totale</code>, <code>individui</code>, <code>incidenza_pc</code></p>
+<p><strong>Tavola 1.2 — Presi in carico per percorso</strong> (5 percorsi × {assoluto, % riga}) <code>1_reinserimento_lavorativo_{ass,pc}</code>, <code>2_aggiornamento_upskilling_{ass,pc}</code>, <code>3_riqualificazione_reskilling_{ass,pc}</code>, <code>4_lavoro_inclusione_{ass,pc}</code>, <code>5_ricollocazione_collettiva_{ass,pc}</code></p>
+<p><strong>Tavola 2.1 — Politiche, LEP, formazione, tirocini</strong> <code>raggiunti</code>, <code>con_politica</code> (+<code>_pc</code>), <code>con_pol_o_tiroc</code> (+<code>_pc</code>), <code>c07_form_incl_dig</code>, <code>c11_form_no_dig</code>, <code>c12_form_spec_dig</code>, <code>tirocinio_co</code>, <code>lep_e</code>, <code>lep_f1</code>, <code>lep_f2</code>, <code>lep_h</code>, <code>lep_j</code>, <code>lep_o</code></p>
+<p><strong>Tavola 2.2 — Esiti occupazionali</strong> <code>presi_in_carico</code>, <code>gia_occupati</code> (+<code>_pc</code>), <code>nuovi_occupati</code> (+<code>_pc</code>), <code>occupati_totale</code>, <code>occupati_pc</code>, <code>quota_nuovi_su_occ</code></p>
+<p>Copertura: 100% (22/22 regioni × 12/12 date × 15 variabili).</p>
+</div>
+<div class="section level3">
+<h3 id="gol_storia_volumi-9194-righe">
+<code>gol_storia_volumi</code> (9.194 righe)<a class="anchor" aria-label="anchor" href="#gol_storia_volumi-9194-righe"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="30%">
+<col width="40%">
+<col width="30%">
+</colgroup>
+<thead><tr>
+<th>variabile</th>
+<th align="right">n. righe</th>
+<th>periodo</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>presi_in_carico_ass</code></td>
+<td align="right">3.937</td>
+<td>2022-09 → 2025-12</td>
+</tr>
+<tr>
+<td><code>presi_in_carico_pc</code></td>
+<td align="right">2.844</td>
+<td>2022-09 → 2025-12</td>
+</tr>
+<tr>
+<td><code>presi_in_carico_totale</code></td>
+<td align="right">587</td>
+<td>2022-09 → 2025-12</td>
+</tr>
+<tr>
+<td><code>individui_raggiunti</code></td>
+<td align="right">264</td>
+<td>2024-06 → 2025-12</td>
+</tr>
+<tr>
+<td><code>presi_in_carico_anno_{2022,2023,2024,2025}</code></td>
+<td align="right">264 × 4</td>
+<td>2024-06 → 2025-12</td>
+</tr>
+<tr>
+<td><code>presi_in_carico_anno_totale</code></td>
+<td align="right">264</td>
+<td>2024-06 → 2025-12</td>
+</tr>
+<tr>
+<td><code>presi_in_carico_anno_incidenza_pc</code></td>
+<td align="right">264</td>
+<td>2024-06 → 2025-12</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="gol_storia_caratteristiche-9767-righe">
+<code>gol_storia_caratteristiche</code> (9.767 righe)<a class="anchor" aria-label="anchor" href="#gol_storia_caratteristiche-9767-righe"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="30%">
+<col width="30%">
+<col width="40%">
+</colgroup>
+<thead><tr>
+<th>caratteristica</th>
+<th>modalità</th>
+<th align="right">n. righe</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>genere</code></td>
+<td>Maschi, Femmine, Totale</td>
+<td align="right">2.290</td>
+</tr>
+<tr>
+<td><code>classe_eta</code></td>
+<td>15-29, 30-54, 55+, Totale</td>
+<td align="right">3.119</td>
+</tr>
+<tr>
+<td><code>cittadinanza</code></td>
+<td>Italiana, Straniera, Totale</td>
+<td align="right">2.270</td>
+</tr>
+<tr>
+<td><code>durata_disoccupazione</code></td>
+<td>ge_6mesi, ge_12mesi</td>
+<td align="right">1.662</td>
+</tr>
+<tr>
+<td><code>target_patto_servizio</code></td>
+<td>Totale, SFL, ADI, NASpI, Altri disoccupati</td>
+<td align="right">219</td>
+</tr>
+<tr>
+<td><code>vulnerabilita</code></td>
+<td>raggiunti, vulnerabili (+<code>_pc</code>), donne, dis6m+, under30, over55, disabili</td>
+<td align="right">207</td>
+</tr>
+</tbody>
+</table>
+<p>Copertura temporale: 2022-09 → 2025-12 per le 4 caratteristiche anagrafiche principali; 2024-06 → 2025-12 per target e vulnerabilità.</p>
+</div>
+<div class="section level3">
+<h3 id="gol_storia_esiti-15515-righe">
+<code>gol_storia_esiti</code> (15.515 righe)<a class="anchor" aria-label="anchor" href="#gol_storia_esiti-15515-righe"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="30%">
+<col width="40%">
+<col width="30%">
+</colgroup>
+<thead><tr>
+<th>variabile</th>
+<th align="right">n. righe</th>
+<th>periodo</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>in_formazione</code></td>
+<td align="right">4.424</td>
+<td>2024-06 → 2025-12</td>
+</tr>
+<tr>
+<td>
+<code>con_politica_avviata</code> (+<code>_pc</code>)</td>
+<td align="right">1.866</td>
+<td>2023-05 → 2024-12</td>
+</tr>
+<tr>
+<td><code>presi_in_carico_totale</code></td>
+<td align="right">953</td>
+<td>2022-12 → 2025-12</td>
+</tr>
+<tr>
+<td>
+<code>gia_occupati</code>, <code>nuovi_occupati</code>, <code>occupati_totale</code>, <code>occupati_pc</code>, <code>quota_nuovi_su_occ</code>
+</td>
+<td align="right">572 × 5</td>
+<td>2024-06 → 2025-12</td>
+</tr>
+<tr>
+<td><code>occupati_180gg</code></td>
+<td align="right">308</td>
+<td>2022-12 → 2023-04</td>
+</tr>
+<tr>
+<td><code>tasso_occupati_60gg</code></td>
+<td align="right">264</td>
+<td>2023-01 → 2023-04</td>
+</tr>
+<tr>
+<td><code>lep_{e, f1, f2, h, j, o}</code></td>
+<td align="right">264 × 6</td>
+<td>2024-06 → 2025-12</td>
+</tr>
+<tr>
+<td>
+<code>c07_form_incl_dig</code>, <code>c11_form_no_dig</code>, <code>c12_form_spec_dig</code>
+</td>
+<td align="right">264 × 3</td>
+<td>2024-06 → 2025-12</td>
+</tr>
+<tr>
+<td>
+<code>con_politica</code> (+<code>_pc</code>), <code>con_pol_o_tiroc</code> (+<code>_pc</code>), <code>tirocinio_co</code>, <code>raggiunti</code>
+</td>
+<td align="right">264 × 6</td>
+<td>2024-06 → 2025-12</td>
+</tr>
+<tr>
+<td>
+<code>corsi_totali</code>, <code>corsi_completati</code> (+<code>_pc</code>)</td>
+<td align="right">22 × 4</td>
+<td>2025-12</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="cob_regionale_trimestrale-1470-righe-35-trimestri-2017-q1--2025-q3-21-regioni">
+<code>cob_regionale_trimestrale</code> (1.470 righe, 35 trimestri 2017-Q1 → 2025-Q3, 21 regioni)<a class="anchor" aria-label="anchor" href="#cob_regionale_trimestrale-1470-righe-35-trimestri-2017-q1--2025-q3-21-regioni"></a>
+</h3>
+<table class="table">
+<thead><tr>
+<th>variabile</th>
+<th>descrizione</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>rapporti</code></td>
+<td>N. rapporti di lavoro attivati o cessati nel trimestre</td>
+</tr>
+<tr>
+<td><code>lavoratori</code></td>
+<td>N. lavoratori distinti</td>
+</tr>
+<tr>
+<td><code>media</code></td>
+<td>Rapporti / lavoratore</td>
+</tr>
+</tbody>
+</table>
+<p><code>flusso</code> ∈ {<code>avviamenti</code>, <code>cessazioni</code>}.</p>
+<p><strong>Indicatori derivati</strong> (via <code><a href="reference/cob_compute_indicators.html">cob_compute_indicators()</a></code>): <code>avviamenti_{rapporti, lavoratori}</code>, <code>cessazioni_{rapporti, lavoratori}</code>, <code>rotation_{avviamenti, cessazioni}</code>, <code>saldo_{rapporti, lavoratori}</code>, <code>yoy_{avviamenti, cessazioni, saldo}</code> (lag 4 trimestri).</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="installazione">Installazione<a class="anchor" aria-label="anchor" href="#installazione"></a>
@@ -136,7 +402,7 @@
 <div class="section level2">
 <h2 id="citazione">Citazione<a class="anchor" aria-label="anchor" href="#citazione"></a>
 </h2>
-<p>Montaletti, G. (2026). <em>golDatasets: Dataset canonici del Programma GOL</em>. Versione 0.1.0. <a href="https://github.com/gmontaletti/golDatasets" class="external-link uri">https://github.com/gmontaletti/golDatasets</a></p>
+<p>Montaletti, G. (2026). <em>golDatasets: Dataset canonici del Programma GOL</em>. Versione 0.8.0. <a href="https://github.com/gmontaletti/golDatasets" class="external-link uri">https://github.com/gmontaletti/golDatasets</a></p>
 </div>
 <div class="section level2">
 <h2 id="licenza">Licenza<a class="anchor" aria-label="anchor" href="#licenza"></a>
