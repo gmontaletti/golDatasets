@@ -177,9 +177,18 @@ plot_timeline(
 # 6. Grafici - Esiti del programma -------------------------------------------
 
 # 6.1 LEP - 6 prestazioni essenziali, trend mensile 2024-2025
-leps <- c("lep_e", "lep_f1", "lep_f2", "lep_h", "lep_j", "lep_o")
-serie_lep <- rbindlist(lapply(leps, function(v) {
-  gol_storia_esiti_series(variabile = v, regione = "Totale")[, lep := v]
+leps <- c(
+  lep_e = "LEP-E: orientamento di base",
+  lep_f1 = "LEP-F1: orientamento specialistico",
+  lep_f2 = "LEP-F2: orientamento creazione impresa",
+  lep_h = "LEP-H: accompagnamento al lavoro",
+  lep_j = "LEP-J: avvio formazione",
+  lep_o = "LEP-O: politica disoccupati"
+)
+serie_lep <- rbindlist(lapply(names(leps), function(v) {
+  gol_storia_esiti_series(variabile = v, regione = "Totale")[,
+    lep := leps[[v]]
+  ]
 }))
 plot_timeline(
   serie_lep,
@@ -238,13 +247,15 @@ plot_timeline(
 # Note: queste metriche partono dal nuovo formato MLPS/INAPP (tav 2.2) e
 # non sono confrontabili con `tasso_occupati_60gg` ANPAL 2022-2023.
 metriche_occ <- c(
-  "occupati_pc",
-  "gia_occupati_pc",
-  "nuovi_occupati_pc",
-  "quota_nuovi_su_occ"
+  occupati_pc = "Tasso di occupazione totale",
+  gia_occupati_pc = "Quota gia' occupati al PIC",
+  nuovi_occupati_pc = "Tasso nuovi occupati post-PIC",
+  quota_nuovi_su_occ = "Quota nuovi su totale occupati"
 )
-serie_metriche <- rbindlist(lapply(metriche_occ, function(v) {
-  gol_storia_esiti_series(variabile = v, regione = "Totale")[, metrica := v]
+serie_metriche <- rbindlist(lapply(names(metriche_occ), function(v) {
+  gol_storia_esiti_series(variabile = v, regione = "Totale")[,
+    metrica := metriche_occ[[v]]
+  ]
 }))
 plot_timeline(
   serie_metriche,
@@ -258,13 +269,15 @@ plot_timeline(
 
 # 6.6 Volumi occupazionali (count) - 4 metriche complementari
 volumi_occ <- c(
-  "raggiunti",
-  "occupati_totale",
-  "gia_occupati",
-  "nuovi_occupati"
+  raggiunti = "Individui raggiunti",
+  occupati_totale = "Occupati totali",
+  gia_occupati = "Gia' occupati al PIC",
+  nuovi_occupati = "Nuovi occupati post-PIC"
 )
-serie_volumi_occ <- rbindlist(lapply(volumi_occ, function(v) {
-  gol_storia_esiti_series(variabile = v, regione = "Totale")[, metrica := v]
+serie_volumi_occ <- rbindlist(lapply(names(volumi_occ), function(v) {
+  gol_storia_esiti_series(variabile = v, regione = "Totale")[,
+    metrica := volumi_occ[[v]]
+  ]
 }))
 plot_timeline(
   serie_volumi_occ,
@@ -302,10 +315,18 @@ plot_timeline(
 # 7. Vulnerabilita' e target PNRR (v0.7-0.8) --------------------------------
 
 # 7.1 Target patto di servizio per Italia (numerosita' per target)
+target_labels <- c(
+  Totale = "Totale",
+  SFL_domanda_accolta = "SFL (Supporto Formazione e Lavoro)",
+  ADI_attivabili = "ADI (Assegno di Inclusione)",
+  NASpI_domanda_presentata = "NASpI / DisColl",
+  Altri_disoccupati = "Altri disoccupati"
+)
 serie_target <- gol_storia_caratteristiche_series(
   caratteristica = "target_patto_servizio",
   regione = "Totale"
 )
+serie_target[, modalita := target_labels[modalita]]
 plot_timeline(
   serie_target,
   group = "modalita",
@@ -318,11 +339,19 @@ plot_timeline(
 # 7.2 Vulnerabilita' - aggregato Italia (filtro percorso = totale_percorsi)
 # La caratteristica "vulnerabilita" ha la dimensione `percorso` valorizzata:
 # senza filtro si sovrappongono 4 percorsi per ogni modalita'.
+vuln_labels <- c(
+  donne = "Donne",
+  disocc_ge6mesi = "Disoccupati >= 6 mesi",
+  under_30 = "Under 30",
+  over_55 = "Over 55",
+  disabili = "Persone con disabilita'"
+)
 serie_vuln_italia <- gol_storia_caratteristiche_series(
   caratteristica = "vulnerabilita",
-  modalita = c("donne", "disocc_ge6mesi", "under_30", "over_55", "disabili"),
+  modalita = names(vuln_labels),
   percorso = "totale_percorsi"
 )
+serie_vuln_italia[, modalita := vuln_labels[modalita]]
 plot_timeline(
   serie_vuln_italia,
   group = "modalita",
@@ -333,6 +362,13 @@ plot_timeline(
 )
 
 # 7.3 Vulnerabilita' - confronto per percorso GOL (fissata una modalita')
+percorso_labels <- c(
+  "1_reinserimento_lavorativo" = "1. Reinserimento lavorativo",
+  "2_aggiornamento_upskilling" = "2. Aggiornamento (upskilling)",
+  "3_riqualificazione_reskilling" = "3. Riqualificazione (reskilling)",
+  "4_lavoro_inclusione" = "4. Lavoro e inclusione",
+  "5_ricollocazione_collettiva" = "5. Ricollocazione collettiva"
+)
 serie_vuln_perc <- gol_storia_caratteristiche_series(
   caratteristica = "vulnerabilita",
   modalita = "donne",
@@ -342,6 +378,7 @@ serie_vuln_perc <- gol_storia_caratteristiche_series(
     "5_ricollocazione_collettiva"
   )
 )
+serie_vuln_perc[, percorso := percorso_labels[percorso]]
 plot_timeline(
   serie_vuln_perc,
   group = "percorso",
