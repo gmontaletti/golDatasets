@@ -22,3 +22,6 @@ inst/doc
 /Meta/
 docs
 .positai
+
+# Claude Code session-local settings (non in versioning)
+.claude/

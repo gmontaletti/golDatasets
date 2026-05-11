@@ -11,9 +11,95 @@
 |---|---|---|---|
 | `gol_inapp_mensile` | 2024-06 → 2025-12 (12 report) | report × tavola × regione × variabile × percorso | INAPP Focus GOL |
 | `gol_storico_regionale` | 2022-09 → 2025-12 (27 PDF) | tema × file × data × regione × col_index | ANPAL / MLPS / INAPP, temi A1, B, F, H |
+| `gol_storia_volumi` | 2022-09 → 2025-12 (~25 date) | data × regione × percorso × variabile | storico decodificato + INAPP mensile |
+| `gol_storia_caratteristiche` | 2022-09 → 2025-12 | data × regione × caratteristica × modalità | storico + INAPP focus_gol_all |
+| `gol_storia_esiti` | 2022-12 → 2025-12 | data × regione × percorso × variabile | storico + INAPP mensile + focus_gol_all |
 | `cob_regionale_trimestrale` | 2017-Q1 → 2025-Q3 (35 trimestri) | regione × anno × trimestre × flusso | INPS "Allegato IV - Trimestre" |
 
+Dataset metadati:
+
+| Dataset | Descrizione |
+|---|---|
+| `storico_decoder` | Mappa `(tema, caption_num, col_index, era)` → semantica per `gol_storico_regionale` |
+| `gol_method_ruptures` | 3 rotture metodologiche del 2025 (cambio unità, regola regionale, 4→5 percorsi) |
+| `gol_rescan_recommendations` | File PDF da ri-estrarre per copertura regionale incompleta |
+
 I nomi regionali sono armonizzati alle 22 etichette canoniche (21 regioni / PPAA + `Totale`/`Italia`).
+
+## Variabili disponibili e copertura
+
+### `gol_inapp_mensile` (10.922 righe, 12 date 2024-06 → 2025-12, 22 regioni)
+
+**Tavola 1.1 — Presi in carico per anno**
+`2022`, `2023`, `2024`, `2025`, `totale`, `individui`, `incidenza_pc`
+
+**Tavola 1.2 — Presi in carico per percorso** (5 percorsi × {assoluto, % riga})
+`1_reinserimento_lavorativo_{ass,pc}`, `2_aggiornamento_upskilling_{ass,pc}`,
+`3_riqualificazione_reskilling_{ass,pc}`, `4_lavoro_inclusione_{ass,pc}`,
+`5_ricollocazione_collettiva_{ass,pc}`
+
+**Tavola 2.1 — Politiche, LEP, formazione, tirocini**
+`raggiunti`, `con_politica` (+`_pc`), `con_pol_o_tiroc` (+`_pc`),
+`c07_form_incl_dig`, `c11_form_no_dig`, `c12_form_spec_dig`,
+`tirocinio_co`, `lep_e`, `lep_f1`, `lep_f2`, `lep_h`, `lep_j`, `lep_o`
+
+**Tavola 2.2 — Esiti occupazionali**
+`presi_in_carico`, `gia_occupati` (+`_pc`), `nuovi_occupati` (+`_pc`),
+`occupati_totale`, `occupati_pc`, `quota_nuovi_su_occ`
+
+Copertura: 100% (22/22 regioni × 12/12 date × 15 variabili).
+
+### `gol_storia_volumi` (9.194 righe)
+
+| variabile | n. righe | periodo |
+|---|---:|---|
+| `presi_in_carico_ass` | 3.937 | 2022-09 → 2025-12 |
+| `presi_in_carico_pc` | 2.844 | 2022-09 → 2025-12 |
+| `presi_in_carico_totale` | 587 | 2022-09 → 2025-12 |
+| `individui_raggiunti` | 264 | 2024-06 → 2025-12 |
+| `presi_in_carico_anno_{2022,2023,2024,2025}` | 264 × 4 | 2024-06 → 2025-12 |
+| `presi_in_carico_anno_totale` | 264 | 2024-06 → 2025-12 |
+| `presi_in_carico_anno_incidenza_pc` | 264 | 2024-06 → 2025-12 |
+
+### `gol_storia_caratteristiche` (9.767 righe)
+
+| caratteristica | modalità | n. righe |
+|---|---|---:|
+| `genere` | Maschi, Femmine, Totale | 2.290 |
+| `classe_eta` | 15-29, 30-54, 55+, Totale | 3.119 |
+| `cittadinanza` | Italiana, Straniera, Totale | 2.270 |
+| `durata_disoccupazione` | ge_6mesi, ge_12mesi | 1.662 |
+| `target_patto_servizio` | Totale, SFL, ADI, NASpI, Altri disoccupati | 219 |
+| `vulnerabilita` | raggiunti, vulnerabili (+`_pc`), donne, dis6m+, under30, over55, disabili | 207 |
+
+Copertura temporale: 2022-09 → 2025-12 per le 4 caratteristiche anagrafiche principali; 2024-06 → 2025-12 per target e vulnerabilità.
+
+### `gol_storia_esiti` (15.515 righe)
+
+| variabile | n. righe | periodo |
+|---|---:|---|
+| `in_formazione` | 4.424 | 2024-06 → 2025-12 |
+| `con_politica_avviata` (+`_pc`) | 1.866 | 2023-05 → 2024-12 |
+| `presi_in_carico_totale` | 953 | 2022-12 → 2025-12 |
+| `gia_occupati`, `nuovi_occupati`, `occupati_totale`, `occupati_pc`, `quota_nuovi_su_occ` | 572 × 5 | 2024-06 → 2025-12 |
+| `occupati_180gg` | 308 | 2022-12 → 2023-04 |
+| `tasso_occupati_60gg` | 264 | 2023-01 → 2023-04 |
+| `lep_{e, f1, f2, h, j, o}` | 264 × 6 | 2024-06 → 2025-12 |
+| `c07_form_incl_dig`, `c11_form_no_dig`, `c12_form_spec_dig` | 264 × 3 | 2024-06 → 2025-12 |
+| `con_politica` (+`_pc`), `con_pol_o_tiroc` (+`_pc`), `tirocinio_co`, `raggiunti` | 264 × 6 | 2024-06 → 2025-12 |
+| `corsi_totali`, `corsi_completati` (+`_pc`) | 22 × 4 | 2025-12 |
+
+### `cob_regionale_trimestrale` (1.470 righe, 35 trimestri 2017-Q1 → 2025-Q3, 21 regioni)
+
+| variabile | descrizione |
+|---|---|
+| `rapporti` | N. rapporti di lavoro attivati o cessati nel trimestre |
+| `lavoratori` | N. lavoratori distinti |
+| `media` | Rapporti / lavoratore |
+
+`flusso` ∈ {`avviamenti`, `cessazioni`}.
+
+**Indicatori derivati** (via `cob_compute_indicators()`): `avviamenti_{rapporti, lavoratori}`, `cessazioni_{rapporti, lavoratori}`, `rotation_{avviamenti, cessazioni}`, `saldo_{rapporti, lavoratori}`, `yoy_{avviamenti, cessazioni, saldo}` (lag 4 trimestri).
 
 ## Installazione
 
@@ -56,7 +142,7 @@ Rscript data-raw/build_all.R
 
 ## Citazione
 
-Montaletti, G. (2026). *golDatasets: Dataset canonici del Programma GOL*. Versione 0.1.0. <https://github.com/gmontaletti/golDatasets>
+Montaletti, G. (2026). *golDatasets: Dataset canonici del Programma GOL*. Versione 0.8.0. <https://github.com/gmontaletti/golDatasets>
 
 ## Licenza
 
