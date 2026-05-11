@@ -1,0 +1,30 @@
+Tabella 1.1        Programma GOL: prese in carico (totale e per anno*) e individui raggiunti per
+                   Regione, v.a. e v. %
+                                          Prese in carico per anno                     Totale      Incidenza % del
+ Regione                                                                                                               Individui
+                                  2022             2023               2024                         2024 sul totale
+ Abruzzo                          9.634           25.344              9.991           44.969            22,2            43.676
+ Basilicata                       6.588           13.167              6.438           26.193            24,6            24.566
+ P.A. Bolzano                     2.031            6.002              3.389           11.422            29,7            10.633
+ Calabria                        28.892           49.793             27.554           106.239           25,9           100.939
+ Campania                        92.502           167.993            91.183           351.678           25,9           338.685
+ Emilia-Romagna                  44.363           83.822             45.771           173.956           26,3           171.599
+ Friuli-Venezia Giulia           16.758           36.449             17.893           71.100            25,2            68.635
+ Lazio                           61.227           79.066             39.051           179.344           21,8           176.543
+ Liguria                         11.326           21.021             10.302           42.649            24,2            41.841
+ Lombardia                       76.543           137.986            82.851           297.380           27,9           284.604
+ Marche                          18.127           36.287             20.975           75.389            27,8            71.726
+ Molise                           1.698            2.666              2.522            6.886            36,6            6.655
+ Piemonte                        46.423           73.637             41.890           161.950           25,9           155.285
+ Puglia                          70.129           102.336            55.363           227.828           24,3           222.358
+ Sardegna                        37.199           59.875             28.168           125.242           22,5           118.941
+ Sicilia                         66.236           169.668            95.593           331.497           28,8           319.580
+ Toscana                         45.072           84.773             45.738           175.583           26,0           162.666
+ P.A. Trento                      4.960            8.045              4.116           17.121            24,0            16.973
+ Umbria                          10.817           20.312              8.318           39.447            21,1            38.146
+ Valle d'Aosta                    1.268            1.916              928              4.112            22,6            4.012
+ Veneto                          38.763           112.796            53.664           205.223           26,1           192.824
+ Totale                         690.556          1.292.954           691.698         2.675.208          25,9          2.570.887
+
+*Per il 2024 si osserva il primo semestre.
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 30 giugno 2024)

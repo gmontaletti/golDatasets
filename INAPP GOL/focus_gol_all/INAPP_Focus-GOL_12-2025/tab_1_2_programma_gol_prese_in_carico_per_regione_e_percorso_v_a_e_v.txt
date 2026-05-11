@@ -1,0 +1,34 @@
+Tabella 1.2             Programma GOL: prese in carico per regione e percorso, v.a. e val.%
+
+                                                                   Valori assoluti                                                                                           Valori % (di riga)
+
+
+Regione
+                                  1                   2                      3                      4                5                     1                       2                   3                4                5
+                            Reinserimento      Aggiornamento         Riqualificazione            Lavoro e     Ricollocazione         Reinserimento          Aggiornamento      Riqualificazione      Lavoro e     Ricollocazione
+                              lavorativo         (upskilling)           (reskilling)           inclusione        collettiva            lavorativo             (upskilling)        (reskilling)     inclusione        collettiva
+
+Abruzzo                              47.743               12.497                      13.311            973                     0                    64,1             16,8                  17,9            1,3                0,0
+Basilicata                            26.518               8.494                      16.772            608                     4                    50,6             16,2                  32,0            1,2                0,0
+P.A. Bolzano                         12.405                3.774                        564             810                     0                    70,7             21,5                   3,2            4,6                0,0
+Calabria                             80.472               45.142                      53.166          4.496               1175                       43,6             24,5                  28,8            2,4                0,6
+Campania                            183.903              124.779                     239.889         30.816               1418                       31,7             21,5                  41,3            5,3                0,2
+Emilia-Romagna                      179.983               63.386                      24.246         19.783                    38                    62,6             22,1                   8,4            6,9                0,0
+Friuli-Venezia Giulia                82.551               27.234                      10.887          3.000                    589                   66,4             21,9                   8,8            2,4                0,5
+Lazio                               163.734               51.068                      56.758          2.216               1195                       59,5             18,6                  20,6            0,8                0,4
+Liguria                              47.679                8.907                      10.852          3.653                    19                    67,0             12,5                  15,3            5,1                0,0
+Lombardia                           308.414              143.591                      87.179         19.537                    137                   55,2             25,7                  15,6            3,5                0,0
+Marche                               87.383               19.751                       9.617          2.251                     3                    73,4             16,6                   8,1            1,9                0,0
+Molise                                5.173                3.989                       5.193            122                    311                   35,0             27,0                  35,1            0,8                2,1
+Piemonte                            143.897               60.919                      43.983         28.759               1035                       51,7             21,9                  15,8           10,3                0,4
+Puglia                              155.878              116.943                     112.266          7.475                     0                    39,7             29,8                  28,6            1,9                0,0
+Sardegna                            105.226               44.090                      33.638          3.339                    876                   56,2             23,6                  18,0            1,8                0,5
+Sicilia                             255.529              128.474                     180.991         14.171               1342                       44,0             22,1                  31,2            2,4                0,2
+Toscana                             214.089               64.845                      27.818         11.573                    262                   67,2             20,4                   8,7            3,6                0,1
+P.A. Trento                          16.722                7.024                       1.557          2.246                     0                    60,7             25,5                   5,7            8,2                0,0
+Umbria                               47.948                9.752                       9.249          1.586                    451                   69,5             14,1                  13,4            2,3                0,7
+Valle d'Aosta                         4.130                1.643                        340           1.437                     3                    54,7             21,8                   4,5           19,0                0,0
+Veneto                              163.337              150.758                      28.229          9.471               1060                       46,3             42,7                   8,0            2,7                0,3
+Totale                             2.332.714           1.097.060                     966.505        168.322              9.918                       51,0             24,0                  21,1            3,7                0,2
+
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 30 settembre 2025)

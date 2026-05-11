@@ -1,0 +1,13 @@
+Tabella 2.3 Programma GOL: individui occupati alla data di riferimento per tipo di contratto e
+            percorso, val.%
+                                         1.                  2.                  3.                  4.
+ Tipo di contratto                 Reinserimento       Aggiornamento      Riqualificazione        Lavoro e            Totale
+                                     lavorativo          (Upskilling)       (Reskilling)         inclusione
+ Tempo Indeterminato                    26,8                25,0               25,9                 28,3               26,3
+ Apprendistato                            6,2                7,1                 9,2                1,7                 6,7
+ Tempo determinato                       59,4               57,3                55,4                55,3               58,4
+ Domestico                                4,8                8,1                 6,3                12,1                5,9
+ Altre forme contrattuali                 2,8                2,6                 3,2                2,5                 2,8
+ Totale                                 100,0               100,0              100,0               100,0               100,0
+
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 30 giugno 2024)

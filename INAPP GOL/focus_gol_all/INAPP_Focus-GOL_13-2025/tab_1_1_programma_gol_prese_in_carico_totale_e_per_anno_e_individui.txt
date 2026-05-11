@@ -1,0 +1,32 @@
+Tabella 1.1         Programma GOL: prese in carico (totale e per anno) e individui raggiunti, ultima presa in
+                    carico per Regione, v.a. e val.%
+                                               Prese in carico per anno                                         Incidenza %
+                                                                                                                                   Individui
+                                                                                                     Totale     del 2025 sul
+                              2022              2023               2024              2025*                                         raggiunti
+ Regione                                                                                                           totale
+ Abruzzo                          9.609             25.223              24.107          17.517           76.456         22,9          69.284
+ Basilicata                       6.398             12.866              18.741          16.084           54.089            29,7       46.133
+ P.A. Bolzano                     2.422              5.871                5.603          4.107           18.003            22,8       15.980
+ Calabria                        28.565             48.854              63.234          50.840         191.493             26,5      171.130
+ Campania                        91.706           166.106              207.936         134.821         600.569             22,4      529.316
+ Emilia-Romagna                  44.377             84.012              89.383          78.887         296.659             26,6      269.603
+ Friuli-Venezia Giulia           21.632             39.287              37.703          28.505         127.127             22,4      108.261
+ Lazio                           61.636             78.929              75.292          71.088         286.945             24,8      270.347
+ Liguria                         11.844             21.184              23.944          15.941           72.913            21,9       66.992
+ Lombardia                       77.288           137.162              164.530         204.220         583.200             35,0      519.890
+ Marche                          18.534             36.185              39.198          29.195         123.112             23,7      106.638
+ Molise                           1.690              2.647                4.571          6.482           15.390            42,1       13.896
+ Piemonte                        46.443             73.547              80.725          88.120         288.835             30,5      258.697
+ Puglia                          70.880           102.505              118.448         114.994         406.827             28,3      379.687
+ Sardegna                        41.976             58.756              52.862          41.645         195.239             21,3      168.953
+ Sicilia                         65.405           165.585              194.020         178.649         603.659             29,6      532.644
+ Toscana                         45.120             84.789             103.476          96.952         330.337             29,3      277.036
+ P.A. Trento                      4.919              8.100                8.232          7.686           28.937            26,6       26.984
+ Umbria                          11.099             20.343              21.296          19.081           71.819            26,6       62.308
+ Valle d'Aosta                    1.313              1.935                2.058          2.592            7.898            32,8         6.904
+ Veneto                          40.825           116.595              111.558          94.802         363.780             26,1      312.907
+ Totale                         703.681         1.290.481            1.446.917       1.302.208       4.743.287             27,5    4.213.590
+
+*Per il 2025 osserviamo i primi dieci mesi.
+Fonte: elaborazioni Inpp su dati MLPS - Sistema Informativo Unitario (dati al 31 ottobre 2025)

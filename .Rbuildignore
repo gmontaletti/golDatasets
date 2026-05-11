@@ -16,3 +16,7 @@
 ^Meta$
 ^pkgdown$
 ^dev$
+^INAPP GOL/focus_gol_all$
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.positai$

@@ -1,0 +1,18 @@
+Tabella 2.9 Tirocini extracurriculari terminati per durata effettiva in giorni. Statistiche descrittive e
+            incidenza % per classe di durata
+
+Durata effettiva in giorni
+Valore medio                                                                                         197
+Devianza                                                                                           92,057
+p50 – Valore Mediano                                                                                 182
+p25                                                                                                  175
+p75                                                                                                  192
+Valore minimo                                                                                          60
+Classi di durata                                                                        v.a.                         %
+da 2 a 4 mesi                                                                         32.560                        17,4
+da 4 a 6 mesi                                                                         21.529                        11,5
+da 6 a 12 mesi                                                                        109.237                       58,3
+oltre 12 mesi                                                                         24.018                        12,8
+Totale tirocini terminati                                                             187.344                       100
+
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 31 dicembre 2025)

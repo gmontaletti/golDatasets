@@ -236,4 +236,4 @@ panel[order(-quota)]
 # ?build_gol_datasets
 
 # Vignette
-# vignette("merge-gol-cob", package = "golDatasets")
+vignette("merge-gol-cob", package = "golDatasets")

@@ -1,0 +1,46 @@
+Tabella 1.4            Programma GOL: individui per Regione di ultima presa in carico e caratteristiche socio-anagrafiche, val.%
+
+                                                        1                 2              3             4              5                                                Valori % riga
+                                      Totale      Reinserimento    Aggiornamento Riqualificazione Lavoro e     Ricollocazione
+                                                                                                                                Percorso1              Percorso2          Percorso3            Percorso4          Percorso 5
+                                                    lavorativo       (Upskilling)  (Reskilling)   inclusione      collettiva
+ Individui raggiunti                 4.426.443       2.240.785       1.047.655        958.276      168.468        11.259                       50,6                                      23,7                      21,6            3,8
+ Genere                             valori % colonna
+ Maschi                                   44,5              45,3            45,8            40,9        45,2            67,8                   51,5                                       24,3                     19,9            3,9
+                                                                                                                                              49,9                                      23,1                      23,0             3,8
+ Femmine                                  55,5              54,7            54,2            59,1        54,8            32,2
+                                         100,0             100,0           100,0           100,0       100,0           100,0
+ Classe di età
+                                                                                                                                              48,1                                     24,2                       25,6              2,1
+ 15-29                                    30,8              29,3            31,5            36,5        17,1             2,7
+                                                                                                                                               52,3                                       22,5                    20,3            4,6
+ 30-54                                    52,3              54,1            49,8            49,1        62,7            62,0
+                                                                                                                                              50,1                                       26,3                      18,5           4,6
+ 55+                                      16,8              16,6            18,7            14,4        20,2            35,3
+                                         100,0             100,0           100,0           100,0       100,0           100,0
+ Titolo di studio
+ Fino alla licenza media                  45,8              34,5            51,7            61,3        72,1            31,5           38,1                                  26,7                          29,0                   6,0
+
+ Qualifica prof.le                         6,7               7,5             6,4             5,4         5,2             8,2                     56,4                                           22,8                 17,6          3,0
+
+ Scuola secondaria superiore              35,6              40,7            32,2            30,3        19,1            48,2                         57,8                                        21,4                    18,4       2,0
+
+ Laurea triennale                          5,8               8,2             5,3             1,6         1,7             5,4                                 71,4                                            21,3                6,0 1,1
+
+ Laurea specialistica/magistrale           6,0               9,1             4,3             1,4         1,8             6,8                                   76,7                                                17,0          4,91,1
+
+                                         100,0             100,0           100,0           100,0       100,0           100,0
+ Cittadinanza
+ Italiana                                 84,5              86,5            80,2            86,5        73,7            97,7                   51,8                                      22,4                      22,1            3,3
+
+ Straniera                                15,5              13,5            19,8            13,5        26,3             2,3             44,2                                       30,4                          18,9            6,5
+
+                                         100,0             100,0           100,0           100,0       100,0           100,0
+ Durata disoccupazione
+ Meno di 12 mesi                          72,1              85,1            71,0            48,0        43,1            93,1                          59,7                                         23,3                   14,4      2,3
+
+ Da 12 mesi e oltre (LTU)                 27,9              14,9            29,0            52,0        56,9             6,9    27,1                            24,6                                40,4                         7,8
+
+                                         100,0             100,0           100,0           100,0       100,0           100,0
+
+Fonte: elaborazioni Inapp su dati MLPS – Sistema Informativo Unitario (dati al 31 dicembre 2025)

@@ -1,0 +1,30 @@
+Tabella 1.6         Programma GOL: individui con patto di servizio attivo, per target e regione (v.a)
+                                                               Presi in carico con patto di servizio attivo
+                                                         SFL
+                                                                                 ADI              NASpI-DisColl
+                                     Totale         Domanda accolta                                                     Altri disoccupati
+                                                                          Attivabili al lavoro domanda presentata
+                                                       e attiva
+ Abruzzo                            57.857               1.136                 1.524                  33.205                21.992
+ Basilicata                         36.107                 956                 1.099                  17.769                16.283
+ P.A. Bolzano                        5.703                     -                   8                   4.730                   965
+ Calabria                          113.640               9.473                11.113                  42.160                50.894
+ Campania                          439.809              28.072                51.592                 122.653               237.492
+ Emilia-Romagna                    156.987               1.340                 1.318                  94.792                59.537
+ Friuli-Venezia Giulia              67.374                 370                   210                  41.258                25.536
+ Lazio                             214.758               5.837                 6.137                  98.823               103.961
+ Liguria                            38.816                 833                   633                  22.413                14.937
+ Lombardia                         376.862               3.065                 3.063                 196.822               173.912
+ Marche                             75.367                 549                   628                  41.776                32.414
+ Molise                              9.705                 596                   489                   2.834                 5.786
+ Piemonte                          161.685               3.476                 3.435                  79.939                74.835
+ Puglia                            300.975              11.736                13.402                 117.340               158.497
+ Sardegna                          109.805               4.627                 2.928                  52.510                49.740
+ Sicilia                           425.772              22.905                44.327                 149.381               209.159
+ Toscana                           200.353               1.495                 1.341                 116.290                81.227
+ P.A. Trento                        14.579                   26                   72                   8.992                 5.489
+ Umbria                             51.998                 349                   433                  27.461                23.755
+ Valle d'Aosta                       2.848                   22                   21                   1.834                   971
+ Veneto                            183.657                 702                   773                 103.038                79.144
+ Totale                          3.044.657              97.565               144.546               1.376.020             1.426.526
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 31 marzo 2025)

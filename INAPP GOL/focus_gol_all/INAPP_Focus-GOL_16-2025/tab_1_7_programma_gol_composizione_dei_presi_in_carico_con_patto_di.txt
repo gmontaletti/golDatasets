@@ -1,0 +1,32 @@
+Tabella 1.7 Programma GOL: composizione (%) dei presi in carico con patto di servizio attivo per
+            caratteristiche, percorso GOL e target
+                                                                           SFL                            NASpI-
+                                                                                            ADI
+                                                                        Domanda                           DIsColl         Altri
+                                                         Totale                         Attivabili al
+                                                                        accolta e                       Domanda       disoccupati
+                                                                                          lavoro
+                                                                         attiva                         presentata
+ Presi in carico con patto di servizio attivo            3.738.188         123.697            83.601      1.524.541     2.006.349
+ Genere
+ Maschi                                                        44,2           39,4               40,9          45,5           43,6
+ Femmine                                                       55,8           60,6               59,1          54,5           56,4
+ Classi di età
+ 15-29                                                         30,6           29,5                 10          25,8           35,2
+ 30-54                                                         52,3           55,7               86,1          55,3           48,3
+ 55+                                                           17,1           14,7                3,9          18,9           16,4
+ Titolo di studio
+ Fino alla licenza media                                       46,5           62,9               74,4          42,2           47,6
+ Qualifica professionale                                          6,6          5,1                4,5           7,3            6,2
+ Diploma istruzione secondaria superiore                       35,5           28,2               19,2          36,4            36
+ Laurea triennale                                                 5,5          1,8                0,8           6,2            5,4
+ Laurea specialistica/magistrale                                  5,9          1,9                1,1           7,9            4,9
+ Percorso GOL
+ 1 Reinserimento lavorativo                                    48,4            8,7                8,8          73,1           33,7
+ 2 Aggiornamento                                               23,6           19,2               16,8           21            26,1
+ 3 Riqualificazione                                            23,8           65,8               61,7           4,6           34,3
+ 4 Lavoro e inclusione                                            3,9          6,2               12,8           1,3            5,4
+ 5 Ricollocazione collettiva                                      0,3               0               0           0,1            0,4
+ Totale                                                        100             100               100           100            100
+
+Fonte: elaborazioni Inapp su dati MLPS – Sistema Informativo Unitario (dati al 30 novembre 2025)

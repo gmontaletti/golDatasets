@@ -1,0 +1,37 @@
+Tabella 3.1      Programma GOL: individui* occupati alla data di riferimento per regione di presa in carico e percorso, v.a. e v.%
+                                                                                                             Occupati alla data di riferimento
+                                       Individui                                                          di cui:                                    di cui:                    Quota (%) nuovi
+                                       raggiunti                   Totale                   con nuovo rapporto di lavoro avviato      con rapporto di lavoro avviato prima    rapporti di lavoro sul
+                                                                                                  dopo la presa in carico                     della presa in carico              totale occupati
+
+                                                (A)               (B )          (B/A) %                    (C)             (C/A) %                     (D)         (D/A) %                  (C/B )%
+Regione presa in carico
+Abruzzo                                      71.929            31286               43,5               28140                    39,1                 3146                4,4                     89,9
+Basilicata                                   47.703            17231               36,1               15489                    32,5                 1742                3,7                     89,9
+P.A. Bolzano                                 16.514             8.764              53,1                8.281                   50,1                   483               2,9                     94,5
+Calabria                                    178.746            58.311              32,6               52.981                   29,6                 5.330               3,0                     90,9
+Campania                                    554.450           165.501              29,8              146.220                   26,4                19.281               3,5                     88,3
+Emilia-Romagna                              281.586           121.658              43,2              108.301                   38,5                13.357               4,7                     89,0
+Friuli-Venezia Giulia                       111.538            52.880              47,4               49.565                   44,4                 3.315               3,0                     93,7
+Lazio                                       289.903           120.066              41,4              103.406                   35,7                16.660               5,7                     86,1
+Liguria                                      69.977            29.223              41,8               25.680                   36,7                 3.543               5,1                     87,9
+Lombardia                                   547.768           230.850              42,1              203.007                   37,1                27.843               5,1                     87,9
+Marche                                      111.440            47024               42,2               41936                    37,6                 5088                4,6                     89,2
+Molise                                       15.188             5.587              36,8                4.914                   32,4                   673               4,4                     88,0
+Piemonte                                    273.770           112.057              40,9               99.089                   36,2                12.968               4,7                     88,4
+Puglia                                      400.901           146.664              36,6              134.077                   33,4                12.587               3,1                     91,4
+Sardegna                                    176.814            66.442              37,6               59.413                   33,6                 7.029               4,0                     89,4
+Sicilia                                     561.914           179.361              31,9              163.505                   29,1                15.856               2,8                     91,2
+Toscana                                     290.131           132382               45,6              117971                    40,7                14411                5,0                     89,1
+P.A. Trento                                  28.213            13.329              47,2               12.517                   44,4                   812               2,9                     93,9
+Umbria                                       65465             30844               47,1               27590                    42,1                 3254                5,0                     89,5
+Valle d'Aosta                                 7.332             3.579              48,8                3.287                   44,8                   292               4,0                     91,8
+Veneto                                      325.161           143.476              44,1              132.553                   40,8                10.923               3,4                     92,4
+Percorso
+1. Reinserimento lavorativo               2.240.785         1.067.368              47,6               967.748                  43,2                99.620               4,4                     90,7
+2. Upskilling                             1.047.655           411.068              39,2               367.115                  35,0                43.953               4,2                     89,3
+3. Reskilling                               958.276           194.548              20,3               172.785                  18,0                21.763               2,3                     88,8
+4. Lavoro e inclusione                      168.468            36.228              21,5                28.408                  16,9                 7.820               4,6                     78,4
+Totale                                    4.415.184         1.709.212              38,7             1.536.056                  34,8               173.156               3,9                     89,9
+* Al netto degli individui presi in carico nel percorso 5
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 31 dicembre 2025)

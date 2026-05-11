@@ -1,0 +1,19 @@
+Tabella 2.4 Esiti occupazionali ad un anno dalla presa in carico per area geografica (v.a. e %)
+                                                                                                            Tasso di
+                                    Presi in     Occupati nei 365 Di cui: con            Tasso di        occupazione        Incidenza
+                                   carico al       giorni dalla    occupazione        occupazione         stabile nei         lavoro
+                                  31.10.2024      presa in carico     stabile         nei 365 giorni      365 giorni          stabile
+                                      (A)              (B)               (C)            (B/A) (%)          (C/A) (%)        (C/B) (%)
+                                                           Area geografica
+ Nord-Ovest                         504.279           269.580           195.577            53,5              38,8              72,5
+ Nord-Est                           484.128           289.809           203.817            59,9              42,1              70,3
+ Centro                             463.745           257.758           178.196            55,6              38,4              69,1
+ Sud e Isole                       1.248.992          547.590           334.133            43,8              26,8              61,0
+                                                                 Percorso
+ 1 - Reinserimento lavorativo      1.320.523          824.642           567.382            62,4              43,0              68,8
+ 2 - Upskilling                     681.771           355.621           232.665            52,2              34,1              65,4
+ 3 - Reskilling                     598.111           158.072            96.125            26,4              16,1              60,8
+ 4 - Lavoro e inclusione            100.739            26.402            15.551            26,2              15,4              58,9
+ Totale                            2.701.144         1.364.737          911.723            50,5              33,8              66,8
+
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 31 ottobre 2025)

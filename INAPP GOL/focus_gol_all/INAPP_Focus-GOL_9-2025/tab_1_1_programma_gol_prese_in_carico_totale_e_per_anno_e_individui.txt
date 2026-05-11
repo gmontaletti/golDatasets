@@ -1,0 +1,32 @@
+Tabella 1.1         Programma GOL: prese in carico (totale e per anno) e individui raggiunti, ultima
+                    presa in carico per Regione, v.a. e val.%
+                                                Prese in carico per anno                                         Incidenza %
+                                                                                                                                    Individui
+                                                                                                       Totale    del 2025 sul
+                              2022               2023               2024              2025*                                         raggiunti
+ Regione                                                                                                            totale
+ Abruzzo                           9.642            25.228               24.148          13.921           72.939         19,1           66.528
+ Basilicata                        6.460            12.979               18.749          13.020           51.208             25,4       44.085
+ P.A. Bolzano                      2.425              5.875                5.611           3.217          17.128             18,8       15.301
+ Calabria                        28.287             48.864               63.337          40.026          180.514             22,2     163.148
+ Campania                        92.156            166.448             208.216           99.223          566.043             17,5     502.543
+ Emilia-Romagna                  44.370             83.986               89.354          62.848          280.558             22,4     257.367
+ Friuli-Venezia Giulia           21.694             39.330               37.706          22.033          120.763             18,2     103.314
+ Lazio                           61.715             79.036               75.317          49.664          265.732             18,7     251.843
+ Liguria                         11.842             21.190               23.800          12.297           69.129             17,8       63.859
+ Lombardia                       77.651            137.636             164.866          152.205          532.358             28,6     479.047
+ Marche                          18.590             36.332               39.308          21.563          115.793             18,6     101.537
+ Molise                            1.703              2.660                4.574           5.327          14.264             37,3       12.973
+ Piemonte                        46.640             73.628               80.775          68.710          269.753             25,5     243.420
+ Puglia                          71.121            102.737             118.416           86.415          378.689             22,8     355.411
+ Sardegna                        40.113             58.428               53.115          31.307          182.963             17,1     161.429
+ Sicilia                         65.814            167.467             194.251          133.307          560.839             23,8     501.010
+ Toscana                         45.156             84.710             103.313           75.041          308.220             24,3     261.538
+ P.A. Trento                       4.890              8.030                8.091           5.688          26.699             21,3       25.371
+ Umbria                          11.067             20.333               21.346          14.004           66.750             21,0       58.465
+ Valle d'Aosta                     1.297              1.925                2.058           1.890            7.170            26,4        6.327
+ Veneto                          40.712            116.535             111.637           68.042          336.926             20,2     291.815
+ Totale                         703.345          1.293.357           1.447.988          979.748        4.424.438             22,1   3.966.331
+
+*Per il 2025 osserviamo i primi otto mesi.
+Fonte: elaborazioni Inpp su dati MLPS - Sistema Informativo Unitario (dati al 31 agosto 2025)

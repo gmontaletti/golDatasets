@@ -1,0 +1,23 @@
+Tabella 2.5      Esiti occupazionali nei 6 mesi dalla conclusione della PAL per area geografica (v.a. e val.%)
+                        Presi in carico                                                               Tasso di
+                                          Occupati nei 180       Di cui: con        Tasso di                          Incidenza
+                             con PAL                                                                occupazione
+                                            giorni dalla        occupazione       occupazione                        occupazione
+                        conclusa entro                                                             stabile nei 180
+                                          conclusione PAL          stabile        nei 180 giorni                        stabile
+                         il 30/04/2025                                                                 giorni
+                                                (B)                  (C)             (B/A) %                           (C/B) %
+                               (A)                                                                    (C/A) %
+                                                             Totale PAL
+Nord-Ovest                 301.012             113.538             72.039              37,7             23,9            63,4
+Nord-Est                   472.401             213.919             146.136             45,3             30,9            68,3
+Centro                     313.617             151.831             105.806             48,4             33,7            69,7
+Sud e Isole                615.408             192.153             112.546             31,2             18,3            58,6
+Totale                    1.702.438            671.441             436.527             39,4             25,6            65,0
+                                                         Di cui: Formazione
+Nord-Ovest                  90.820             35.919              22.744              39,5             25,0            63,3
+Nord-Est                    82.874             40.429              25.727              48,8             31,0            63,6
+Centro                      58.163             27.778              19.165              47,8             33,0            69,0
+Sud e Isole                116.804             21.095              10.098              18,1             8,6             47,9
+Totale                     348.661             125.221             77.734              35,9             22,3            62,1
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 31 ottobre 2025)

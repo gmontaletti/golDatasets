@@ -1,0 +1,16 @@
+Tabella 1.5 Programma GOL: individui con caratteristiche di vulnerabilità e percorso, v.a. e val.%
+                                                   di cui:
+                                  Individui         con                                 Disoccupati                              Persone
+                                                                   %
+ Percorso GOL                     raggiunti   caratteristiche               Donne        da 6 mesi      Under 30     Over 55        con
+                                                                 (B/A)
+                                              di vulnerabilità                            e oltre                                disabilità
+                                    (A)              (B)
+ 1. Reinserimento lavorativo     1.642.921          1.346.202     81,9      893.490          362.101     476.881      263.877      57.185
+ 2. Upskilling                     814.891            709.093     87,0      446.107          299.850     243.539      148.328      38.840
+ 3. Reskilling                     699.294            665.815     95,2      412.094          424.930     220.777      109.937      39.854
+ 4. Lavoro e inclusione            125.855            115.564     91,8       69.792           80.395      18.397       25.983      20.065
+ 5. Ricollocazione collettiva        3.951               2.697    68,3        1.652              391          99        1.089          99
+ Totale                          3.286.912          2.839.371     86,4    1.823.135        1.167.667     959.693      549.214     156.043
+
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 31 gennaio 2025)

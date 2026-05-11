@@ -1,0 +1,44 @@
+Tabella 2.1 Programma GOL: individui* per Regione con almeno una politica dopo la presa in carico (LEP avviati dopo la presa in carico)
+                                                                                                                   Individui con LEP dopo la presa in carico
+
+                                      Individui con
+                                                                                                                                   Dettaglio formazione                                                                 Individui con    % individui
+                                       almeno una        % individui
+                          Individui                                                                                                                                                                     Individui con    almeno una      con almeno
+                                       politica (LEP     con almeno                                                                                                                           LEP O
+  Regione                 raggiunti                                        LEP E         LEP F1       LEP F2                                                                     LEP J                   Tirocinio da   politica (SAP)   una politica
+                                      E, F1, F2, H, J,   una politica                                                              C11                                                       Supporto
+                             (A)                                          Orient.       Accomp.     Attivazione       C07                          C12             LEP H     Conciliazione               CO (no SAP)    o un tirocinio    o tirocinio
+                                             O             (B/A%)                                                               Formazione                                                     auto
+                                                                        specialistico    lavoro      tirocinio    Formazione                    Formazione      Avviamento   vita e lavoro                                  CO (C)          (C/A%)
+                                            (B)                                                                                  non incl.                                                   impiego
+                                                                                                                  incl. comp.                   specifica su         a
+                                                                                                                                  comp.
+                                                                                                                    digitali                   comp. digitali   formazione
+                                                                                                                                  digitali
+
+ Abruzzo                  59.013         48.731             82,6          37.605         26.791         8           1.408           312             439           2.128           0             1          3.288           49.430           83,8
+ Basilicata               37.121          9.438             25,4           5.745         1.807          0           1.898          1.009           1.610          4.507           0            42          1.425           11.009           29,7
+ P.A. Bolzano             13.527         12.494             92,4           1.189         12.277        12             13            576             245            717            0            18           249            12.556           92,8
+ Calabria                 138.029        86.105             62,4          84.756         39.268       2.555         4.390          3.746           1.924          9.825           0           3.123        5.214           89.697           65,0
+ Campania                 447.378        285.341            63,8         272.604         77.075       7.372        102.711          222            10.451        113.245         403          1.442        21.869         293.973           65,7
+ Emilia-Romagna           222.702        187.898            84,4         177.151        142.550       6.995         30.764         5.851           39.332        73.377           1           1.584        12.570         189.999           85,3
+ Friuli-Venezia Giulia    91.834         86.368             94,0          65.566         77.446       1.949         5.657          9.555           7.985         21.183           53           51          4.539           86.747           94,5
+ Lazio                    219.860        105.678            48,1         105.603         21.380        18           5.579          9.723           3.381         18.381           0            411         13.353         115.615           52,6
+ Liguria                  55.247         40.972             74,2          35.098         20.585       1.229           9            7.770           6.996         13.252           0            35          2.897           41.491           75,1
+ Lombardia                378.896        208.460            55,0         188.406        160.961       7.997         5.905         38.725           19.161        55.443           6           1.794        23.934         221.289           58,4
+ Marche                   90.644         74.372             82,0          37.043         67.263       1.435         1.220          2.161           2.578          5.728           0            830         8.223           76.034           83,9
+ Molise                    9.533          1.822             19,1            745            13           2            911            126             185           1.213           1             0           643            2.442            25,6
+ Piemonte                 202.853        135.548            66,8         128.466         66.995      15.697         30.290         3.555           6.574         38.077           0             3          19.045         138.245           68,2
+ Puglia                   298.652        117.716            39,4          57.202         80.680        405          13.027         8.231           2.711         23.645           4           1.530        15.859         130.201           43,6
+ Sardegna                 143.332        109.114            76,1         108.315         42.708       1.076           13           5.343           2.977          8.221           1             7          8.114          111.534           77,8
+ Sicilia                  426.447        103.117            24,2          98.596         7.247         54           11.728         3.044           2.080         16.529           1            162         17.461         120.331           28,2
+ Toscana                  221.895        198.970            89,7         181.219        144.113       7.260         19.632        21.595           8.008         44.106         3.076         2.683        11.362         199.747           90,0
+ P.A. Trento              21.966         20.812             94,7           8.638         18.396        160           587           1.922           1.487          3.978          280            4           455            20.832           94,8
+ Umbria                   51.149         34.830             68,1          34.537         17.214        269           276           3.928           2.478          5.865           0             3          3.953           36.756           71,9
+ Valle D'Aosta             5236           4348              83,0           3033           2952         180           143            310             204            808            16            3           378             4415            84,3
+ Veneto                   254.343        253.908            99,8         253.729        244.778      11.079         6.503         34.875           15.798        50.096         1.588          167         26.067         253.991           99,9
+ Totale                  3.389.657     2.126.042            62,7        1.885.246       1.272.499    65.752        242.664        162.579         136.604        510.324        5.430        13.893       200.898        2.206.334          65,1
+
+* Al netto degli individui presi in carico nel percorso 5.
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 28 febbraio 2025 provvisori)

@@ -1,0 +1,32 @@
+Tabella 1.1         Programma GOL: prese in carico (totale e per anno) e individui raggiunti per Regione,
+                    v.a. e val.%
+                                                              Prese in carico per anno
+                                                                                                                                  Individui
+ Regione                                                                                                     Incidenza % del
+                            2022             2023            2024            2025*            Totale                              raggiunti
+                                                                                                             2025 sul totale
+ Abruzzo                   9.667            25.243           24.203         8.332             67.445               12,4              62.077
+ Basilicata                6.514            13.036           18.781         6.391             44.722               14,3              39.011
+ P.A. Bolzano              2.426             5.884            5.617         1.830             15.757               11,6              14.205
+ Calabria                 28.307            49.110           63.534        22.048            162.999               13,5             149.019
+ Campania                 92.547           167.149          208.478        51.829            520.003               10,0             466.868
+ Emilia-Romagna           44.362            83.885           89.269        35.726            253.242               14,1             235.956
+ Friuli-Venezia Giulia    21.702            39.368           37.733        11.295            110.098               10,3              95.825
+ Lazio                    61.786            79.138           75.329        23.641            239.894               9,9              230.022
+ Liguria                  11.820            21.158           23.340         6.515             62.833               10,4              58.513
+ Lombardia                78.148           138.172          165.194        63.646            445.160               14,3             405.095
+ Marche                   18.492            36.297           39.324        11.894            106.007               11,2              94.614
+ Molise                    1.710             2.668            4.580         2.625             11.583               22,7              10.734
+ Piemonte                 46.822            73.707           80.811        37.084            238.424               15,6             217.864
+ Puglia                   71.334           102.917          118.166        40.610            333.027               12,2             315.278
+ Sardegna                 38.951            59.040           54.035        15.589            167.615               9,3              148.854
+ Sicilia                  66.373           168.693          194.437        54.372            483.875               11,2             446.451
+ Toscana                  45.387            84.932          103.541        38.917            272.777               14,3             234.529
+ P.A. Trento               4.943             8.034            8.027         3.138             24.142               13,0              23.367
+ Umbria                   11.150            20.387           21.377         7.472             60.386               12,4              53.622
+ Valle d'Aosta             1.292             1.923            2.057           974              6.246               15,6               5.590
+ Veneto                   40.575           115.970          110.470        36.390            303.405               12,0             266.958
+ Totale                  704.308         1.296.711        1.448.303       480.318          3.929.640               12,2           3.574.452
+
+*Per il 2025 si osserva il primo trimestre.
+Fonte: elaborazioni Inpp su dati MLPS - Sistema Informativo Unitario (dati al 30 aprile 2025)
