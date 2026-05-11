@@ -38,25 +38,25 @@ d[tema == "A1" & confidenza == "high",
 #>    1:       2022-12-31 Abruzzo presi_in_carico_ass
 #>    2:       2022-12-31 Abruzzo presi_in_carico_ass
 #>    3:       2022-12-31 Abruzzo presi_in_carico_ass
-#>    4:       2022-12-31 Abruzzo  presi_in_carico_pc
+#>    4:       2022-12-31 Abruzzo presi_in_carico_ass
 #>    5:       2022-12-31 Abruzzo  presi_in_carico_pc
 #>   ---                                             
-#> 3847:       2025-01-31  Veneto  presi_in_carico_pc
-#> 3848:       2025-01-31  Veneto presi_in_carico_ass
-#> 3849:       2025-01-31  Veneto  presi_in_carico_pc
-#> 3850:       2025-01-31  Veneto presi_in_carico_ass
-#> 3851:       2025-01-31  Veneto  presi_in_carico_pc
+#> 4611:       2025-01-31  Veneto  presi_in_carico_pc
+#> 4612:       2025-01-31  Veneto presi_in_carico_ass
+#> 4613:       2025-01-31  Veneto  presi_in_carico_pc
+#> 4614:       2025-01-31  Veneto presi_in_carico_ass
+#> 4615:       2025-01-31  Veneto  presi_in_carico_pc
 #>                            percorso valore_num
 #>                              <char>      <num>
 #>    1:    1_reinserimento_lavorativo     5165.0
-#>    2: 3_riqualificazione_reskilling     1729.0
-#>    3:           4_lavoro_inclusione      260.0
-#>    4:    1_reinserimento_lavorativo       51.8
-#>    5:    2_aggiornamento_upskilling       28.2
+#>    2:    2_aggiornamento_upskilling     2811.0
+#>    3: 3_riqualificazione_reskilling     1729.0
+#>    4:           4_lavoro_inclusione      260.0
+#>    5:    1_reinserimento_lavorativo       51.8
 #>   ---                                         
-#> 3847: 3_riqualificazione_reskilling       48.5
-#> 3848:           4_lavoro_inclusione       41.5
-#> 3849:           4_lavoro_inclusione        6.7
-#> 3850:   5_ricollocazione_collettiva        3.1
-#> 3851:   5_ricollocazione_collettiva        0.2
+#> 4611: 3_riqualificazione_reskilling       48.5
+#> 4612:           4_lavoro_inclusione       41.5
+#> 4613:           4_lavoro_inclusione        6.7
+#> 4614:   5_ricollocazione_collettiva        3.1
+#> 4615:   5_ricollocazione_collettiva        0.2
 ```
