@@ -333,7 +333,7 @@ for (i in seq_len(nrow(scaffold))) {
     # Riqualificazione Lavoro e inclusione") non si allinea
     # affidabilmente al col_index. Per quel sotto-insieme usiamo solo
     # il mapping posizionale .A1_C2_POSITIONAL (definito in cima).
-    if (s$caption_num %in% c("2", "1.2") && s$era == "pre_2025") {
+    if (s$caption_num %in% c("2", "1.2", "1.3") && s$era == "pre_2025") {
       next
     }
 
@@ -592,7 +592,7 @@ scaffold[
 for (m in .A1_C2_POSITIONAL) {
   scaffold[
     tema == "A1" &
-      caption_num %in% c("2", "1.2") &
+      caption_num %in% c("2", "1.2", "1.3") &
       era == "pre_2025" &
       col_index == m$col &
       is.na(percorso),
