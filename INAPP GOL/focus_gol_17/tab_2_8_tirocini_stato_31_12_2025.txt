@@ -1,0 +1,8 @@
+Tabella 2.8           Tirocini extracurriculari avviati dopo la presa in carico, stato al 31 dicembre 2025
+ N. Tirocini extracurriculari avviati dopo presa in carico in GOL al 31 dicembre 2025                v.a.
+ In corso                                                                                            58.561
+ Completati                                                                                         187.344
+ Tirocini abbandonati                                                                                89.967
+                    di cui tirocini abbandonati con durata maggiore o uguale a 2 mesi                53.685
+                                                                                        %              59,7
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 31 dicembre 2025)

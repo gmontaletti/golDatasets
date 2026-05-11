@@ -1,0 +1,19 @@
+Tabella 3.3       Esiti occupazionali ad un anno dalla presa in carico per area geografica (v.a. e v.%)
+                                        Presi in     Occupati       Di cui: con      Tasso di         Tasso di      Incidenza
+                                       carico al      nei 365      occupazione     occupazione      occupazione    occupazione
+                                      31.12.2024    giorni dalla      stabile      nei 365 giorni    stabile nei      stabile
+                                                      presa in                                       365 giorni
+                                                       carico
+                                          (A)           (B)             (C)          (B/A) (%)       (C/A) (%)      (C/B) (%)
+Area geografica
+Nord-Ovest                             534.273        284.951        206.550            53,5           38,8           72,5
+Nord-Est                               513.044        307.923        216.036            59,9           42,1           70,2
+Centro                                 491.077        273.482        188.987            55,6           38,4           69,1
+Sud e Isole                           1.315.239       576.496        353.032            43,8           26,8           61,2
+Percorso
+1 - Reinserimento lavorativo          1.401.259       874.914        602.190            62,4           43,0           68,8
+2 - Upskilling                         712.872        372.205        243.847            52,2           34,2           65,5
+3 - Reskilling                         630.203        167.143        101.795            26,5           16,2           60,9
+4 - Lavoro e inclusione                109.299        28.590         16.773             26,2           15,3           58,7
+Totale                                2.853.633      1.442.852       964.605            50,6           33,8           66,9
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 31 dicembre 2025)

@@ -1,0 +1,32 @@
+Tabella 2.10 Tirocini extracurriculari avviati dopo la presa in carico in GOL (totali e promossi dai CPI) per
+             settore di attività del datore di lavoro, qualifica professionale e skill (v.a. e v.%)
+                                                                                                      Tirocini extracurriculari
+                                                                   Tirocini extracurriculari
+                                                                                                      promossi da Cpi (LEP F2)
+                                                                    v.a.               %               v.a.              %
+Totale                                                                335.872                  100     151.715                    100
+Settore datore di lavoro
+Agricoltura                                                                5.249                1,6       2.784                    1,8
+Alberghi e ristoranti                                                   27.701                  8,3     12.723                     8,4
+Altri servizi pubblici, sociali e personali                             22.714                  6,7     10.793                     7,1
+Commercio e riparazioni                                                 80.540                 24,0     34.483                    22,7
+Costruzioni                                                             16.350                  4,9       7.922                    5,2
+Industria in senso stretto                                              53.567                 16,0     26.035                    17,2
+P.A., Istruzione e Sanità                                               52.070                 15,5      21790                    14,4
+Trasporti, Comunicazioni, Attività finanziaria                          77.681                 23,1     35.185                    23,2
+Qualifica professionale
+Legislatori dirigenti imprenditori                                          243                 0,1          43                    0,0
+Professioni intellettuali scientifiche                                  22.606                  6,7       8.465                    5,6
+Professioni tecniche                                                    44.257                 13,2     21.277                    14,0
+Impiegati                                                               83.379                 24,8     39.706                    26,2
+Professioni qualificate nelle attività commerciali                      88.314                 26,3     38.617                    25,5
+Artigiani                                                               42.806                 12,7     21.203                    14,0
+Conduttori impianti operai semiqualificati                              13.696                  4,1       6.117                    4,0
+Professioni non qualificate                                             33.798                 10,1     13.468                     8,9
+Skill
+Basse                                                                   36.482                 10,9     14.674                     9,7
+Medio-basse                                                           225.396                  67,1    104.484                    68,9
+Medio-alte                                                              41.985                 12,5     19.997                    13,2
+Alte                                                                    25.236                  7,5       9.741                    6,4
+
+Fonte: elaborazioni Inapp su dati MLPS - Sistema Informativo Unitario (dati al 31 dicembre 2025)

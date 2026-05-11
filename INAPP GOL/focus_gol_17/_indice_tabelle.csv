@@ -1,0 +1,20 @@
+numero,titolo,pagine,csv,txt,n_righe,n_colonne
+1.3,"Individui per Regione e caratteristiche socio-anagrafiche, v.a.","9,10",tab_1_3_caratteristiche_socio_anagrafiche_va.csv,tab_1_3_caratteristiche_socio_anagrafiche_va.txt,27,10
+1.4,"Individui per Regione e caratteristiche socio-anagrafiche, val.%","11,12",tab_1_4_caratteristiche_socio_anagrafiche_pc.csv,tab_1_4_caratteristiche_socio_anagrafiche_pc.txt,27,12
+1.5,Individui con caratteristiche di vulnerabilità per percorso,"12,13,14",tab_1_5_vulnerabilita_e_percorso.csv,tab_1_5_vulnerabilita_e_percorso.txt,25,4
+1.6,Individui con patto di servizio attivo per target e regione,"14,15",tab_1_6_patto_servizio_attivo_target_regione.csv,tab_1_6_patto_servizio_attivo_target_regione.txt,25,4
+1.7,Composizione presi in carico con patto di servizio per target,"16,17",tab_1_7_patto_servizio_composizione_target.csv,tab_1_7_patto_servizio_composizione_target.txt,20,6
+2.2,"Prese in carico e corsi di formazione per area, percorso, età, genere, titolo","20,21",tab_2_2_formazione_per_caratteristiche.csv,tab_2_2_formazione_per_caratteristiche.txt,39,7
+2.3,Corsi di formazione per arricchimento competenze digitali,"22,23",tab_2_3_formazione_competenze_digitali.csv,tab_2_3_formazione_competenze_digitali.txt,32,3
+2.4,Distribuzione avvii corsi di formazione per anno e area geografica,"24,25",tab_2_4_avvii_corsi_per_anno_area.csv,tab_2_4_avvii_corsi_per_anno_area.txt,7,7
+2.5,"Durata corsi di formazione: media, mediana, quartili","27,28",tab_2_5_durata_corsi_statistiche.csv,tab_2_5_durata_corsi_statistiche.txt,16,6
+2.6,Durata corsi di formazione in competenze digitali,"28,29",tab_2_6_durata_corsi_competenze_digitali.csv,tab_2_6_durata_corsi_competenze_digitali.txt,12,15
+2.7,Tirocini extracurriculari avviati dopo la presa in carico,"30,31",tab_2_7_tirocini_extracurriculari_avviati.csv,tab_2_7_tirocini_extracurriculari_avviati.txt,3,8
+2.8,Tirocini extracurriculari: stato al 31/12/2025,"32,33",tab_2_8_tirocini_stato_31_12_2025.csv,tab_2_8_tirocini_stato_31_12_2025.txt,12,4
+2.9,Tirocini extracurriculari terminati: durata effettiva in giorni,"33,34",tab_2_9_tirocini_durata_giorni.csv,tab_2_9_tirocini_durata_giorni.txt,7,5
+2.10,Tirocini extracurriculari avviati totali e promossi dai CPI per regione,"34,35,36",tab_2_10_tirocini_per_regione_cpi.csv,tab_2_10_tirocini_per_regione_cpi.txt,7,5
+3.1,Individui occupati alla data di riferimento per regione di presa in carico e percorso,"37,38",tab_3_1_occupati_per_regione_e_percorso.csv,tab_3_1_occupati_per_regione_e_percorso.txt,32,7
+3.2,Individui occupati per tipo di contratto e percorso,"38,39",tab_3_2_occupati_per_tipo_contratto_percorso.csv,tab_3_2_occupati_per_tipo_contratto_percorso.txt,16,7
+3.3,Esiti occupazionali a un anno per area geografica,"39,40",tab_3_3_esiti_un_anno_area_geografica.csv,tab_3_3_esiti_un_anno_area_geografica.txt,16,7
+3.4,Esiti occupazionali a un anno per area geografica e percorso,"41,42",tab_3_4_esiti_un_anno_area_percorso.csv,tab_3_4_esiti_un_anno_area_percorso.txt,20,7
+3.5,Esiti occupazionali nei 6 mesi dalla conclusione della PAL,"43,44",tab_3_5_esiti_sei_mesi_post_pal.csv,tab_3_5_esiti_sei_mesi_post_pal.txt,11,6

@@ -1,0 +1,24 @@
+Package: golDatasets
+Title: Dataset canonici del Programma GOL
+Version: 0.1.0
+Authors@R: 
+    person("Giampaolo", "Montaletti", , "giampaolo.montaletti@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0002-5327-1122"))
+Description: Raccolta di dataset regionali canonici relativi al Programma
+    GOL (Garanzia Occupabilita' Lavoratori). Include la serie mensile
+    INAPP Focus GOL (2024-06/2025-12), lo storico GOL 2022-2025 per i temi
+    con schema stabile (A1, B, F, H), e i flussi trimestrali COB INPS
+    (2017-2025) armonizzati alle etichette regionali GOL. Include la
+    funzione build_gol_datasets() per rigenerare gli oggetti dai CSV
+    grezzi.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Language: it
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    data.table

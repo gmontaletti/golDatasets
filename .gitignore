@@ -1,0 +1,19 @@
+# R session / build
+.DS_Store
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user
+docs/
+*.tar.gz
+
+# renv
+renv/library/
+renv/local/
+renv/staging/
+renv/python/
+renv/sandbox/
+renv/.cache/
+
+# Output di test / check temporanei
+golDatasets.Rcheck/

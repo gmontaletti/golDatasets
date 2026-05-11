@@ -1,0 +1,68 @@
+[
+  {
+    "theme": "A1",
+    "n_records": 3365,
+    "n_files": 27,
+    "n_unique_rows": 385
+  },
+  {
+    "theme": "A2",
+    "n_records": 861,
+    "n_files": 6,
+    "n_unique_rows": 172
+  },
+  {
+    "theme": "A3",
+    "n_records": 396,
+    "n_files": 5,
+    "n_unique_rows": 110
+  },
+  {
+    "theme": "B",
+    "n_records": 6996,
+    "n_files": 27,
+    "n_unique_rows": 588
+  },
+  {
+    "theme": "E",
+    "n_records": 1410,
+    "n_files": 13,
+    "n_unique_rows": 286
+  },
+  {
+    "theme": "F",
+    "n_records": 6825,
+    "n_files": 20,
+    "n_unique_rows": 535
+  },
+  {
+    "theme": "H",
+    "n_records": 3309,
+    "n_files": 18,
+    "n_unique_rows": 418
+  },
+  {
+    "theme": "I",
+    "n_records": 300,
+    "n_files": 15,
+    "n_unique_rows": 60
+  },
+  {
+    "theme": "J",
+    "n_records": 137,
+    "n_files": 3,
+    "n_unique_rows": 19
+  },
+  {
+    "theme": "K",
+    "n_records": 978,
+    "n_files": 4,
+    "n_unique_rows": 151
+  },
+  {
+    "theme": "L",
+    "n_records": 265,
+    "n_files": 2,
+    "n_unique_rows": 25
+  }
+]

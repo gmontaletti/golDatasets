@@ -1,0 +1,12 @@
+^LICENSE\.md$
+^INAPP GOL$
+^cob$
+^dataset_long$
+^percorsi$
+^data-raw$
+^CLAUDE\.md$
+\.DS_Store
+^_pkgdown\.yml$
+^docs$
+^\.github$
+^\.claude$
