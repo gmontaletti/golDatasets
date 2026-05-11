@@ -19,6 +19,18 @@ visualizzazione.
 
   Estrai una serie temporale pronta per plot da `gol_inapp_mensile`
 
+- [`gol_storia_volumi_series()`](https://gmontaletti.github.io/golDatasets/reference/gol_storia_volumi_series.md)
+  : Estrae una serie di volumi (presi in carico) per plot_timeline
+
+- [`gol_storia_caratteristiche_series()`](https://gmontaletti.github.io/golDatasets/reference/gol_storia_caratteristiche_series.md)
+  : Estrae una serie di caratteristiche dei beneficiari
+
+- [`gol_storia_esiti_series()`](https://gmontaletti.github.io/golDatasets/reference/gol_storia_esiti_series.md)
+  : Estrae una serie di esiti (occupazionali, LEP, politiche)
+
+- [`gol_decode_storico()`](https://gmontaletti.github.io/golDatasets/reference/gol_decode_storico.md)
+  : Applica il decoder semantico a gol_storico_regionale
+
 - [`cob_compute_indicators()`](https://gmontaletti.github.io/golDatasets/reference/cob_compute_indicators.md)
   : Calcola indicatori derivati dai flussi COB
 
@@ -50,12 +62,30 @@ oggetti.
 
 - [`gol_inapp_mensile`](https://gmontaletti.github.io/golDatasets/reference/gol_inapp_mensile.md)
   : Serie INAPP Focus GOL mensile (2024-06 -\> 2025-12)
+
 - [`gol_storico_regionale`](https://gmontaletti.github.io/golDatasets/reference/gol_storico_regionale.md)
   : Storico GOL regionale 2022-2025 (temi A1, B, F, H)
+
 - [`cob_regionale_trimestrale`](https://gmontaletti.github.io/golDatasets/reference/cob_regionale_trimestrale.md)
   : Comunicazioni Obbligatorie regionali trimestrali (2017-Q1 -\>
   2025-Q3)
+
 - [`gol_method_ruptures`](https://gmontaletti.github.io/golDatasets/reference/gol_method_ruptures.md)
   : Rotture di metodo nella serie GOL
+
 - [`gol_rescan_recommendations`](https://gmontaletti.github.io/golDatasets/reference/gol_rescan_recommendations.md)
   : Raccomandazioni di rescanning per le estrazioni storiche GOL
+
+- [`storico_decoder`](https://gmontaletti.github.io/golDatasets/reference/storico_decoder.md)
+  :
+
+  Decoder semantico per `gol_storico_regionale`
+
+- [`gol_storia_volumi`](https://gmontaletti.github.io/golDatasets/reference/gol_storia_volumi.md)
+  : Storia lunga GOL: presi in carico 2022-2025
+
+- [`gol_storia_caratteristiche`](https://gmontaletti.github.io/golDatasets/reference/gol_storia_caratteristiche.md)
+  : Storia lunga GOL: caratteristiche dei beneficiari 2022-2025
+
+- [`gol_storia_esiti`](https://gmontaletti.github.io/golDatasets/reference/gol_storia_esiti.md)
+  : Storia lunga GOL: esiti 2022-2025

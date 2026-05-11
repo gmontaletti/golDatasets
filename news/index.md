@@ -1,5 +1,53 @@
 # Changelog
 
+## golDatasets 0.5.0
+
+### Decoder semantico storico
+
+- `storico_decoder` (~228 righe): mappa (`tema`, `caption_num`,
+  `col_index`, `era`) a (`variabile`, `caratteristica`, `modalita`,
+  `percorso`, `unita`, `confidenza`). Costruito via regex su
+  `header_above` modale; editabile manualmente da
+  `inst/extdata/storico_decoder.csv`.
+- [`gol_decode_storico()`](https://gmontaletti.github.io/golDatasets/reference/gol_decode_storico.md):
+  applica il decoder a `gol_storico_regionale`, aggiungendo `era` e le
+  colonne semantiche. Supporta filtro `min_confidenza` (high / medium /
+  low).
+
+### Storia lunga 2022-2025
+
+Tre dataset tematici long format che integrano storico ANPAL/MLPS e
+INAPP mensile:
+
+- `gol_storia_volumi` (~9.200 righe): presi in carico × regione ×
+  percorso, da 2022-09 a 2025-12.
+- `gol_storia_caratteristiche` (~4.300 righe): genere, classe eta’,
+  cittadinanza, durata disoccupazione.
+- `gol_storia_esiti` (~13.600 righe): occupazione 60/90/180gg,
+  politiche, LEP, formazione, occupati totali.
+
+Tre funzioni di estrazione compatibili con
+[`plot_timeline()`](https://gmontaletti.github.io/golDatasets/reference/plot_timeline.md):
+
+- `gol_storia_volumi_series(variabile, regione, percorso, ...)`
+- `gol_storia_caratteristiche_series(caratteristica, modalita, regione, ...)`
+- `gol_storia_esiti_series(variabile, regione, percorso, ...)`
+
+### Documentazione
+
+- Vignette `merge-gol-cob` estesa con sezione “Storia lunga 2022-2025”
+  che mostra 3 grafici (presi in carico totale, composizione di genere,
+  LEP-E) con cadenze miste (episodica 2022 → mensile 2025) e rotture
+  annotate.
+
+### Future work (v0.6.0)
+
+- Mapper per le 6 nuove tabelle INAPP estratte in `focus_gol_all/` (1.3,
+  1.4, 1.5, 1.6, 1.7, 2.3) — patto di servizio, vulnerabilita’,
+  competenze digitali.
+- Refinement manuale del CSV `storico_decoder.csv` per ridurre la quota
+  di righe `confidenza = low` (53/228).
+
 ## golDatasets 0.4.0
 
 ### Quality assessment

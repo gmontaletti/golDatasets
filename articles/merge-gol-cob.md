@@ -343,7 +343,70 @@ gol_storico_regionale[, .N, by = rescan_severity]
 #> 3: replaced_from_inapp_csv_long  2420
 ```
 
-### 5.3 Plot COB
+### 5.3 Storia lunga 2022-2025
+
+I tre dataset `gol_storia_volumi`, `gol_storia_caratteristiche`,
+`gol_storia_esiti` integrano lo storico ANPAL/MLPS (cadenza
+episodica/semestrale) con la serie mensile INAPP, producendo una visione
+completa del Programma GOL dal 2022 alla fine del 2025. Le rotture
+metodologiche del 2025 sono annotate via `gol_method_ruptures`.
+
+``` r
+
+serie_pic <- gol_storia_volumi_series(
+  variabile = "presi_in_carico_totale",
+  regione   = "Totale"
+)
+plot_timeline(
+  serie_pic,
+  ruptures = gol_method_ruptures,
+  title    = "Presi in carico GOL - Italia, 2022-2025",
+  subtitle = "Integrazione storico ANPAL/MLPS + INAPP mensile",
+  y_label  = "N. presi in carico"
+)
+```
+
+![](merge-gol-cob_files/figure-html/storia-volumi-1.png)
+
+Composizione di genere (storica dal 2022, valori percentuali ANPAL):
+
+``` r
+
+serie_genere <- gol_storia_caratteristiche_series(
+  caratteristica = "genere",
+  regione        = "Totale"
+)
+plot_timeline(
+  serie_genere,
+  group    = "modalita",
+  ruptures = gol_method_ruptures,
+  title    = "Composizione di genere dei presi in carico"
+)
+```
+
+![](merge-gol-cob_files/figure-html/storia-genere-1.png)
+
+LEP-E (orientamento iniziale, INAPP mensile):
+
+``` r
+
+serie_lep <- gol_storia_esiti_series(variabile = "lep_e",
+                                      regione = "Totale")
+plot_timeline(
+  serie_lep,
+  ruptures = gol_method_ruptures,
+  title    = "LEP-E (orientamento iniziale) - Italia",
+  y_label  = "N. beneficiari"
+)
+```
+
+![](merge-gol-cob_files/figure-html/storia-lep-1.png)
+
+I tre dataset propagano la colonna `confidenza` che permette di filtrare
+via `min_confidenza = "high"` per analisi rigorose, escludendo le righe
+le cui semantiche derivano da inferenza euristica sul `header_above`.
+
+### 5.4 Plot COB
 
 Per le serie COB (che non hanno rotture metodologiche note) il parametro
 `ruptures` rimane `NULL` e si usa una palette CVD-safe (Okabe-Ito) per
@@ -396,7 +459,7 @@ str(ind[1])
 #>  $ yoy_avviamenti       : num NA
 #>  $ yoy_cessazioni       : num NA
 #>  $ yoy_saldo            : num NA
-#>  - attr(*, ".internal.selfref")=<pointer: 0x559eb1e23010> 
+#>  - attr(*, ".internal.selfref")=<pointer: 0x55c8033b6010> 
 #>  - attr(*, "sorted")= chr [1:3] "regione" "anno" "trimestre"
 ```
 
