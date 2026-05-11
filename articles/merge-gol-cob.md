@@ -1,0 +1,207 @@
+# Merge tra serie GOL e baseline COB
+
+Questa vignette mostra un caso d’uso cross-dataset: combinare le serie
+INAPP del Programma GOL con i flussi del mercato del lavoro provenienti
+dalle Comunicazioni Obbligatorie (COB) INPS, sfruttando il fatto che
+entrambi i dataset usano le stesse 21 etichette regionali canoniche.
+
+``` r
+
+library(golDatasets)
+library(data.table)
+#> 
+#> Attaching package: 'data.table'
+#> The following object is masked from 'package:base':
+#> 
+#>     %notin%
+```
+
+## 1. Esiti occupazionali GOL per regione
+
+La tavola 2.2 della serie INAPP riporta gli “occupati” tra i raggiunti
+dal programma. Filtriamo i valori assoluti aggregati per regione
+(`percorso == ""`) all’ultima data disponibile.
+
+``` r
+
+ultima_data <- max(gol_inapp_mensile$data_riferimento)
+
+occupati <- gol_inapp_mensile[
+  tavola == 2.2 &
+    data_riferimento == ultima_data &
+    dimensione == "regione" &
+    percorso == "" &
+    variabile == "occupati_totale" &
+    etichetta != "Totale",
+  .(regione = etichetta, occupati_gol = valore)
+]
+
+setorder(occupati, -occupati_gol)
+head(occupati, 10)
+#>            regione occupati_gol
+#>             <char>        <num>
+#>  1:      Lombardia       230850
+#>  2:        Sicilia       179361
+#>  3:       Campania       165501
+#>  4:         Puglia       146664
+#>  5:         Veneto       143476
+#>  6:        Toscana       132382
+#>  7: Emilia-Romagna       121658
+#>  8:          Lazio       120066
+#>  9:       Piemonte       112057
+#> 10:       Sardegna        66442
+```
+
+## 2. Flusso COB della stessa regione, ultimo anno disponibile
+
+Aggreghiamo i flussi del 2025 (3 trimestri disponibili) per ciascuna
+regione, restando sugli avviamenti.
+
+``` r
+
+cob_2025 <- cob_regionale_trimestrale[
+  flusso == "avviamenti" & anno == 2025,
+  .(avviamenti_2025 = sum(rapporti, na.rm = TRUE),
+    lavoratori_2025 = sum(lavoratori, na.rm = TRUE)),
+  by = regione
+]
+
+head(cob_2025, 5)
+#> Key: <regione>
+#>           regione avviamenti_2025 lavoratori_2025
+#>            <char>           <num>           <num>
+#> 1:        Abruzzo          212708          177828
+#> 2:     Basilicata          120862           91817
+#> 3:       Calabria          275822          236409
+#> 4:       Campania          823743          628379
+#> 5: Emilia-Romagna          856728          691433
+```
+
+## 3. Merge sulla chiave regionale
+
+I due dataset condividono la stessa convenzione di naming: le 21
+etichette regionali canoniche. Il merge è quindi diretto.
+
+``` r
+
+panel <- merge(occupati, cob_2025, by = "regione", all = FALSE)
+
+panel[, quota_gol_su_avviamenti := occupati_gol / avviamenti_2025]
+setorder(panel, -quota_gol_su_avviamenti)
+panel
+#>                   regione occupati_gol avviamenti_2025 lavoratori_2025
+#>                    <char>        <num>           <num>           <num>
+#>  1: Friuli-Venezia Giulia        52880          184203          158344
+#>  2:                Umbria        30844          124867          103313
+#>  3:               Sicilia       179361          730215          583464
+#>  4:              Sardegna        66442          280514          233126
+#>  5:              Piemonte       112057          505085          428621
+#>  6:               Toscana       132382          625907          512636
+#>  7:              Calabria        58311          275822          236409
+#>  8:              Campania       165501          823743          628379
+#>  9:                Veneto       143476          727404          625449
+#> 10:                Marche        47024          247312          205987
+#> 11:                Puglia       146664          917030          651392
+#> 12:             Lombardia       230850         1517151         1186585
+#> 13:               Abruzzo        31286          212708          177828
+#> 14:                Molise         5587           38607           32561
+#> 15:            Basilicata        17231          120862           91817
+#> 16:        Emilia-Romagna       121658          856728          691433
+#> 17:         Valle d'Aosta         3579           26492           22933
+#> 18:               Liguria        29223          221783          188820
+#> 19:           P.A. Trento        13329          134871          118923
+#> 20:                 Lazio       120066         1422964          804587
+#> 21:          P.A. Bolzano         8764          158050          140296
+#>                   regione occupati_gol avviamenti_2025 lavoratori_2025
+#>                    <char>        <num>           <num>           <num>
+#>     quota_gol_su_avviamenti
+#>                       <num>
+#>  1:              0.28707459
+#>  2:              0.24701482
+#>  3:              0.24562766
+#>  4:              0.23685805
+#>  5:              0.22185771
+#>  6:              0.21150427
+#>  7:              0.21140808
+#>  8:              0.20091339
+#>  9:              0.19724390
+#> 10:              0.19014039
+#> 11:              0.15993370
+#> 12:              0.15216020
+#> 13:              0.14708427
+#> 14:              0.14471469
+#> 15:              0.14256756
+#> 16:              0.14200306
+#> 17:              0.13509739
+#> 18:              0.13176393
+#> 19:              0.09882777
+#> 20:              0.08437740
+#> 21:              0.05545081
+#>     quota_gol_su_avviamenti
+#>                       <num>
+```
+
+## 4. Serie temporale per una singola regione
+
+Concatenando le due serie possiamo costruire una visione regionale
+dell’andamento. Esempio per l’Emilia-Romagna.
+
+``` r
+
+serie_gol <- gol_inapp_mensile[
+  tavola == 2.2 &
+    etichetta == "Emilia-Romagna" &
+    percorso == "" &
+    variabile == "occupati_totale",
+  .(data = data_riferimento,
+    fonte = "GOL: occupati (INAPP)",
+    valore = valore)
+]
+
+serie_cob <- cob_regionale_trimestrale[
+  regione == "Emilia-Romagna" & flusso == "avviamenti",
+  .(data = data_inizio_trimestre,
+    fonte = "COB: avviamenti (INPS)",
+    valore = rapporti)
+]
+
+serie <- rbindlist(list(serie_gol, serie_cob))
+setorder(serie, data, fonte)
+serie[, .N, by = fonte]
+#>                     fonte     N
+#>                    <char> <int>
+#> 1: COB: avviamenti (INPS)    35
+#> 2:  GOL: occupati (INAPP)    12
+```
+
+## 5. Rotture di serie da tenere a mente
+
+Prima di costruire indicatori longitudinali, è importante ricordare le
+rotture di serie documentate in `dataset_long/README.md`:
+
+- **Cambio unità di osservazione** nel 2025 (presi in carico →
+  individui).
+- **Cambio regola di assegnazione regionale** nel 2025 (regione di presa
+  in carico → regione di ultima presa in carico).
+- **Passaggio da 4 a 5 percorsi GOL** con `ricollocazione_collettiva`
+  introdotto nel 2025.
+
+Lo storico più lungo è disponibile in `gol_storico_regionale`, ma per i
+quattro temi A1, B, F, H il `col_index` non è confrontabile direttamente
+pre/post 2025.
+
+## 6. Convenzione regioni
+
+Le 21 etichette canoniche usate da tutti e tre i dataset:
+
+``` r
+
+sort(unique(cob_regionale_trimestrale$regione))
+#>  [1] "Abruzzo"               "Basilicata"            "Calabria"             
+#>  [4] "Campania"              "Emilia-Romagna"        "Friuli-Venezia Giulia"
+#>  [7] "Lazio"                 "Liguria"               "Lombardia"            
+#> [10] "Marche"                "Molise"                "P.A. Bolzano"         
+#> [13] "P.A. Trento"           "Piemonte"              "Puglia"               
+#> [16] "Sardegna"              "Sicilia"               "Toscana"              
+#> [19] "Umbria"                "Valle d'Aosta"         "Veneto"
+```
