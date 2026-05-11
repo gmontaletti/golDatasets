@@ -101,6 +101,19 @@ Timeline regionali con annotazione delle rotture metodologiche.
 - [`plot_timeline()`](https://gmontaletti.github.io/golDatasets/reference/plot_timeline.md)
   : Disegna una timeline con eventuali annotazioni di rotture di metodo
 
+## Qualita’ delle estrazioni
+
+Valutazione delle estrazioni PDF e identificazione delle tavole da
+ri-estrarre.
+
+- [`gol_storico_quality()`](https://gmontaletti.github.io/golDatasets/reference/gol_storico_quality.md)
+  :
+
+  Calcola le metriche di qualita' per `gol_storico_regionale`
+
+- [`gol_quality_classify()`](https://gmontaletti.github.io/golDatasets/reference/gol_quality_classify.md)
+  : Classifica la qualita' di un'estrazione GOL storica
+
 ## Dataset
 
 Dataset esposti dal package, accessibili con
@@ -116,6 +129,8 @@ oggetti.
   2025-Q3)
 - [`gol_method_ruptures`](https://gmontaletti.github.io/golDatasets/reference/gol_method_ruptures.md)
   : Rotture di metodo nella serie GOL
+- [`gol_rescan_recommendations`](https://gmontaletti.github.io/golDatasets/reference/gol_rescan_recommendations.md)
+  : Raccomandazioni di rescanning per le estrazioni storiche GOL
 
 # Articles
 

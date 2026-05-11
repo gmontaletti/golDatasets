@@ -276,7 +276,74 @@ plot_timeline(
 
 ![](merge-gol-cob_files/figure-html/plot-gol-lep-1.png)
 
-### 5.2 Plot COB
+### 5.2 Qualità delle estrazioni storiche
+
+Il dataset `gol_storico_regionale` deriva dall’estrazione automatica di
+27 PDF di monitoraggio GOL. Non tutte le combinazioni
+`(file, tema, caption_num)` hanno la stessa qualità: la funzione
+[`gol_storico_quality()`](https://gmontaletti.github.io/golDatasets/reference/gol_storico_quality.md)
+calcola metriche di copertura e completamento e classifica ogni
+estrazione in 5 tier di severità.
+
+``` r
+
+q <- gol_storico_quality()
+q[, .N, by = severity][order(severity)]
+#>      severity     N
+#>        <char> <int>
+#> 1:         ok    89
+#> 2: rescan_low     9
+```
+
+Le anomalie residue (tutte non `ok`) sono esposte come dataset
+`gol_rescan_recommendations`. La maggior parte sono **file ANPAL
+2022-2024 con 19-20 regioni invece di 21**, che si possono recuperare
+ri-estraendo direttamente dal PDF.
+
+``` r
+
+gol_rescan_recommendations[, .(file, tema, caption_num, n_anchor, severity)]
+#>                                                        file   tema caption_num
+#>                                                      <char> <char>      <char>
+#> 1: 2022/Nota monitoraggio GOL 2-2022 - Focus n. 13782e9.pdf      B           3
+#> 2:   2022/Nota monitoraggio GOL 3-2022 Focus n. 139475c.pdf      B           3
+#> 3:  2022/Nota monitoraggio GOL 1-2022 - Focus N 135bdfb.pdf     A1           2
+#> 4:  2022/Nota monitoraggio GOL 1-2022 - Focus N 135bdfb.pdf      B           3
+#> 5: 2022/Nota monitoraggio GOL 2-2022 - Focus n. 13782e9.pdf     A1           2
+#> 6:   2022/Nota monitoraggio GOL 3-2022 Focus n. 139475c.pdf     A1           2
+#> 7:     2023/ANPAL_Nota_12-2023_Focus166_dati_31-10-2023.pdf      F         2.1
+#> 8:     2023/ANPAL_Nota_14-2023_Focus169_dati_31-12-2023.pdf      F         2.1
+#> 9:                        2024/Nota-monitoraggio-1_2024.pdf      F         2.1
+#>    n_anchor   severity
+#>       <int>     <char>
+#> 1:       20 rescan_low
+#> 2:       20 rescan_low
+#> 3:       20 rescan_low
+#> 4:       20 rescan_low
+#> 5:       20 rescan_low
+#> 6:       20 rescan_low
+#> 7:       19 rescan_low
+#> 8:       19 rescan_low
+#> 9:       19 rescan_low
+```
+
+Il caso più grave (INAPP A1/1.2 — 10 file su 11 con extraction fallita
+in `dataset_long/`) è già stato risolto in fase di build sostituendo le
+righe rotte con la versione decodificata di
+`INAPP GOL/csv_long/tab_1_2_long.csv`. La colonna `rescan_severity`
+traccia la provenienza di ciascuna riga.
+
+``` r
+
+gol_storico_regionale[, .N, by = rescan_severity]
+#>                 rescan_severity     N
+#>                          <char> <int>
+#> 1:                           ok 18861
+#> 2:                   rescan_low  1369
+#> 3: replaced_from_inapp_csv_long  2420
+```
+
+### 5.3 Plot COB
 
 Per le serie COB (che non hanno rotture metodologiche note) il parametro
 `ruptures` rimane `NULL` e si usa una palette CVD-safe (Okabe-Ito) per
@@ -329,7 +396,7 @@ str(ind[1])
 #>  $ yoy_avviamenti       : num NA
 #>  $ yoy_cessazioni       : num NA
 #>  $ yoy_saldo            : num NA
-#>  - attr(*, ".internal.selfref")=<pointer: 0x55e1c5306010> 
+#>  - attr(*, ".internal.selfref")=<pointer: 0x55dc47aeb010> 
 #>  - attr(*, "sorted")= chr [1:3] "regione" "anno" "trimestre"
 ```
 

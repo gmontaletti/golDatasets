@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golDatasets</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -312,12 +312,70 @@ regione, stesso pattern di <code>rbindlist</code>.</p>
 <p><img src="merge-gol-cob_files/figure-html/plot-gol-lep-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
-<h3 id="plot-cob">5.2 Plot COB<a class="anchor" aria-label="anchor" href="#plot-cob"></a>
+<h3 id="qualità-delle-estrazioni-storiche">5.2 Qualità delle estrazioni storiche<a class="anchor" aria-label="anchor" href="#qualit%C3%A0-delle-estrazioni-storiche"></a>
+</h3>
+<p>Il dataset <code>gol_storico_regionale</code> deriva dall’estrazione
+automatica di 27 PDF di monitoraggio GOL. Non tutte le combinazioni
+<code>(file, tema, caption_num)</code> hanno la stessa qualità: la
+funzione <code><a href="../reference/gol_storico_quality.html">gol_storico_quality()</a></code> calcola metriche di
+copertura e completamento e classifica ogni estrazione in 5 tier di
+severità.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gol_storico_quality.html">gol_storico_quality</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">q</span><span class="op">[</span>, <span class="va">.N</span>, by <span class="op">=</span> <span class="va">severity</span><span class="op">]</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">severity</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;      severity     N</span></span>
+<span><span class="co">#&gt;        &lt;char&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1:         ok    89</span></span>
+<span><span class="co">#&gt; 2: rescan_low     9</span></span></code></pre></div>
+<p>Le anomalie residue (tutte non <code>ok</code>) sono esposte come
+dataset <code>gol_rescan_recommendations</code>. La maggior parte sono
+<strong>file ANPAL 2022-2024 con 19-20 regioni invece di 21</strong>,
+che si possono recuperare ri-estraendo direttamente dal PDF.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gol_rescan_recommendations</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">file</span>, <span class="va">tema</span>, <span class="va">caption_num</span>, <span class="va">n_anchor</span>, <span class="va">severity</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;                                                        file   tema caption_num</span></span>
+<span><span class="co">#&gt;                                                      &lt;char&gt; &lt;char&gt;      &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: 2022/Nota monitoraggio GOL 2-2022 - Focus n. 13782e9.pdf      B           3</span></span>
+<span><span class="co">#&gt; 2:   2022/Nota monitoraggio GOL 3-2022 Focus n. 139475c.pdf      B           3</span></span>
+<span><span class="co">#&gt; 3:  2022/Nota monitoraggio GOL 1-2022 - Focus N 135bdfb.pdf     A1           2</span></span>
+<span><span class="co">#&gt; 4:  2022/Nota monitoraggio GOL 1-2022 - Focus N 135bdfb.pdf      B           3</span></span>
+<span><span class="co">#&gt; 5: 2022/Nota monitoraggio GOL 2-2022 - Focus n. 13782e9.pdf     A1           2</span></span>
+<span><span class="co">#&gt; 6:   2022/Nota monitoraggio GOL 3-2022 Focus n. 139475c.pdf     A1           2</span></span>
+<span><span class="co">#&gt; 7:     2023/ANPAL_Nota_12-2023_Focus166_dati_31-10-2023.pdf      F         2.1</span></span>
+<span><span class="co">#&gt; 8:     2023/ANPAL_Nota_14-2023_Focus169_dati_31-12-2023.pdf      F         2.1</span></span>
+<span><span class="co">#&gt; 9:                        2024/Nota-monitoraggio-1_2024.pdf      F         2.1</span></span>
+<span><span class="co">#&gt;    n_anchor   severity</span></span>
+<span><span class="co">#&gt;       &lt;int&gt;     &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:       20 rescan_low</span></span>
+<span><span class="co">#&gt; 2:       20 rescan_low</span></span>
+<span><span class="co">#&gt; 3:       20 rescan_low</span></span>
+<span><span class="co">#&gt; 4:       20 rescan_low</span></span>
+<span><span class="co">#&gt; 5:       20 rescan_low</span></span>
+<span><span class="co">#&gt; 6:       20 rescan_low</span></span>
+<span><span class="co">#&gt; 7:       19 rescan_low</span></span>
+<span><span class="co">#&gt; 8:       19 rescan_low</span></span>
+<span><span class="co">#&gt; 9:       19 rescan_low</span></span></code></pre></div>
+<p>Il caso più grave (INAPP A1/1.2 — 10 file su 11 con extraction
+fallita in <code>dataset_long/</code>) è già stato risolto in fase di
+build sostituendo le righe rotte con la versione decodificata di
+<code>INAPP GOL/csv_long/tab_1_2_long.csv</code>. La colonna
+<code>rescan_severity</code> traccia la provenienza di ciascuna
+riga.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gol_storico_regionale</span><span class="op">[</span>, <span class="va">.N</span>, by <span class="op">=</span> <span class="va">rescan_severity</span><span class="op">]</span></span>
+<span><span class="co">#&gt;                 rescan_severity     N</span></span>
+<span><span class="co">#&gt;                          &lt;char&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1:                           ok 18861</span></span>
+<span><span class="co">#&gt; 2:                   rescan_low  1369</span></span>
+<span><span class="co">#&gt; 3: replaced_from_inapp_csv_long  2420</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="plot-cob">5.3 Plot COB<a class="anchor" aria-label="anchor" href="#plot-cob"></a>
 </h3>
 <p>Per le serie COB (che non hanno rotture metodologiche note) il
 parametro <code>ruptures</code> rimane <code>NULL</code> e si usa una
 palette CVD-safe (Okabe-Ito) per il confronto multi-regione.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cob_compute_indicators.html">cob_compute_indicators</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">serie_saldi</span> <span class="op">&lt;-</span> <span class="va">ind</span><span class="op">[</span></span>
 <span>  <span class="va">regione</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Emilia-Romagna"</span>, <span class="st">"Lombardia"</span>, <span class="st">"Veneto"</span><span class="op">)</span>,</span>
@@ -342,7 +400,7 @@ palette CVD-safe (Okabe-Ito) per il confronto multi-regione.</p>
 <p><code><a href="../reference/cob_compute_indicators.html">cob_compute_indicators()</a></code> produce un wide-table con i
 flussi e gli indicatori derivati piu’ usati per l’analisi del mercato
 del lavoro regionale.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cob_compute_indicators.html">cob_compute_indicators</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">ind</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   1 obs. of  15 variables:</span></span>
@@ -361,11 +419,11 @@ del lavoro regionale.</p>
 <span><span class="co">#&gt;  $ yoy_avviamenti       : num NA</span></span>
 <span><span class="co">#&gt;  $ yoy_cessazioni       : num NA</span></span>
 <span><span class="co">#&gt;  $ yoy_saldo            : num NA</span></span>
-<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x55e1c5306010&gt; </span></span>
+<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x55dc47aeb010&gt; </span></span>
 <span><span class="co">#&gt;  - attr(*, "sorted")= chr [1:3] "regione" "anno" "trimestre"</span></span></code></pre></div>
 <p>Estrazione tipica: indice di rotazione
 (<code>rapporti / lavoratori</code>) per gli avviamenti.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_timeline.html">plot_timeline</a></span><span class="op">(</span></span>
 <span>  <span class="va">ind</span><span class="op">[</span><span class="va">regione</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Emilia-Romagna"</span>, <span class="st">"Calabria"</span><span class="op">)</span>,</span>
 <span>      <span class="fu">.</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_inizio_trimestre</span>, valore <span class="op">=</span> <span class="va">rotation_avviamenti</span>, <span class="va">regione</span><span class="op">)</span><span class="op">]</span>,</span>
@@ -402,7 +460,7 @@ carico → individui).</li>
 <h2 id="convenzione-regioni">8. Convenzione regioni<a class="anchor" aria-label="anchor" href="#convenzione-regioni"></a>
 </h2>
 <p>Le 21 etichette canoniche usate da tutti e tre i dataset:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">cob_regionale_trimestrale</span><span class="op">$</span><span class="va">regione</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "Abruzzo"               "Basilicata"            "Calabria"             </span></span>
 <span><span class="co">#&gt;  [4] "Campania"              "Emilia-Romagna"        "Friuli-Venezia Giulia"</span></span>

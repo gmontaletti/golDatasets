@@ -8,11 +8,11 @@
 ## Citation
 
 Montaletti G (2026). *golDatasets: Dataset canonici del Programma GOL*.
-R package version 0.3.0.
+R package version 0.4.0.
 
     @Manual{,
       title = {golDatasets: Dataset canonici del Programma GOL},
       author = {Giampaolo Montaletti},
       year = {2026},
-      note = {R package version 0.3.0},
+      note = {R package version 0.4.0},
     }

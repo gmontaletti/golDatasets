@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golDatasets</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +35,32 @@
 
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.0" id="goldatasets-040">golDatasets 0.4.0<a class="anchor" aria-label="anchor" href="#goldatasets-040"></a></h2>
+<div class="section level3">
+<h3 id="quality-assessment-0-4-0">Quality assessment<a class="anchor" aria-label="anchor" href="#quality-assessment-0-4-0"></a></h3>
+<ul><li>
+<code>gol_quality_classify(n_anchor, pct_na_valore, n_header_variants, n_col_index)</code>: classificatore basato su 4 metriche, produce 5 tier di severita’: <code>ok</code>, <code>review</code>, <code>rescan_low</code>, <code>rescan_high</code>, <code>rescan_critical</code>.</li>
+<li>
+<code>gol_storico_quality(data = NULL)</code>: applica il classificatore al dataset storico e produce una tabella diagnostica per <code>(file, tema, caption_num)</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="rebuild-di-gol_storico_regionale-0-4-0">Rebuild di gol_storico_regionale<a class="anchor" aria-label="anchor" href="#rebuild-di-gol_storico_regionale-0-4-0"></a></h3>
+<ul><li>
+<strong>INAPP A1/1.2</strong>: le 10-11 estrazioni rotte (1-3 anchor invece di 21) in <code>dataset_long/gol_A1_long.csv</code> sono sostituite automaticamente con la versione decodificata di <code>INAPP GOL/csv_long/tab_1_2_long.csv</code>. Risultato: tutti i file INAPP per quella tavola hanno ora 22 anchor e 10 col_index (5 percorsi × {abs, pc}).</li>
+<li>Aggiunta colonna <code>rescan_severity</code> con valori <code>ok</code>, <code>rescan_low</code>, <code>replaced_from_inapp_csv_long</code> per tracciare la provenienza.</li>
+<li>Le 3 estrazioni ANPAL 2022 e 3 ANPAL/ALTRO F/2.1 con 19-20 anchor sono marcate <code>rescan_low</code> e raccolte in <code>gol_rescan_recommendations</code> come future-work per re-estrazione manuale.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="dataset-esposti-0-4-0">Dataset esposti<a class="anchor" aria-label="anchor" href="#dataset-esposti-0-4-0"></a></h3>
+<ul><li>
+<code>gol_rescan_recommendations</code>: snapshot delle anomalie residue dopo la build, una riga per <code>(file, tema, caption_num)</code> da ri-estrarre.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentazione-0-4-0">Documentazione<a class="anchor" aria-label="anchor" href="#documentazione-0-4-0"></a></h3>
+<ul><li>Vignette <code>merge-gol-cob</code> estesa con sezione “Qualità delle estrazioni storiche”.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="goldatasets-030">golDatasets 0.3.0<a class="anchor" aria-label="anchor" href="#goldatasets-030"></a></h2>
 <div class="section level3">
