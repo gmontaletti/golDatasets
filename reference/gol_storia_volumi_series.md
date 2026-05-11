@@ -36,4 +36,5 @@ gol_storia_volumi_series(
 ## Value
 
 Un `data.table` con colonne `data, valore, fonte` e (se multivalore)
-`regione`, `percorso`.
+`regione`, `percorso`. Emette warning se l'output contiene piu' di un
+valore per stessa (data, group).

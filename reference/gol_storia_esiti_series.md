@@ -28,3 +28,5 @@ gol_storia_esiti_series(
 
 Un `data.table` pronto per
 [`plot_timeline()`](https://gmontaletti.github.io/golDatasets/reference/plot_timeline.md).
+Emette warning se l'output contiene piu' di un valore per stessa (data,
+group).
