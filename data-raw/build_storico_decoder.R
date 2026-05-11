@@ -116,10 +116,12 @@ classify_unita <- function(header, caption) {
 .H_22_POSITIONAL <- list(
   list(var = "raggiunti", unit = "count", col = 0L),
   list(var = "occupati_totale", unit = "count", col = 1L),
-  list(var = "nuovi_occupati", unit = "count", col = 2L),
-  list(var = "occupati_pc", unit = "rate", col = 3L),
-  list(var = "quota_nuovi_su_occ", unit = "rate", col = 4L),
-  list(var = "gia_occupati", unit = "count", col = 5L)
+  list(var = "occupati_pc", unit = "rate", col = 2L),
+  list(var = "gia_occupati", unit = "count", col = 3L),
+  list(var = "gia_occupati_pc", unit = "rate", col = 4L),
+  list(var = "nuovi_occupati", unit = "count", col = 5L),
+  list(var = "nuovi_occupati_pc", unit = "rate", col = 6L),
+  list(var = "quota_nuovi_su_occ", unit = "rate", col = 7L)
 )
 
 # Mapping posizionale per tema H caption "8" ANPAL pre-2025 -----------------

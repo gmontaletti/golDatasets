@@ -234,6 +234,68 @@ plot_timeline(
   y_label = "N. occupati"
 )
 
+# 6.5 Serie mensile 2024-06 -> 2025-12 (13 punti) - metriche occupazionali
+# Note: queste metriche partono dal nuovo formato MLPS/INAPP (tav 2.2) e
+# non sono confrontabili con `tasso_occupati_60gg` ANPAL 2022-2023.
+metriche_occ <- c(
+  "occupati_pc",
+  "gia_occupati_pc",
+  "nuovi_occupati_pc",
+  "quota_nuovi_su_occ"
+)
+serie_metriche <- rbindlist(lapply(metriche_occ, function(v) {
+  gol_storia_esiti_series(variabile = v, regione = "Totale")[, metrica := v]
+}))
+plot_timeline(
+  serie_metriche,
+  group = "metrica",
+  ruptures = gol_method_ruptures,
+  title = "Esiti occupazionali GOL - Italia",
+  subtitle = "Tassi % e quote, formato MLPS/INAPP 2024-06 -> 2025-12",
+  y_label = "%",
+  date_breaks = "2 months"
+)
+
+# 6.6 Volumi occupazionali (count) - 4 metriche complementari
+volumi_occ <- c(
+  "raggiunti",
+  "occupati_totale",
+  "gia_occupati",
+  "nuovi_occupati"
+)
+serie_volumi_occ <- rbindlist(lapply(volumi_occ, function(v) {
+  gol_storia_esiti_series(variabile = v, regione = "Totale")[, metrica := v]
+}))
+plot_timeline(
+  serie_volumi_occ,
+  group = "metrica",
+  ruptures = gol_method_ruptures,
+  title = "Volumi occupazionali GOL - Italia",
+  subtitle = "Conteggi assoluti, 13 punti mensili",
+  y_label = "N. individui",
+  date_breaks = "2 months"
+)
+
+# 6.7 Formazione - 4 categorie LEP
+form_vars <- c(
+  "c07_form_incl_dig",
+  "c11_form_no_dig",
+  "c12_form_spec_dig",
+  "tirocinio_co"
+)
+serie_form <- rbindlist(lapply(form_vars, function(v) {
+  gol_storia_esiti_series(variabile = v, regione = "Totale")[, metrica := v]
+}))
+plot_timeline(
+  serie_form,
+  group = "metrica",
+  ruptures = gol_method_ruptures,
+  title = "Formazione e tirocini GOL - Italia",
+  subtitle = "13 punti mensili 2024-06 -> 2025-12",
+  y_label = "N. beneficiari",
+  date_breaks = "2 months"
+)
+
 
 # 7. Vulnerabilita' e target PNRR (v0.7-0.8) --------------------------------
 
