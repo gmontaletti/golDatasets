@@ -122,6 +122,29 @@ classify_unita <- function(header, caption) {
   list(var = "gia_occupati", unit = "count", col = 5L)
 )
 
+# Mapping posizionale per tema H caption "8" ANPAL pre-2025 -----------------
+# Header: "Presi in carico (A) | Nuovi occupati 60gg (B) | %(B/A) |
+#          Nuovi occupati 90gg (C) | %(C/A) | Variazioni"
+# Variante alternativa: 90gg/180gg invece di 60gg/90gg (riconosciuta dal
+# pattern globale del header_modal). Qui codifichiamo solo la PRIMA
+# variante (la piu' frequente). La seconda viene catturata dal match
+# col_token-based applicato prima.
+.H_C8_POSITIONAL <- list(
+  list(var = "presi_in_carico_totale", unit = "count", col = 0L),
+  list(var = "occupati_60gg", unit = "count", col = 1L),
+  list(var = "tasso_occupati_60gg", unit = "rate", col = 2L),
+  list(var = "occupati_90gg", unit = "count", col = 3L),
+  list(var = "tasso_occupati_90gg", unit = "rate", col = 4L)
+)
+
+# Mapping posizionale per tema H caption "6" ANPAL pre-2025 -----------------
+# Header: "Presi in carico | Occupati a 60 giorni di cui con lo stesso datore"
+.H_C6_POSITIONAL <- list(
+  list(var = "presi_in_carico_totale", unit = "count", col = 0L),
+  list(var = "occupati_60gg", unit = "count", col = 1L),
+  list(var = "tasso_occupati_60gg", unit = "rate", col = 2L)
+)
+
 # Mapping posizionale per tema F caption 2.1 ---------------------------------
 .F_21_POSITIONAL <- list(
   list(var = "presi_in_carico_totale", unit = "count", col = 0L),
@@ -412,9 +435,12 @@ for (i in seq_len(nrow(scaffold))) {
     }
   }
 
-  # Tema H: esiti occupazionali
+  # Tema H: esiti occupazionali.
+  # I pattern "60 giorni / 90 giorni / 180 giorni" sono valutati solo sulla
+  # PROPRIA colonna (col_token) per evitare overmatch: l'header_modal
+  # globale contiene piu' periodi insieme (es. "Nuovi occupati 60 90") e
+  # il vecchio loop mappava tutte le colonne al primo periodo trovato.
   if (s$tema == "H") {
-    h <- s$header_modal
     if (s$col_index == 0L) {
       scaffold[
         i,
@@ -424,36 +450,51 @@ for (i in seq_len(nrow(scaffold))) {
           confidenza = "high"
         )
       ]
-    } else if (grepl("60\\s*giorni", h)) {
-      is_pc <- grepl("%|tasso|incidenza", h)
-      scaffold[
-        i,
-        `:=`(
-          variabile = if (is_pc) "tasso_occupati_60gg" else "occupati_60gg",
-          unita = if (is_pc) "rate" else "count",
-          confidenza = "medium"
-        )
-      ]
-    } else if (grepl("90\\s*giorni", h)) {
-      is_pc <- grepl("%|tasso", h)
-      scaffold[
-        i,
-        `:=`(
-          variabile = if (is_pc) "tasso_occupati_90gg" else "occupati_90gg",
-          unita = if (is_pc) "rate" else "count",
-          confidenza = "medium"
-        )
-      ]
-    } else if (grepl("180\\s*giorni|6\\s*mesi", h)) {
-      is_pc <- grepl("%|tasso", h)
-      scaffold[
-        i,
-        `:=`(
-          variabile = if (is_pc) "tasso_occupati_180gg" else "occupati_180gg",
-          unita = if (is_pc) "rate" else "count",
-          confidenza = "medium"
-        )
-      ]
+    } else {
+      tk <- s$col_token
+      if (!is.na(tk)) {
+        is_pc <- grepl("%|tasso|incidenza|riga", tk, ignore.case = TRUE)
+        if (grepl("60", tk)) {
+          scaffold[
+            i,
+            `:=`(
+              variabile = if (is_pc) {
+                "tasso_occupati_60gg"
+              } else {
+                "occupati_60gg"
+              },
+              unita = if (is_pc) "rate" else "count",
+              confidenza = "medium"
+            )
+          ]
+        } else if (grepl("90", tk)) {
+          scaffold[
+            i,
+            `:=`(
+              variabile = if (is_pc) {
+                "tasso_occupati_90gg"
+              } else {
+                "occupati_90gg"
+              },
+              unita = if (is_pc) "rate" else "count",
+              confidenza = "medium"
+            )
+          ]
+        } else if (grepl("180", tk)) {
+          scaffold[
+            i,
+            `:=`(
+              variabile = if (is_pc) {
+                "tasso_occupati_180gg"
+              } else {
+                "occupati_180gg"
+              },
+              unita = if (is_pc) "rate" else "count",
+              confidenza = "medium"
+            )
+          ]
+        }
+      }
     }
   }
 }
@@ -484,6 +525,30 @@ for (m in .B_POSITIONAL) {
 for (m in .H_22_POSITIONAL) {
   scaffold[
     tema == "H" & caption_num == "2.2" & col_index == m$col & is.na(variabile),
+    `:=`(
+      variabile = m$var,
+      unita = m$unit,
+      confidenza = "medium"
+    )
+  ]
+}
+
+# Tema H caption 8 ANPAL (60/90 giorni) - solo varianti con 60gg
+for (m in .H_C8_POSITIONAL) {
+  scaffold[
+    tema == "H" & caption_num == "8" & col_index == m$col & is.na(variabile),
+    `:=`(
+      variabile = m$var,
+      unita = m$unit,
+      confidenza = "medium"
+    )
+  ]
+}
+
+# Tema H caption 6 ANPAL (60 giorni)
+for (m in .H_C6_POSITIONAL) {
+  scaffold[
+    tema == "H" & caption_num == "6" & col_index == m$col & is.na(variabile),
     `:=`(
       variabile = m$var,
       unita = m$unit,
