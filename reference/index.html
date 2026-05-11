@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golDatasets</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,9 +35,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="funzioni">Funzioni<a class="anchor" aria-label="anchor" href="#funzioni"></a></h2>
+      <h2 id="costruzione-dei-dataset">Costruzione dei dataset<a class="anchor" aria-label="anchor" href="#costruzione-dei-dataset"></a></h2>
 
-      <div class="section-desc"><p>Costruzione dei dataset dai CSV grezzi</p></div>
+      <div class="section-desc"><p>Funzioni per rigenerare i .rda dai CSV grezzi.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -50,6 +50,29 @@
 
         </dt>
         <dd>Costruisce i tre dataset canonici GOL e li scrive in <code>data/</code></dd>
+      </dl></div><div class="section level2">
+      <h2 id="indicatori-e-visualizzazione">Indicatori e visualizzazione<a class="anchor" aria-label="anchor" href="#indicatori-e-visualizzazione"></a></h2>
+
+      <div class="section-desc"><p>Trasformazione dei flussi COB in indicatori derivati e timeline regionali con annotazione delle rotture metodologiche.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="cob_compute_indicators.html">cob_compute_indicators()</a></code>
+
+        </dt>
+        <dd>Calcola indicatori derivati dai flussi COB</dd>
+
+        <dt>
+
+          <code><a href="plot_timeline.html">plot_timeline()</a></code>
+
+        </dt>
+        <dd>Disegna una timeline con eventuali annotazioni di rotture di metodo</dd>
       </dl></div><div class="section level2">
       <h2 id="dataset">Dataset<a class="anchor" aria-label="anchor" href="#dataset"></a></h2>
 
@@ -80,6 +103,13 @@
 
         </dt>
         <dd>Comunicazioni Obbligatorie regionali trimestrali (2017-Q1 -&gt; 2025-Q3)</dd>
+
+        <dt>
+
+          <code><a href="gol_method_ruptures.html">gol_method_ruptures</a></code>
+
+        </dt>
+        <dd>Rotture di metodo nella serie GOL</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

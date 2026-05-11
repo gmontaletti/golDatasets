@@ -174,7 +174,99 @@ serie[, .N, by = fonte]
 #> 2:  GOL: occupati (INAPP)    12
 ```
 
-## 5. Rotture di serie da tenere a mente
+## 5. Visualizzazione con rotture annotate
+
+[`plot_timeline()`](https://gmontaletti.github.io/golDatasets/reference/plot_timeline.md)
+produce una timeline con annotazione automatica delle rotture di metodo.
+Il dataset `gol_method_ruptures` espone i tre eventi documentati al
+passaggio del 2025.
+
+``` r
+
+plot_timeline(
+  serie_gol,
+  ruptures = gol_method_ruptures,
+  title    = "Occupati GOL - Emilia-Romagna",
+  subtitle = "Tavola 2.2, INAPP Focus GOL",
+  y_label  = "N. occupati"
+)
+```
+
+![](merge-gol-cob_files/figure-html/plot-gol-1.png)
+
+Per le serie COB (che non hanno rotture metodologiche note) il parametro
+`ruptures` rimane `NULL` e si usa una palette CVD-safe (Okabe-Ito) per
+il confronto multi-regione.
+
+``` r
+
+ind <- cob_compute_indicators()
+serie_saldi <- ind[
+  regione %in% c("Emilia-Romagna", "Lombardia", "Veneto"),
+  .(data = data_inizio_trimestre,
+    valore = saldo_rapporti,
+    regione)
+]
+plot_timeline(
+  serie_saldi,
+  group       = "regione",
+  title       = "Saldo netto avviamenti - cessazioni",
+  subtitle    = "Top 3 regioni del Nord, dati COB INPS",
+  y_label     = "Saldo trimestrale (rapporti)",
+  date_breaks = "1 year"
+)
+```
+
+![](merge-gol-cob_files/figure-html/plot-cob-1.png)
+
+## 6. Indicatori derivati COB
+
+[`cob_compute_indicators()`](https://gmontaletti.github.io/golDatasets/reference/cob_compute_indicators.md)
+produce un wide-table con i flussi e gli indicatori derivati piu’ usati
+per l’analisi del mercato del lavoro regionale.
+
+``` r
+
+ind <- cob_compute_indicators()
+str(ind[1])
+#> Classes 'data.table' and 'data.frame':   1 obs. of  15 variables:
+#>  $ regione              : chr "Abruzzo"
+#>  $ anno                 : int 2017
+#>  $ trimestre            : int 1
+#>  $ data_inizio_trimestre: IDate, format: "2017-01-01"
+#>  $ avviamenti_rapporti  : num 48519
+#>  $ cessazioni_rapporti  : num 34400
+#>  $ avviamenti_lavoratori: num 40644
+#>  $ cessazioni_lavoratori: num 27914
+#>  $ rotation_avviamenti  : num 1.19
+#>  $ rotation_cessazioni  : num 1.23
+#>  $ saldo_rapporti       : num 14119
+#>  $ saldo_lavoratori     : num 12730
+#>  $ yoy_avviamenti       : num NA
+#>  $ yoy_cessazioni       : num NA
+#>  $ yoy_saldo            : num NA
+#>  - attr(*, ".internal.selfref")=<pointer: 0x557cede26010> 
+#>  - attr(*, "sorted")= chr [1:3] "regione" "anno" "trimestre"
+```
+
+Estrazione tipica: indice di rotazione (`rapporti / lavoratori`) per gli
+avviamenti.
+
+``` r
+
+plot_timeline(
+  ind[regione %in% c("Emilia-Romagna", "Calabria"),
+      .(data = data_inizio_trimestre, valore = rotation_avviamenti, regione)],
+  group       = "regione",
+  title       = "Rotazione contrattuale (rapporti per lavoratore)",
+  y_label     = "Rapporti / lavoratore",
+  date_breaks = "1 year"
+)
+```
+
+![](merge-gol-cob_files/figure-html/rotation-1.png)
+
+## 7. Rotture di serie da tenere a mente
 
 Prima di costruire indicatori longitudinali, è importante ricordare le
 rotture di serie documentate in `dataset_long/README.md`:
@@ -190,7 +282,7 @@ Lo storico più lungo è disponibile in `gol_storico_regionale`, ma per i
 quattro temi A1, B, F, H il `col_index` non è confrontabile direttamente
 pre/post 2025.
 
-## 6. Convenzione regioni
+## 8. Convenzione regioni
 
 Le 21 etichette canoniche usate da tutti e tre i dataset:
 
