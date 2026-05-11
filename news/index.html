@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golDatasets</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +35,54 @@
 
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.8.0" id="goldatasets-080">golDatasets 0.8.0<a class="anchor" aria-label="anchor" href="#goldatasets-080"></a></h2>
+<div class="section level3">
+<h3 id="nuovi-mapper-inapp-focus_gol_all-0-8-0">Nuovi mapper INAPP focus_gol_all<a class="anchor" aria-label="anchor" href="#nuovi-mapper-inapp-focus_gol_all-0-8-0"></a></h3>
+<ul><li>
+<strong><code>.map_tab_1_3()</code></strong>: caratteristiche socio-anagrafiche per regione, % riga. Schema gestisce sia 10 colonne (eta/cittadinanza fuse) sia 12 colonne (separate). 22 regioni × 9 modalita’ (Maschi, Femmine, 15-29, 30-54, 55+, Italiana, Straniera, ge_6mesi, ge_12mesi).</li>
+<li>
+<strong><code>.map_tab_1_5_per_percorso()</code></strong>: variante schema della tab 1.5 presente nei report mensili 3-16/2025. 5 percorsi GOL × 7 variabili di vulnerabilita’ (raggiunti, vulnerabili, vulnerabili_pc, donne, disocc_ge6mesi, under_30, over_55, disabili).</li>
+<li>Orchestratore <code><a href="../reference/build_inapp_focus_long.html">build_inapp_focus_long()</a></code> esteso: per tab 1.5 prova prima il mapper “per regione” e in fallback quello “per percorso”.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="dataset-aggiornati-0-8-0">Dataset aggiornati<a class="anchor" aria-label="anchor" href="#dataset-aggiornati-0-8-0"></a></h3>
+<table class="table"><thead><tr><th>Dataset</th>
+<th align="right">v0.7.0</th>
+<th align="right">v0.8.0</th>
+</tr></thead><tbody><tr><td><code>gol_storia_caratteristiche</code></td>
+<td align="right">7.215</td>
+<td align="right"><strong>9.767</strong></td>
+</tr><tr><td><code>gol_storia_esiti</code></td>
+<td align="right">15.515</td>
+<td align="right">15.515</td>
+</tr></tbody></table><p>Breakdown caratteristiche v0.8.0:</p>
+<table class="table"><thead><tr><th>caratteristica</th>
+<th align="right">righe</th>
+</tr></thead><tbody><tr><td>classe_eta</td>
+<td align="right">3.119</td>
+</tr><tr><td>genere</td>
+<td align="right">2.290</td>
+</tr><tr><td>cittadinanza</td>
+<td align="right">2.270</td>
+</tr><tr><td>durata_disoccupazione</td>
+<td align="right">1.662</td>
+</tr><tr><td>target_patto_servizio</td>
+<td align="right">219</td>
+</tr><tr><td>vulnerabilita</td>
+<td align="right">207</td>
+</tr></tbody></table><p>12 date INAPP (2024-06 → 2025-12) coperte per tutte le caratteristiche da tab 1.3.</p>
+</div>
+<div class="section level3">
+<h3 id="future-work-v090-0-8-0">Future work (v0.9.0)<a class="anchor" aria-label="anchor" href="#future-work-v090-0-8-0"></a></h3>
+<ul><li>
+<strong>Tab 1.4</strong> composizione per percorso (% colonna): schema a sezioni, ma duplica info gia’ presente in altre tabelle (caratteristiche x percorso da 1.5 per percorso). Da valutare se il valore aggiunto giustifica un mapper dedicato.</li>
+<li>
+<strong>Tab 1.6</strong> patto di servizio per target × caratteristiche: schema a sezioni con 5 colonne target. Richiede mapping target_pnrr × caratteristica × modalita.</li>
+<li>
+<strong>Tab 1.7</strong> composizione per regione (38 colonne irregolari): necessita di header recovery dedicato per le varie sotto-colonne (LEP, formazione, tirocini, CO).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.0" id="goldatasets-070">golDatasets 0.7.0<a class="anchor" aria-label="anchor" href="#goldatasets-070"></a></h2>
 <div class="section level3">
