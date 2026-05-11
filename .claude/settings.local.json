@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(R_PROFILE_USER=/dev/null Rscript -e ' *)"
-    ]
-  }
-}
