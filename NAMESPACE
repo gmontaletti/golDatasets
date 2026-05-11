@@ -2,8 +2,12 @@
 
 export(build_gol_datasets)
 export(cob_compute_indicators)
+export(gol_decode_storico)
 export(gol_extract_series)
 export(gol_quality_classify)
+export(gol_storia_caratteristiche_series)
+export(gol_storia_esiti_series)
+export(gol_storia_volumi_series)
 export(gol_storico_quality)
 export(plot_timeline)
 importFrom(data.table,":=")

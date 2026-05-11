@@ -17,6 +17,8 @@ suppressPackageStartupMessages(library(data.table))
 source("R/utils-regioni.R")
 source("R/build_datasets.R")
 source("R/gol_quality.R")
+source("R/storico_decoder.R")
+source("R/build_storia_lunga.R")
 
 # 2. Build -------------------------------------------------------------------
 out <- build_gol_datasets(
@@ -81,6 +83,76 @@ message(
   nrow(gol_rescan_recommendations),
   " righe non-ok)"
 )
+
+# 3.6 Decoder semantico + 3 dataset di storia lunga -------------------------
+message("\n--- Build decoder + storia lunga ---")
+# Lo scaffold del decoder e' generato da data-raw/build_storico_decoder.R
+# che va eseguito separatamente. Carica il .rda gia' costruito.
+if (file.exists("data/storico_decoder.rda")) {
+  load("data/storico_decoder.rda")
+  message("Decoder caricato: ", nrow(storico_decoder), " righe")
+
+  # Decodifica inline (non chiamiamo gol_decode_storico perche' cerca il
+  # namespace del package non ancora installato)
+  d <- data.table::copy(out$gol_storico_regionale)
+  d[,
+    era := ifelse(
+      data_riferimento < data.table::as.IDate("2025-01-01"),
+      "pre_2025",
+      "post_2025"
+    )
+  ]
+  storico_decoded <- merge(
+    d,
+    storico_decoder[, .(
+      tema,
+      caption_num,
+      col_index,
+      era,
+      variabile,
+      caratteristica,
+      modalita,
+      percorso,
+      unita,
+      confidenza
+    )],
+    by = c("tema", "caption_num", "col_index", "era"),
+    all.x = TRUE,
+    sort = FALSE
+  )
+
+  gol_storia_volumi <- .build_gol_storia_volumi(
+    storico_decoded = storico_decoded,
+    inapp = out$gol_inapp_mensile
+  )
+  gol_storia_caratteristiche <- .build_gol_storia_caratteristiche(
+    storico_decoded = storico_decoded
+  )
+  gol_storia_esiti <- .build_gol_storia_esiti(
+    storico_decoded = storico_decoded,
+    inapp = out$gol_inapp_mensile
+  )
+
+  save(gol_storia_volumi, file = "data/gol_storia_volumi.rda", compress = "xz")
+  save(
+    gol_storia_caratteristiche,
+    file = "data/gol_storia_caratteristiche.rda",
+    compress = "xz"
+  )
+  save(gol_storia_esiti, file = "data/gol_storia_esiti.rda", compress = "xz")
+
+  message("Salvato: gol_storia_volumi (", nrow(gol_storia_volumi), " righe)")
+  message(
+    "Salvato: gol_storia_caratteristiche (",
+    nrow(gol_storia_caratteristiche),
+    " righe)"
+  )
+  message("Salvato: gol_storia_esiti (", nrow(gol_storia_esiti), " righe)")
+} else {
+  message(
+    "Decoder non presente: eseguire Rscript data-raw/build_storico_decoder.R"
+  )
+}
 
 # 4. File generati -----------------------------------------------------------
 message("\nFile in data/:")

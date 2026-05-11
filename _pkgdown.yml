@@ -15,6 +15,10 @@ reference:
   desc: Helper per pivotare i dataset long in serie pronte per la visualizzazione.
   contents:
   - gol_extract_series
+  - gol_storia_volumi_series
+  - gol_storia_caratteristiche_series
+  - gol_storia_esiti_series
+  - gol_decode_storico
   - cob_compute_indicators
 
 - title: Visualizzazione
@@ -36,6 +40,10 @@ reference:
   - cob_regionale_trimestrale
   - gol_method_ruptures
   - gol_rescan_recommendations
+  - storico_decoder
+  - gol_storia_volumi
+  - gol_storia_caratteristiche
+  - gol_storia_esiti
 
 navbar:
   structure:

@@ -63,5 +63,19 @@ utils::globalVariables(c(
   "caption_title",
   "ente",
   "file",
-  "titolo_tabella"
+  "titolo_tabella",
+  # storico_decoder + storia lunga
+  "era",
+  "variabile",
+  "caratteristica",
+  "modalita",
+  "unita",
+  "confidenza",
+  "fonte",
+  "storico_decoder",
+  "gol_storico_regionale",
+  "gol_inapp_mensile",
+  "gol_storia_volumi",
+  "gol_storia_caratteristiche",
+  "gol_storia_esiti"
 ))

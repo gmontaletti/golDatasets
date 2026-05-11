@@ -126,3 +126,49 @@
 #'
 #' @seealso [gol_storico_quality()], [gol_quality_classify()].
 "gol_rescan_recommendations"
+
+#' Decoder semantico per `gol_storico_regionale`
+#'
+#' Mappa `(tema, caption_num, col_index, era)` alla relativa semantica
+#' (`variabile`, `caratteristica`, `modalita`, `percorso`, `unita`,
+#' `confidenza`). Costruito via `data-raw/build_storico_decoder.R` con
+#' regex auto-derivate da `header_above` modale + `caption_title` modale.
+#' E' editabile manualmente via `inst/extdata/storico_decoder.csv`.
+#'
+#' @format Un `data.table` con circa 230 righe e 15 colonne.
+#' @seealso [gol_decode_storico()].
+"storico_decoder"
+
+#' Storia lunga GOL: presi in carico 2022-2025
+#'
+#' Serie regionale dei volumi presi in carico dal Programma GOL, integrata
+#' fra storico ANPAL/MLPS (2022-2024) e INAPP mensile (2024-06/2025-12).
+#'
+#' @format Un `data.table` long con colonne: `data_riferimento, fonte,
+#'   regione, percorso, variabile, unita, valore, confidenza, era,
+#'   rescan_severity`.
+#' @seealso [gol_storia_volumi_series()], [plot_timeline()].
+"gol_storia_volumi"
+
+#' Storia lunga GOL: caratteristiche dei beneficiari 2022-2025
+#'
+#' Serie regionale dei beneficiari per caratteristiche anagrafiche
+#' (genere, classe eta', cittadinanza, durata disoccupazione).
+#'
+#' @format Un `data.table` long con colonne: `data_riferimento, fonte,
+#'   regione, percorso, caratteristica, modalita, variabile, unita,
+#'   valore, confidenza, era, rescan_severity`.
+#' @seealso [gol_storia_caratteristiche_series()].
+"gol_storia_caratteristiche"
+
+#' Storia lunga GOL: esiti 2022-2025
+#'
+#' Serie regionale degli esiti del programma: politiche attivate
+#' (tema F), occupazione a 60/90/180 giorni (tema H), LEP e formazione
+#' (INAPP tav 2.1), occupati totali e per percorso (INAPP tav 2.2).
+#'
+#' @format Un `data.table` long con colonne: `data_riferimento, fonte,
+#'   regione, percorso, variabile, unita, valore, confidenza,
+#'   tema_storico, era, rescan_severity`.
+#' @seealso [gol_storia_esiti_series()].
+"gol_storia_esiti"
