@@ -74,6 +74,24 @@ plot_timeline <- function(
   smooth = FALSE
 ) {
   stopifnot(is.data.frame(data))
+  # Check duplicati: per (x [+ group]) deve esserci una sola riga
+  if (is.null(group)) {
+    n_dup <- sum(duplicated(data[[x]]))
+  } else {
+    key <- paste(data[[x]], data[[group]], sep = "::")
+    n_dup <- sum(duplicated(key))
+  }
+  if (n_dup > 0L) {
+    warning(
+      "plot_timeline: ",
+      n_dup,
+      " punti duplicati per (",
+      x,
+      if (!is.null(group)) paste0(", ", group) else "",
+      "). Il grafico avra' linee sovrapposte; filtra i dati a monte.",
+      call. = FALSE
+    )
+  }
   x_sym <- rlang::sym(x)
   y_sym <- rlang::sym(y)
 

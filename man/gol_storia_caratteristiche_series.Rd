@@ -8,22 +8,28 @@ gol_storia_caratteristiche_series(
   caratteristica,
   modalita = NULL,
   regione = NULL,
+  percorso = NULL,
   min_confidenza = "medium"
 )
 }
 \arguments{
-\item{caratteristica}{Nome della caratteristica (\code{"genere"}, \code{"classe_eta"},
-\code{"cittadinanza"}, \code{"durata_disoccupazione"}).}
+\item{caratteristica}{Nome della caratteristica (\code{"genere"},
+\code{"classe_eta"}, \code{"cittadinanza"}, \code{"durata_disoccupazione"},
+\code{"target_patto_servizio"}, \code{"vulnerabilita"}).}
 
-\item{modalita}{Vettore di modalita' (\code{"Maschi"}, \code{"Femmine"}, \code{"15-29"} ...).
-\code{NULL} = tutte.}
+\item{modalita}{Vettore di modalita' (\code{"Maschi"}, \code{"Femmine"},
+\code{"15-29"} ...). \code{NULL} = tutte.}
 
 \item{regione}{Filtro regionale. \code{NULL} = tutte.}
+
+\item{percorso}{Filtro su percorso GOL (utile per \code{caratteristica = "vulnerabilita"} che e' disaggregata per percorso). \code{NULL} = tutti.}
 
 \item{min_confidenza}{Default \code{"medium"}.}
 }
 \value{
 Un \code{data.table} pronto per \code{plot_timeline(group = "modalita")}.
+Emette warning se l'output contiene piu' di un valore per stessa
+(data, group).
 }
 \description{
 Estrae una serie di caratteristiche dei beneficiari

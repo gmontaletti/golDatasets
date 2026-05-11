@@ -18,7 +18,8 @@ gol_storia_esiti_series(
 \item{regione, percorso, min_confidenza}{Come negli altri estrattori.}
 }
 \value{
-Un \code{data.table} pronto per \code{plot_timeline()}.
+Un \code{data.table} pronto per \code{plot_timeline()}. Emette warning se
+l'output contiene piu' di un valore per stessa (data, group).
 }
 \description{
 Estrae una serie di esiti (occupazionali, LEP, politiche)

@@ -83,5 +83,7 @@ utils::globalVariables(c(
   "percorso_id",
   # dedup_storia
   ".__has_value",
-  ".__prio"
+  ".__prio",
+  # .warn_if_overplot
+  "N"
 ))

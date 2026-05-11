@@ -23,7 +23,8 @@ gol_storia_volumi_series(
 }
 \value{
 Un \code{data.table} con colonne \verb{data, valore, fonte} e (se
-multivalore) \code{regione}, \code{percorso}.
+multivalore) \code{regione}, \code{percorso}. Emette warning se l'output
+contiene piu' di un valore per stessa (data, group).
 }
 \description{
 Estrae una serie di volumi (presi in carico) per plot_timeline

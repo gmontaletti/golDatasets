@@ -251,17 +251,38 @@ plot_timeline(
   date_breaks = "3 months"
 )
 
-# 7.2 Vulnerabilita' per percorso GOL
-serie_vuln <- gol_storia_caratteristiche_series(
+# 7.2 Vulnerabilita' - aggregato Italia (filtro percorso = totale_percorsi)
+# La caratteristica "vulnerabilita" ha la dimensione `percorso` valorizzata:
+# senza filtro si sovrappongono 4 percorsi per ogni modalita'.
+serie_vuln_italia <- gol_storia_caratteristiche_series(
   caratteristica = "vulnerabilita",
-  modalita = c("donne", "disocc_ge6mesi", "under_30", "over_55", "disabili")
+  modalita = c("donne", "disocc_ge6mesi", "under_30", "over_55", "disabili"),
+  percorso = "totale_percorsi"
 )
 plot_timeline(
-  serie_vuln,
+  serie_vuln_italia,
   group = "modalita",
   ruptures = gol_method_ruptures,
-  title = "Caratteristiche di vulnerabilita' per percorso GOL",
-  subtitle = "Italia, sub-categorie",
+  title = "Vulnerabilita' aggregata - Italia",
+  subtitle = "totale percorsi GOL, sub-categorie",
+  date_breaks = "2 months"
+)
+
+# 7.3 Vulnerabilita' - confronto per percorso GOL (fissata una modalita')
+serie_vuln_perc <- gol_storia_caratteristiche_series(
+  caratteristica = "vulnerabilita",
+  modalita = "donne",
+  percorso = c(
+    "1_reinserimento_lavorativo",
+    "4_lavoro_inclusione",
+    "5_ricollocazione_collettiva"
+  )
+)
+plot_timeline(
+  serie_vuln_perc,
+  group = "percorso",
+  ruptures = gol_method_ruptures,
+  title = "Donne in vulnerabilita' per percorso GOL",
   date_breaks = "2 months"
 )
 
