@@ -20,6 +20,7 @@ reference:
   - gol_storia_esiti_series
   - gol_decode_storico
   - cob_compute_indicators
+  - build_inapp_focus_long
 
 - title: Visualizzazione
   desc: Timeline regionali con annotazione delle rotture metodologiche.
