@@ -1,6 +1,6 @@
 Package: golDatasets
 Title: Dataset canonici del Programma GOL
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
     person("Giampaolo", "Montaletti", , "giampaolo.montaletti@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0002-5327-1122"))
@@ -23,5 +23,7 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
-    data.table
+    data.table,
+    ggplot2,
+    rlang
 VignetteBuilder: knitr

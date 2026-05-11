@@ -30,5 +30,21 @@ utils::globalVariables(c(
   "lavoratori",
   "media",
   "data_inizio_trimestre",
-  "flusso"
+  "flusso",
+  # cob_compute_indicators
+  "avviamenti_rapporti",
+  "cessazioni_rapporti",
+  "avviamenti_lavoratori",
+  "cessazioni_lavoratori",
+  "saldo_rapporti",
+  "saldo_lavoratori",
+  "rotation_avviamenti",
+  "rotation_cessazioni",
+  "yoy_avviamenti",
+  "yoy_cessazioni",
+  "yoy_saldo",
+  # plot_timeline
+  "evento",
+  "label",
+  "."
 ))

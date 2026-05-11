@@ -98,7 +98,63 @@ setorder(serie, data, fonte)
 serie[, .N, by = fonte]
 ```
 
-# 5. Rotture di serie da tenere a mente
+# 5. Visualizzazione con rotture annotate
+
+`plot_timeline()` produce una timeline con annotazione automatica delle rotture di metodo. Il dataset `gol_method_ruptures` espone i tre eventi documentati al passaggio del 2025.
+
+```{r plot-gol}
+plot_timeline(
+  serie_gol,
+  ruptures = gol_method_ruptures,
+  title    = "Occupati GOL - Emilia-Romagna",
+  subtitle = "Tavola 2.2, INAPP Focus GOL",
+  y_label  = "N. occupati"
+)
+```
+
+Per le serie COB (che non hanno rotture metodologiche note) il parametro `ruptures` rimane `NULL` e si usa una palette CVD-safe (Okabe-Ito) per il confronto multi-regione.
+
+```{r plot-cob}
+ind <- cob_compute_indicators()
+serie_saldi <- ind[
+  regione %in% c("Emilia-Romagna", "Lombardia", "Veneto"),
+  .(data = data_inizio_trimestre,
+    valore = saldo_rapporti,
+    regione)
+]
+plot_timeline(
+  serie_saldi,
+  group       = "regione",
+  title       = "Saldo netto avviamenti - cessazioni",
+  subtitle    = "Top 3 regioni del Nord, dati COB INPS",
+  y_label     = "Saldo trimestrale (rapporti)",
+  date_breaks = "1 year"
+)
+```
+
+# 6. Indicatori derivati COB
+
+`cob_compute_indicators()` produce un wide-table con i flussi e gli indicatori derivati piu' usati per l'analisi del mercato del lavoro regionale.
+
+```{r indicatori}
+ind <- cob_compute_indicators()
+str(ind[1])
+```
+
+Estrazione tipica: indice di rotazione (`rapporti / lavoratori`) per gli avviamenti.
+
+```{r rotation}
+plot_timeline(
+  ind[regione %in% c("Emilia-Romagna", "Calabria"),
+      .(data = data_inizio_trimestre, valore = rotation_avviamenti, regione)],
+  group       = "regione",
+  title       = "Rotazione contrattuale (rapporti per lavoratore)",
+  y_label     = "Rapporti / lavoratore",
+  date_breaks = "1 year"
+)
+```
+
+# 7. Rotture di serie da tenere a mente
 
 Prima di costruire indicatori longitudinali, è importante ricordare le rotture di serie documentate in `dataset_long/README.md`:
 
@@ -108,7 +164,7 @@ Prima di costruire indicatori longitudinali, è importante ricordare le rotture 
 
 Lo storico più lungo è disponibile in `gol_storico_regionale`, ma per i quattro temi A1, B, F, H il `col_index` non è confrontabile direttamente pre/post 2025.
 
-# 6. Convenzione regioni
+# 8. Convenzione regioni
 
 Le 21 etichette canoniche usate da tutti e tre i dataset:
 

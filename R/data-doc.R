@@ -93,3 +93,22 @@
 #' @source INPS, "Allegato IV - Trimestre" delle Comunicazioni Obbligatorie,
 #'   2017-2025.
 "cob_regionale_trimestrale"
+
+#' Rotture di metodo nella serie GOL
+#'
+#' Tre eventi documentati di discontinuita' metodologica nei dati GOL, tutti
+#' collocati al passaggio dal formato pre-2025 (ANPAL/MLPS) al formato INAPP
+#' Focus GOL del 2025. Pensato per essere passato come parametro `ruptures`
+#' a [plot_timeline()].
+#'
+#' @format Un `data.table` con 3 righe e le colonne:
+#' \describe{
+#'   \item{data}{`IDate`, data convenzionale della rottura (2025-01-01).}
+#'   \item{evento}{Descrizione sintetica dell'evento.}
+#'   \item{scope}{Ambito interessato (quali temi / quali colonne).}
+#'   \item{riferimento}{Documento di riferimento.}
+#' }
+#'
+#' @source `dataset_long/README.md`, sezione "Cambiamenti di definizione
+#'   lungo la serie".
+"gol_method_ruptures"

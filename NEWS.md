@@ -1,3 +1,31 @@
+# golDatasets 0.2.0
+
+## Funzioni
+
+* `plot_timeline()`: visualizza una timeline regionale con annotazione
+  opzionale delle rotture di metodo. Usa palette CVD-safe Okabe-Ito di
+  default per il confronto multi-serie.
+* `cob_compute_indicators()`: a partire da `cob_regionale_trimestrale`
+  produce un wide-table con 11 indicatori derivati per
+  `(regione, anno, trimestre)`: saldi netti, indici di rotazione
+  (rapporti / lavoratori) e variazioni YoY (lag 4 trimestri).
+
+## Dataset esposti
+
+* `gol_method_ruptures`: 3 eventi di discontinuita' metodologica nei dati
+  GOL al passaggio del 2025 (cambio unita', regola regionale, 4 -> 5
+  percorsi). Pensato per essere passato al parametro `ruptures` di
+  `plot_timeline()`.
+
+## Dipendenze
+
+* Aggiunti `ggplot2` e `rlang` a Imports.
+
+## Documentazione
+
+* Vignette `merge-gol-cob` estesa con esempi grafici (rotture annotate,
+  multi-regione, indicatori COB).
+
 # golDatasets 0.1.0
 
 Prima release del package.

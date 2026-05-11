@@ -6,10 +6,16 @@ template:
     border-radius: "0.4rem"
 
 reference:
-- title: Funzioni
-  desc: Costruzione dei dataset dai CSV grezzi
+- title: Costruzione dei dataset
+  desc: Funzioni per rigenerare i .rda dai CSV grezzi.
   contents:
   - build_gol_datasets
+
+- title: Indicatori e visualizzazione
+  desc: Trasformazione dei flussi COB in indicatori derivati e timeline regionali con annotazione delle rotture metodologiche.
+  contents:
+  - cob_compute_indicators
+  - plot_timeline
 
 - title: Dataset
   desc: Dataset esposti dal package, accessibili con `data()` o direttamente come oggetti.
@@ -17,6 +23,7 @@ reference:
   - gol_inapp_mensile
   - gol_storico_regionale
   - cob_regionale_trimestrale
+  - gol_method_ruptures
 
 navbar:
   structure:
