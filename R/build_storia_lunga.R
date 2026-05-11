@@ -96,6 +96,48 @@
     out,
     keys = c("data_riferimento", "regione", "variabile", "percorso")
   )
+
+  # Derivata: presi_in_carico_totale come somma dei percorsi.
+  # Il decoder pre-2025 mappava erroneamente col 0 come "totale" anche
+  # quando in realta' era il valore del percorso 1. Per uniformita',
+  # ricalcoliamo SEMPRE il totale come somma dei percorsi 1-4(-5) e
+  # sostituiamo le righe pre-esistenti, eccetto quelle provenienti da
+  # `inapp_mensile` (tav 1.1 INAPP ha una colonna `totale` autoritativa).
+  out <- out[
+    !(variabile == "presi_in_carico_totale" &
+      fonte != "inapp_mensile")
+  ]
+  derivati <- out[
+    variabile == "presi_in_carico_ass" &
+      !is.na(percorso) &
+      percorso != "totale_percorsi",
+    .(
+      valore = sum(valore, na.rm = TRUE),
+      variabile = "presi_in_carico_totale",
+      percorso = NA_character_,
+      unita = "count",
+      fonte = paste0("derivato_", paste(unique(fonte), collapse = "+")),
+      confidenza = "medium",
+      rescan_severity = "ok",
+      era = era[1]
+    ),
+    by = .(data_riferimento, regione)
+  ]
+  derivati <- derivati[valore > 0]
+  # Non aggiungere se la (data, regione) ha gia' un valore inapp_mensile
+  esistenti <- out[
+    variabile == "presi_in_carico_totale",
+    unique(paste(data_riferimento, regione))
+  ]
+  derivati <- derivati[!paste(data_riferimento, regione) %in% esistenti]
+  if (nrow(derivati) > 0L) {
+    out <- data.table::rbindlist(
+      list(out, derivati),
+      use.names = TRUE,
+      fill = TRUE
+    )
+  }
+
   data.table::setkey(out, data_riferimento, regione, percorso, variabile)
   out[]
 }
