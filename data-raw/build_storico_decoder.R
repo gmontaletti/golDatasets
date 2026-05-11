@@ -129,6 +129,128 @@ classify_unita <- function(header, caption) {
   list(var = "con_politica_avviata_pc", unit = "rate", col = 2L)
 )
 
+# Mapping posizionale per tema A1 caption "1.2" post-2025 -------------------
+# Quando l'INAPP rimpiazzo (v0.4.0) genera col_index 0..9, ordine fisso:
+# 5 percorsi GOL × {valore_assoluto, percentuale_riga}.
+.A1_C12_POSITIONAL <- list(
+  list(
+    var = "presi_in_carico_ass",
+    percorso = "1_reinserimento_lavorativo",
+    unit = "count",
+    col = 0L
+  ),
+  list(
+    var = "presi_in_carico_pc",
+    percorso = "1_reinserimento_lavorativo",
+    unit = "percentage_row",
+    col = 1L
+  ),
+  list(
+    var = "presi_in_carico_ass",
+    percorso = "2_aggiornamento_upskilling",
+    unit = "count",
+    col = 2L
+  ),
+  list(
+    var = "presi_in_carico_pc",
+    percorso = "2_aggiornamento_upskilling",
+    unit = "percentage_row",
+    col = 3L
+  ),
+  list(
+    var = "presi_in_carico_ass",
+    percorso = "3_riqualificazione_reskilling",
+    unit = "count",
+    col = 4L
+  ),
+  list(
+    var = "presi_in_carico_pc",
+    percorso = "3_riqualificazione_reskilling",
+    unit = "percentage_row",
+    col = 5L
+  ),
+  list(
+    var = "presi_in_carico_ass",
+    percorso = "4_lavoro_inclusione",
+    unit = "count",
+    col = 6L
+  ),
+  list(
+    var = "presi_in_carico_pc",
+    percorso = "4_lavoro_inclusione",
+    unit = "percentage_row",
+    col = 7L
+  ),
+  list(
+    var = "presi_in_carico_ass",
+    percorso = "5_ricollocazione_collettiva",
+    unit = "count",
+    col = 8L
+  ),
+  list(
+    var = "presi_in_carico_pc",
+    percorso = "5_ricollocazione_collettiva",
+    unit = "percentage_row",
+    col = 9L
+  )
+)
+
+# Mapping posizionale per tema A1 caption "2" pre-2025 (ANPAL) ---------------
+# Header tipico: "1 2 3 4 | Reinserimento Aggiornamento Riqualificazione
+# Lavoro e | Valori % | Valori assoluti"
+# Struttura osservata: 4 percorsi × valore_assoluto + 4 percorsi × percentuale
+# col 0-3 = valore_assoluto, col 4-7 = percentuale_riga.
+.A1_C2_POSITIONAL <- list(
+  list(
+    var = "presi_in_carico_ass",
+    percorso = "1_reinserimento_lavorativo",
+    unit = "count",
+    col = 0L
+  ),
+  list(
+    var = "presi_in_carico_ass",
+    percorso = "2_aggiornamento_upskilling",
+    unit = "count",
+    col = 1L
+  ),
+  list(
+    var = "presi_in_carico_ass",
+    percorso = "3_riqualificazione_reskilling",
+    unit = "count",
+    col = 2L
+  ),
+  list(
+    var = "presi_in_carico_ass",
+    percorso = "4_lavoro_inclusione",
+    unit = "count",
+    col = 3L
+  ),
+  list(
+    var = "presi_in_carico_pc",
+    percorso = "1_reinserimento_lavorativo",
+    unit = "percentage_row",
+    col = 4L
+  ),
+  list(
+    var = "presi_in_carico_pc",
+    percorso = "2_aggiornamento_upskilling",
+    unit = "percentage_row",
+    col = 5L
+  ),
+  list(
+    var = "presi_in_carico_pc",
+    percorso = "3_riqualificazione_reskilling",
+    unit = "percentage_row",
+    col = 6L
+  ),
+  list(
+    var = "presi_in_carico_pc",
+    percorso = "4_lavoro_inclusione",
+    unit = "percentage_row",
+    col = 7L
+  )
+)
+
 # 3. Auto-derivazione semantica ----------------------------------------------
 
 scaffold[,
@@ -181,26 +303,37 @@ for (i in seq_len(nrow(scaffold))) {
       ]
       next
     }
-    # Riconosci percorso da col_token o header_modal
-    for (perc_id in names(RX_PERCORSI)) {
-      if (grepl(RX_PERCORSI[[perc_id]], s$header_modal, perl = TRUE)) {
-        # Determina se assoluto o %
-        is_pc <- grepl("%|percent|riga", s$header_modal) &&
-          (s$col_index >= 5L) # generalmente le % vengono dopo gli assoluti
-        scaffold[
-          i,
-          `:=`(
-            variabile = if (is_pc) {
-              "presi_in_carico_pc"
-            } else {
-              "presi_in_carico_ass"
-            },
-            percorso = perc_id,
-            unita = if (is_pc) "percentage_row" else "count",
-            confidenza = "medium"
-          )
-        ]
-        break
+    # Riconosci percorso dal col_token (singola colonna), non da
+    # header_modal globale. Il vecchio loop con break causava overmatch:
+    # tutti i col_index venivano mappati al primo percorso trovato
+    # nell'header (sempre "Reinserimento"). Le righe non catturate qui
+    # vengono recuperate dal mapping posizionale .A1_C2_POSITIONAL piu'
+    # in basso.
+    tk <- s$col_token
+    if (!is.na(tk)) {
+      for (perc_id in names(RX_PERCORSI)) {
+        if (
+          grepl(RX_PERCORSI[[perc_id]], tk, perl = TRUE, ignore.case = TRUE)
+        ) {
+          # Determina assoluto vs % dal token stesso (es. *_ass, *_pc)
+          is_pc <- grepl("_pc$|%|percent|riga", tk, ignore.case = TRUE) ||
+            (grepl("%|riga", s$header_modal) &&
+              s$col_index >= 5L)
+          scaffold[
+            i,
+            `:=`(
+              variabile = if (is_pc) {
+                "presi_in_carico_pc"
+              } else {
+                "presi_in_carico_ass"
+              },
+              percorso = perc_id,
+              unita = if (is_pc) "percentage_row" else "count",
+              confidenza = "medium"
+            )
+          ]
+          break
+        }
       }
     }
   }
@@ -380,6 +513,36 @@ scaffold[
     confidenza = "high"
   )
 ]
+
+# Tema A1 caption 2 ANPAL pre-2025 (8 colonne posizionali per 4 percorsi)
+for (m in .A1_C2_POSITIONAL) {
+  scaffold[
+    tema == "A1" & caption_num == "2" & col_index == m$col & is.na(percorso),
+    `:=`(
+      variabile = m$var,
+      percorso = m$percorso,
+      unita = m$unit,
+      confidenza = "high"
+    )
+  ]
+}
+
+# Tema A1 caption 1.2 post-2025 (rimpiazzo INAPP, 10 colonne x 5 percorsi)
+for (m in .A1_C12_POSITIONAL) {
+  scaffold[
+    tema == "A1" &
+      caption_num == "1.2" &
+      era == "post_2025" &
+      col_index == m$col &
+      is.na(percorso),
+    `:=`(
+      variabile = m$var,
+      percorso = m$percorso,
+      unita = m$unit,
+      confidenza = "high"
+    )
+  ]
+}
 
 # 4. Safety net per le righe ancora NA ---------------------------------------
 
