@@ -33,17 +33,30 @@ Un `data.table` con le colonne originali piu' quelle semantiche.
 d <- gol_decode_storico()
 d[tema == "A1" & confidenza == "high",
   .(data_riferimento, anchor, variabile, percorso, valore_num)]
-#>      data_riferimento         anchor              variabile percorso valore_num
-#>                <IDat>         <char>                 <char>   <char>      <num>
-#>   1:       2022-12-31        Abruzzo presi_in_carico_totale     <NA>       5165
-#>   2:       2022-12-31     Basilicata presi_in_carico_totale     <NA>       2450
-#>   3:       2022-12-31       Calabria presi_in_carico_totale     <NA>       9707
-#>   4:       2022-12-31       Campania presi_in_carico_totale     <NA>      38127
-#>   5:       2022-12-31 Emilia-Romagna presi_in_carico_totale     <NA>      28071
-#>  ---                                                                           
-#> 583:       2025-01-31        Toscana presi_in_carico_totale     <NA>     161588
-#> 584:       2025-01-31         Totale presi_in_carico_totale     <NA>    1808684
-#> 585:       2025-01-31         Umbria presi_in_carico_totale     <NA>      38794
-#> 586:       2025-01-31  Valle d'Aosta presi_in_carico_totale     <NA>       2859
-#> 587:       2025-01-31         Veneto presi_in_carico_totale     <NA>     132480
+#>       data_riferimento  anchor           variabile
+#>                 <IDat>  <char>              <char>
+#>    1:       2022-12-31 Abruzzo presi_in_carico_ass
+#>    2:       2022-12-31 Abruzzo presi_in_carico_ass
+#>    3:       2022-12-31 Abruzzo presi_in_carico_ass
+#>    4:       2022-12-31 Abruzzo  presi_in_carico_pc
+#>    5:       2022-12-31 Abruzzo  presi_in_carico_pc
+#>   ---                                             
+#> 3847:       2025-01-31  Veneto  presi_in_carico_pc
+#> 3848:       2025-01-31  Veneto presi_in_carico_ass
+#> 3849:       2025-01-31  Veneto  presi_in_carico_pc
+#> 3850:       2025-01-31  Veneto presi_in_carico_ass
+#> 3851:       2025-01-31  Veneto  presi_in_carico_pc
+#>                            percorso valore_num
+#>                              <char>      <num>
+#>    1:    1_reinserimento_lavorativo     5165.0
+#>    2: 3_riqualificazione_reskilling     1729.0
+#>    3:           4_lavoro_inclusione      260.0
+#>    4:    1_reinserimento_lavorativo       51.8
+#>    5:    2_aggiornamento_upskilling       28.2
+#>   ---                                         
+#> 3847: 3_riqualificazione_reskilling       48.5
+#> 3848:           4_lavoro_inclusione       41.5
+#> 3849:           4_lavoro_inclusione        6.7
+#> 3850:   5_ricollocazione_collettiva        3.1
+#> 3851:   5_ricollocazione_collettiva        0.2
 ```
