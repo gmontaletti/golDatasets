@@ -26,6 +26,7 @@ The source PDFs themselves are not stored here — they live in a separate
 | `dataset_long/` | 27 GOL reports (ANPAL/MLPS/INAPP) | 11 thematic long CSVs (`gol_A1_long.csv` … `gol_L_long.csv`), one row per (file, caption, anchor, col_index) cell |
 | `INAPP GOL/csv_long/` | 12 INAPP Focus GOL reports | Long + wide CSVs for tables 1.1, 1.2, 2.1, 2.2/3.1, plus the unified `tab_long_completo.csv` and `diagnostica.csv` |
 | `INAPP GOL/focus_gol_17/` | single PDF (Focus GOL 17/2025, data 31/12/2025) | All 19 tables of that single report, one CSV + one `.txt` layout dump each, indexed by `_indice_tabelle.csv` |
+| `INAPP GOL/focus_gol_all/` | 12 INAPP Focus GOL 2025 reports | All tables auto-detected via `Tabella X.Y` regex, 131 CSV + 131 `.txt` organized in 12 per-report subdirs, cumulative `_indice_tabelle.csv`. Includes tables not yet integrated in `csv_long/`: 1.3-1.7 (caratteristiche/vulnerabilità/patto servizio) and 2.3 (formazione competenze digitali) across all 12 reports. |
 | `percorsi/` | INAPP reports | Alternative long/wide pair for tables 1.1, 1.2, 2.1, 2.2 (different schema from `INAPP GOL/csv_long/`) |
 | `cob/` | INPS “Allegato IV-Trimestre” XLSX files | Regional avviamenti/cessazioni flows in long form, one row per (regione, anno, trimestre, flusso) |
 
@@ -59,6 +60,22 @@ canonical `INAPP_FocusGOL_*.pdf`.
 Requires `tabula-py` (stream mode) and `pdftotext`. Each target table is
 hard-coded by page range in the `TARGETS` list at the top of the file;
 editing that list is the way to add or correct a table.
+
+**`estrai_tavole_focus_gol_all.py`** — generalizes the above across all
+12 INAPP Focus GOL 2025 PDFs. Auto-detects table positions via
+`Tabella X.Y` regex on `pdftotext -layout` output (uses `\f` form feeds
+for page splits). Each table is extracted via `tabula` (primary) with
+`pdfplumber` fallback (pure Python; works without Java). Output
+organized per-report in `focus_gol_all/<report_id>/`, with a cumulative
+`_indice_tabelle.csv`. Backend used per table is recorded in the index’s
+`note` column.
+
+``` bash
+python3 "INAPP GOL/estrai_tavole_focus_gol_all.py" \
+    --input-dir /path/to/PDFs \
+    --output-dir "INAPP GOL/focus_gol_all" \
+    --pattern "INAPP_Focus-GOL*-2025.pdf"
+```
 
 The 11 `gol_*_long.csv` files in `dataset_long/` are produced by a
 script that lives outside this repo (`outputs/extract_long.py`,
