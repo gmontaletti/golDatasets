@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golDatasets</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +35,35 @@
 
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.6.0" id="goldatasets-060">golDatasets 0.6.0<a class="anchor" aria-label="anchor" href="#goldatasets-060"></a></h2>
+<div class="section level3">
+<h3 id="refinement-del-decoder-semantico-0-6-0">Refinement del decoder semantico<a class="anchor" aria-label="anchor" href="#refinement-del-decoder-semantico-0-6-0"></a></h3>
+<p>Aggiunti tre blocchi di <strong>mapping posizionali</strong> in <code>data-raw/build_storico_decoder.R</code> per i temi con schema stabile:</p>
+<ul><li>Tema B (caption 3, 1.3, 1.4): mapping deterministico delle 12 colonne anagrafiche (<code>Maschi/Femmine/Totale</code>, <code>15-29/30-54/55+/Totale</code>, <code>Italiana/Straniera/Totale</code>, <code>&gt;=6mesi/&gt;=12mesi</code>).</li>
+<li>Tema H caption 2.2: mapping di 6 variabili occupazionali standard (<code>raggiunti</code>, <code>occupati_totale</code>, <code>nuovi_occupati</code>, <code>occupati_pc</code>, <code>quota_nuovi_su_occ</code>, <code>gia_occupati</code>).</li>
+<li>Tema F caption 2.1: mapping di 3 variabili sulle politiche (<code>presi_in_carico_totale</code>, <code>con_politica_avviata</code>, <code>con_politica_avviata_pc</code>).</li>
+</ul><p>Vectorizzazione di <code>classify_unita()</code> per consentire l’uso in data.table con vettori di righe.</p>
+</div>
+<div class="section level3">
+<h3 id="risultati-0-6-0">Risultati<a class="anchor" aria-label="anchor" href="#risultati-0-6-0"></a></h3>
+<ul><li>
+<code>storico_decoder</code>: 228 righe; distribuzione <code>low</code> ridotta da <strong>53 a 20</strong> (-62%). Tema B: 0 low residui. Tema F: 0 low residui. Tema H: 17 low (-37%).</li>
+<li>
+<code>gol_storia_caratteristiche</code>: 4.262 -&gt; <strong>6.996 righe</strong> (+64%), grazie ai 27 mapping anagrafici di tema B ora classificati <code>high</code>.</li>
+<li>
+<code>gol_storia_esiti</code>: 13.561 -&gt; <strong>15.427 righe</strong> (+14%), grazie alle nuove variabili F e H decodificate.</li>
+<li>
+<code>gol_storia_volumi</code>: 9.194 righe (invariato).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="sub-task-differiti-a-v070-0-6-0">Sub-task differiti a v0.7.0<a class="anchor" aria-label="anchor" href="#sub-task-differiti-a-v070-0-6-0"></a></h3>
+<p>I 6 mapper INAPP <code>focus_gol_all</code> previsti dal piano sono <strong>rimandati</strong>:</p>
+<ul><li>Tab 1.3, 1.4, 1.5, 2.3: estrazione <code>pdfplumber</code> produce 1-5 righe per report (header multi-riga non parsato), inutilizzabile senza un parser PDF specializzato.</li>
+<li>Tab 1.6, 1.7: estraggono 20-36 righe ma con strutture incompatibili con le ipotesi del piano (1.6 non e’ per regione ma trasversale per target × caratteristica; 1.7 ha 38 colonne irregolari).</li>
+</ul><p>La risoluzione richiede un parser PDF custom (probabilmente <code>tabula-java</code> se Java diventa disponibile, o un pre-processore <code>pdfplumber</code> con regole di header recovery dedicate per ciascuna tabella). Differito a v0.7.0.</p>
+</div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="goldatasets-050">golDatasets 0.5.0<a class="anchor" aria-label="anchor" href="#goldatasets-050"></a></h2>
 <div class="section level3">

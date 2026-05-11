@@ -1,5 +1,52 @@
 # Changelog
 
+## golDatasets 0.6.0
+
+### Refinement del decoder semantico
+
+Aggiunti tre blocchi di **mapping posizionali** in
+`data-raw/build_storico_decoder.R` per i temi con schema stabile:
+
+- Tema B (caption 3, 1.3, 1.4): mapping deterministico delle 12 colonne
+  anagrafiche (`Maschi/Femmine/Totale`, `15-29/30-54/55+/Totale`,
+  `Italiana/Straniera/Totale`, `>=6mesi/>=12mesi`).
+- Tema H caption 2.2: mapping di 6 variabili occupazionali standard
+  (`raggiunti`, `occupati_totale`, `nuovi_occupati`, `occupati_pc`,
+  `quota_nuovi_su_occ`, `gia_occupati`).
+- Tema F caption 2.1: mapping di 3 variabili sulle politiche
+  (`presi_in_carico_totale`, `con_politica_avviata`,
+  `con_politica_avviata_pc`).
+
+Vectorizzazione di `classify_unita()` per consentire l’uso in data.table
+con vettori di righe.
+
+### Risultati
+
+- `storico_decoder`: 228 righe; distribuzione `low` ridotta da **53 a
+  20** (-62%). Tema B: 0 low residui. Tema F: 0 low residui. Tema H: 17
+  low (-37%).
+- `gol_storia_caratteristiche`: 4.262 -\> **6.996 righe** (+64%), grazie
+  ai 27 mapping anagrafici di tema B ora classificati `high`.
+- `gol_storia_esiti`: 13.561 -\> **15.427 righe** (+14%), grazie alle
+  nuove variabili F e H decodificate.
+- `gol_storia_volumi`: 9.194 righe (invariato).
+
+### Sub-task differiti a v0.7.0
+
+I 6 mapper INAPP `focus_gol_all` previsti dal piano sono **rimandati**:
+
+- Tab 1.3, 1.4, 1.5, 2.3: estrazione `pdfplumber` produce 1-5 righe per
+  report (header multi-riga non parsato), inutilizzabile senza un parser
+  PDF specializzato.
+- Tab 1.6, 1.7: estraggono 20-36 righe ma con strutture incompatibili
+  con le ipotesi del piano (1.6 non e’ per regione ma trasversale per
+  target × caratteristica; 1.7 ha 38 colonne irregolari).
+
+La risoluzione richiede un parser PDF custom (probabilmente
+`tabula-java` se Java diventa disponibile, o un pre-processore
+`pdfplumber` con regole di header recovery dedicate per ciascuna
+tabella). Differito a v0.7.0.
+
 ## golDatasets 0.5.0
 
 ### Decoder semantico storico
