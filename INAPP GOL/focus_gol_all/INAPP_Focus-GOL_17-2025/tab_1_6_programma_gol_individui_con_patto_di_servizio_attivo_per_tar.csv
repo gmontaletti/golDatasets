@@ -1,31 +1,21 @@
-c1,c2,c3,Totale,c5,c6,"SFL
-Domanda
-accolta e
-attiva",c8,c9,"ADI
-Attivabili al
-lavoro",c11,c12,"NASpI-DIsColl
-Domanda
-presentata",c14,c15,"Altri
-disoccupati",c17,c18
-Presi in carico con patto di servizio attivo,,,3.818.413,,,123.862,,,123.329,,,1.568.690,,,2.002.532,,
-,,,,3.818.413,,,123.862,,,123.329,,,1.568.690,,,2.002.532,
-,,,,,,,,,,,,,,,,,
-,Maschi,,,"44,3",,,"38,6",,,"40,9",,,"45,7",,,"43,6",
-,Femmine,,,"55,7",,,"61,4",,,"59,1",,,"54,3",,,"56,4",
-,Classi di età,,,,,,,,,,,,,,,,
-,15-29,,,"30,7",,,"30,5",,,"9,8",,,"26,1",,,"35,5",
-,30-54,,,"52,1",,,"55,1",,,"86,4",,,"54,9",,,"47,6",
-,55+,,,"17,2",,,"14,4",,,"3,8",,,"18,9",,,"16,9",
-,Titolo di studio,,,,,,,,,,,,,,,,
-,Fino alla licenza media,,,"46,5",,,"62,3",,,"74,6",,,"42,3",,,"47,0",
-,Qualifica professionale,,,"6,6",,,"5,2",,,"4,4",,,"7,4",,,"6,2",
-,Diploma istruzione secondaria superiore,,,"35,5",,,"28,7",,,"19,2",,,"36,5",,,"36,2",
-,Laurea triennale,,,"5,5",,,"1,8",,,"0,8",,,"6,1",,,"5,6",
-,Laurea specialistica/magistrale,,,"5,9",,,"2,0",,,"1,1",,,"7,7",,,"5,1",
-,Percorso GOL,,,,,,,,,,,,,,,,
-,1 Reinserimento lavorativo,,,"48,6",,,"8,9",,,"7,8",,,"73,1",,,"34,3",
-,2 Aggiornamento,,,"23,5",,,"19,3",,,"16,0",,,"20,8",,,"26,3",
-,3 Riqualificazione,,,"23,7",,,"65,5",,,"63,1",,,"4,7",,,"33,6",
-,4 Lavoro e inclusione,,,"4,0",,,"6,3",,,"13,0",,,"1,4",,,"5,4",
-,5 Ricollocazione collettiva,,,"0,3",,,"0,0",,,"0,0",,,"0,1",,,"0,4",
-,,,,100,,,100,,,100,,,100,,,100,
+Presi in carico con patto di servizio attivo,3.818.413,123.862,123.329,1.568.690,2.002.532
+Genere,,,,,
+Maschi,"44,3","38,6","40,9","45,7","43,6"
+Femmine,"55,7","61,4","59,1","54,3","56,4"
+Classi di età,,,,,
+15-29,"30,7","30,5","9,8","26,1","35,5"
+30-54,"52,1","55,1","86,4","54,9","47,6"
+55+,"17,2","14,4","3,8","18,9","16,9"
+Titolo di studio,,,,,
+Fino alla licenza media,"46,5","62,3","74,6","42,3","47,0"
+Qualifica professionale,"6,6","5,2","4,4","7,4","6,2"
+Diploma istruzione secondaria superiore,"35,5","28,7","19,2","36,5","36,2"
+Laurea triennale,"5,5","1,8","0,8","6,1","5,6"
+Laurea specialistica/magistrale,"5,9","2,0","1,1","7,7","5,1"
+Percorso GOL,,,,,
+1 Reinserimento lavorativo,"48,6","8,9","7,8","73,1","34,3"
+2 Aggiornamento,"23,5","19,3","16,0","20,8","26,3"
+3 Riqualificazione,"23,7","65,5","63,1","4,7","33,6"
+4 Lavoro e inclusione,"4,0","6,3","13,0","1,4","5,4"
+5 Ricollocazione collettiva,"0,3","0,0","0,0","0,1","0,4"
+Totale,100,100,100,100,100

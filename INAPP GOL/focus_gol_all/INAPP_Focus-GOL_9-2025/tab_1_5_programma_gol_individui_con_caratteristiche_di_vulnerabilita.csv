@@ -1,6 +1,14 @@
-"Individui
-raggiunti",c2,di cui:,%
-,,con,
-,,caratteristiche,
-,,di vulnerabilità,
-(A),(B),,(B/A)
+c1,c2,di cui:,c4,c5,c6,c7,c8,c9
+,Individui,con,,,,,,
+,,,%,,Disoccupati,,,Persone
+,raggiunti,caratteristiche,,,,,,
+Percorso,,,,Donne,da 6 mesi e,Under 30,Over 55,con
+,,di vulnerabilità,,,,,,
+,,,,,oltre,,,disabilità
+,(A),(B),(B/A),,,,,
+1. Reinserimento lavorativo,2.009.317,1.645.795,"81,9",1.103.852,407.618,577.808,330.098,69.829
+2. Upskilling,953.154,827.384,"86,8",518.659,331.669,294.504,174.686,45.419
+3. Reskilling,849.569,808.107,"95,1",500.398,486.399,292.576,127.055,47.430
+4. Lavoro e inclusione,146.431,133.969,"91,5",80.014,90.905,23.060,29.948,25.154
+5. Ricollocazione collettiva,7.860,5.374,"68,4",3.126,470,189,2.831,116
+Totale,3.966.331,3.420.629,"86,2",2.206.049,1.317.061,1.188.137,664.618,187.948

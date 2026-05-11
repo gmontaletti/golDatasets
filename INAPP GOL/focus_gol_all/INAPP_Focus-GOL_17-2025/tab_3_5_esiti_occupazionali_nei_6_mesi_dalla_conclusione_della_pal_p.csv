@@ -1,6 +1,12 @@
-Presi in carico,Occupati nei,Di cui: con,Tasso di,Tasso di,Incidenza
-con PAL,180 giorni,occupazione,occupazione nei,occupazione,occupazione
-conclusa,dalla,stabile,180 giorni,stabile nei,stabile
-entro il,conclusione,,,180 giorni,
-30/06/2025,PAL,,,,
-(A),(B),(C),(B/A) %,(C/A) %,(C/B) %
+c1,c2,Totale PAL,c4,c5,c6
+Nord-Ovest,332.343,123.928 77.530,"37,3","23,3","62,6"
+Nord-Est,498.828,228.290 157.152,"45,8","31,5","68,8"
+Centro,338.958,162.220 113.252,"47,9","33,4","69,8"
+Sud e Isole,678.740,206.955 121.481,"30,5","17,9","58,7"
+Totale,1.848.869,721.393 469.415,"39,0","25,4","65,1"
+,,Di cui: Formazione,,,
+Nord-Ovest,97.381,37.953 23.608,"39,0","24,2","62,2"
+Nord-Est,102.728,51.105 33.470,"49,7","32,6","65,5"
+Centro,76.029,36.513 25.448,"48,0","33,5","69,7"
+Sud e Isole,156.610,32.855 17.835,"21,0","11,4","54,3"
+Totale,432.748,158.426 100.361,"36,6","23,2","63,3"

@@ -19,6 +19,8 @@ source("R/build_datasets.R")
 source("R/gol_quality.R")
 source("R/storico_decoder.R")
 source("R/build_storia_lunga.R")
+source("R/inapp_focus_helpers.R")
+source("R/inapp_focus_mappers.R")
 
 # 2. Build -------------------------------------------------------------------
 out <- build_gol_datasets(
@@ -121,16 +123,28 @@ if (file.exists("data/storico_decoder.rda")) {
     sort = FALSE
   )
 
+  # Mapper INAPP focus_gol_all
+  focus_long <- build_inapp_focus_long()
+  message(
+    "INAPP focus mappers: ",
+    nrow(focus_long$caratteristiche),
+    " righe caratteristiche, ",
+    nrow(focus_long$esiti),
+    " righe esiti"
+  )
+
   gol_storia_volumi <- .build_gol_storia_volumi(
     storico_decoded = storico_decoded,
     inapp = out$gol_inapp_mensile
   )
   gol_storia_caratteristiche <- .build_gol_storia_caratteristiche(
-    storico_decoded = storico_decoded
+    storico_decoded = storico_decoded,
+    focus_long = focus_long
   )
   gol_storia_esiti <- .build_gol_storia_esiti(
     storico_decoded = storico_decoded,
-    inapp = out$gol_inapp_mensile
+    inapp = out$gol_inapp_mensile,
+    focus_long = focus_long
   )
 
   save(gol_storia_volumi, file = "data/gol_storia_volumi.rda", compress = "xz")

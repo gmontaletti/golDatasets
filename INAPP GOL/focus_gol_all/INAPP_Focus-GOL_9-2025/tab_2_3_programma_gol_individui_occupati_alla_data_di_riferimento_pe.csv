@@ -1,13 +1,9 @@
-"1
-Reinserimento
-lavorativo","2
-Upskilling","3
-Reskilling","4
-Lavoro
-e inclusione",Totale
-"38,3","34,8","32,6","35,0","36,7"
-"6,6","7,9","10,1","2,5","7,2"
-"47,6","47,2","48,6","49,5","47,7"
-"5,3","8,1","6,2","10,7","6,2"
-"2,2","2,0","2,5","2,3","2,2"
-"100,0","100,0","100,0","100,0","100,0"
+c1,1,2,3,4,c6
+Tipo di contratto,Reinserimento,Upskilling,Reskilling,Lavoro,Totale
+,lavorativo,,,e inclusione,
+Tempo Indeterminato,"38,3","34,8","32,6","35,0","36,7"
+Apprendistato,"6,6","7,9","10,1","2,5","7,2"
+Tempo determinato,"47,6","47,2","48,6","49,5","47,7"
+Domestico,"5,3","8,1","6,2","10,7","6,2"
+Altre forme contrattuali,"2,2","2,0","2,5","2,3","2,2"
+Totale,"100,0","100,0","100,0","100,0","100,0"

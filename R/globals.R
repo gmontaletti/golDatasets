@@ -77,5 +77,7 @@ utils::globalVariables(c(
   "gol_inapp_mensile",
   "gol_storia_volumi",
   "gol_storia_caratteristiche",
-  "gol_storia_esiti"
+  "gol_storia_esiti",
+  # inapp_focus_mappers
+  "V1"
 ))

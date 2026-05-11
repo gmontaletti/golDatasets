@@ -97,7 +97,10 @@
 }
 
 #' @noRd
-.build_gol_storia_caratteristiche <- function(storico_decoded = NULL) {
+.build_gol_storia_caratteristiche <- function(
+  storico_decoded = NULL,
+  focus_long = NULL
+) {
   if (is.null(storico_decoded)) {
     storico_decoded <- gol_decode_storico()
   }
@@ -119,6 +122,14 @@
     )
   ]
 
+  if (!is.null(focus_long) && nrow(focus_long$caratteristiche) > 0L) {
+    parte_storico <- data.table::rbindlist(
+      list(parte_storico, focus_long$caratteristiche),
+      use.names = TRUE,
+      fill = TRUE
+    )
+  }
+
   parte_storico[,
     era := ifelse(
       data_riferimento < data.table::as.IDate("2025-01-01"),
@@ -138,7 +149,11 @@
 }
 
 #' @noRd
-.build_gol_storia_esiti <- function(storico_decoded = NULL, inapp = NULL) {
+.build_gol_storia_esiti <- function(
+  storico_decoded = NULL,
+  inapp = NULL,
+  focus_long = NULL
+) {
   if (is.null(storico_decoded)) {
     storico_decoded <- gol_decode_storico()
   }
@@ -210,11 +225,11 @@
     )
   ]
 
-  out <- data.table::rbindlist(
-    list(parte_storico, inapp_21, inapp_22_reg, inapp_22_perc),
-    use.names = TRUE,
-    fill = TRUE
-  )
+  parts <- list(parte_storico, inapp_21, inapp_22_reg, inapp_22_perc)
+  if (!is.null(focus_long) && nrow(focus_long$esiti) > 0L) {
+    parts[[length(parts) + 1L]] <- focus_long$esiti
+  }
+  out <- data.table::rbindlist(parts, use.names = TRUE, fill = TRUE)
   out[,
     era := ifelse(
       data_riferimento < data.table::as.IDate("2025-01-01"),

@@ -1,9 +1,21 @@
-(A),c4,c5,(B),c7,c8,(C),c10,c11,(C/A),c13,c14,(C/B),c16,c17
-,Totale,,,Totale,,,di cui:,,,Tasso di,,,Tasso di,
-,presi in,,,occupati,,,occupati,,,occupazione,,,occupazione,
-,carico al,,,nei 365 gg,,,stabili,,,stabile nei 365,,,stabile nei 365,
-,31.12.2024,,,dalla presa,,,nei 365 gg,,,gg dalla presa,,,gg dalla presa,
-,,,,in carico,,,dalla presa,,,in carico,,,in carico,
-,,,,,,,in carico,,,sul totale,,,sul totale,
-,,,,,,,,,,presi in carico,,,occupati,
-,(v.a.),,,(v.a.),,,(v.a.),,,(%),,,(%),
+c1,Nord-Ovest,290.957,171.430,127.834,"43,90%","74,60%"
+,Nord-Est,296.833,189.216,135.227,"45,60%","71,50%"
+1 - Reinserimento lavorativo,,,,,,
+,Centro,316.977,197.571,138.632,"43,70%","70,20%"
+,Sud e Isole,496.492,316.697,200.497,"40,40%","63,30%"
+,Nord-Ovest,136.296,72.978,52.479,"38,50%","71,90%"
+,Nord-Est,159.286,94.954,65.756,"41,30%","69,30%"
+2 - Upskilling,,,,,,
+,Centro,94.997,49.361,33.402,"35,20%","67,70%"
+,Sud e Isole,322.293,154.912,92.210,"28,60%","59,50%"
+,Nord-Ovest,75.181,29.100,19.243,"25,60%","66,10%"
+,Nord-Est,36.684,16.545,10.807,"29,50%","65,30%"
+3 - Reskilling,,,,,,
+,Centro,68.569,24.097,15.470,"22,60%","64,20%"
+,Sud e Isole,449.769,97.401,56.275,"12,50%","57,80%"
+,Nord-Ovest,31.839,11.443,6.994,"22,00%","61,10%"
+,Nord-Est,20.241,7.208,4.246,"21,00%","58,90%"
+4 - Lavoro e inclusione,,,,,,
+,Centro,10.534,2.453,1.483,"14,10%","60,50%"
+,Sud e Isole,46.685,7.486,4.050,"8,70%","54,10%"
+Totale,,2.853.633,1.442.852,964.605,"33,80%","66,90%"

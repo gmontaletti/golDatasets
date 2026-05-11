@@ -1,4 +1,26 @@
-c1,c2,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15
-,Totale,,SFL,,,ADI,,,NASpI-DisColl,,Altri disoccupati
-,,,Domanda,,,Attivabili al,,,Domanda,,
-,,,accolta e attiva,,,lavoro,,,presentata,,
+c1,c2,Presi in carico con patto di servizio attivo,c4
+,,SFL  ADI  NASpI-DisColl,
+,Totale,Domanda Attivabili al Domanda,Altri disoccupati
+,,accolta e attiva lavoro  presentata,
+Abruzzo,65.912,1.553 1.179 32.425,30.755
+Basilicata,44.995,913 862 21.647,21.573
+P.A. Bolzano,5.371,3 15 4.257,1.096
+Calabria,141.439,14.346 9.401 49.172,68.520
+Campania,526.988,37.946 43.319 132.120,313.603
+Emilia-Romagna,191.898,1.749 1.065 104.206,84.878
+Friuli-Venezia Giulia,77.881,379 182 41.244,36.076
+Lazio,272.787,6.552 4.834 117.854,143.547
+Liguria,41.982,761 499 22.075,18.647
+Lombardia,530.228,3.415 2.615 240.603,283.595
+Marche,75.465,755 591 40.836,33.283
+Molise,14.592,691 398 4.893,8.610
+Piemonte,201.581,4.511 2.966 93.652,100.452
+Puglia,393.515,16.267 11.509 142.063,223.676
+Sardegna,125.562,4.201 2.074 58.623,60.664
+Sicilia,542.067,26.726 39.694 181.909,293.738
+Toscana,268.525,1.849 1.085 136.251,129.340
+P.A. Trento,17.632,31 49 10.440,7.112
+Umbria,64.618,477 319 28.937,34.885
+Valle d'Aosta,3.915,28 18 2.373,1.496
+Veneto,211.460,709 655 103.110,106.986
+Totale,3.818.413,123.862 123.329 1.568.690,2.002.532
