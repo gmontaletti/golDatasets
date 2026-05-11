@@ -328,12 +328,18 @@ for (i in seq_len(nrow(scaffold))) {
       ]
       next
     }
-    # Riconosci percorso dal col_token (singola colonna), non da
-    # header_modal globale. Il vecchio loop con break causava overmatch:
-    # tutti i col_index venivano mappati al primo percorso trovato
-    # nell'header (sempre "Reinserimento"). Le righe non catturate qui
-    # vengono recuperate dal mapping posizionale .A1_C2_POSITIONAL piu'
-    # in basso.
+    # Salta il match col_token per A1 caption 2 pre-2025: il col_token
+    # estratto dall'header dell'ANPAL ("Reinserimento Aggiornamento
+    # Riqualificazione Lavoro e inclusione") non si allinea
+    # affidabilmente al col_index. Per quel sotto-insieme usiamo solo
+    # il mapping posizionale .A1_C2_POSITIONAL (definito in cima).
+    if (s$caption_num %in% c("2", "1.2") && s$era == "pre_2025") {
+      next
+    }
+
+    # Riconosci percorso dal col_token (singola colonna). Per altre
+    # caption A1 il token e' affidabile (caption 1.2 post-2025 usa
+    # nomi "<n>_<percorso>_<ass|pc>" dal rimpiazzo INAPP).
     tk <- s$col_token
     if (!is.na(tk)) {
       for (perc_id in names(RX_PERCORSI)) {
@@ -581,10 +587,15 @@ scaffold[
   )
 ]
 
-# Tema A1 caption 2 ANPAL pre-2025 (8 colonne posizionali per 4 percorsi)
+# Tema A1 caption 2 e 1.2 ANPAL/MLPS pre-2025 (8 colonne posizionali per
+# 4 percorsi: col 0-3 = assoluti, col 4-7 = percentuali di riga).
 for (m in .A1_C2_POSITIONAL) {
   scaffold[
-    tema == "A1" & caption_num == "2" & col_index == m$col & is.na(percorso),
+    tema == "A1" &
+      caption_num %in% c("2", "1.2") &
+      era == "pre_2025" &
+      col_index == m$col &
+      is.na(percorso),
     `:=`(
       variabile = m$var,
       percorso = m$percorso,
