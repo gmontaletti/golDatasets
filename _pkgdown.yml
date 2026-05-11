@@ -1,0 +1,28 @@
+url: https://gmontaletti.github.io/golDatasets/
+template:
+  bootstrap: 5
+  bslib:
+    primary: "#1f4e79"
+    border-radius: "0.4rem"
+
+reference:
+- title: Funzioni
+  desc: Costruzione dei dataset dai CSV grezzi
+  contents:
+  - build_gol_datasets
+
+- title: Dataset
+  desc: Dataset esposti dal package, accessibili con `data()` o direttamente come oggetti.
+  contents:
+  - gol_inapp_mensile
+  - gol_storico_regionale
+  - cob_regionale_trimestrale
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [search, github]
+
+authors:
+  Giampaolo Montaletti:
+    href: https://orcid.org/0009-0002-5327-1122

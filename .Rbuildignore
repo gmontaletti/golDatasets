@@ -12,3 +12,6 @@
 ^docs$
 ^\.github$
 ^\.claude$
+^doc$
+^Meta$
+^pkgdown$

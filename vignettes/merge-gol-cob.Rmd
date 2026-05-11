@@ -1,0 +1,117 @@
+---
+title: "Merge tra serie GOL e baseline COB"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Merge tra serie GOL e baseline COB}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment  = "#>",
+  fig.width = 7,
+  fig.height = 4.5
+)
+```
+
+Questa vignette mostra un caso d'uso cross-dataset: combinare le serie INAPP del Programma GOL con i flussi del mercato del lavoro provenienti dalle Comunicazioni Obbligatorie (COB) INPS, sfruttando il fatto che entrambi i dataset usano le stesse 21 etichette regionali canoniche.
+
+```{r packages}
+library(golDatasets)
+library(data.table)
+```
+
+# 1. Esiti occupazionali GOL per regione
+
+La tavola 2.2 della serie INAPP riporta gli "occupati" tra i raggiunti dal programma. Filtriamo i valori assoluti aggregati per regione (`percorso == ""`) all'ultima data disponibile.
+
+```{r esiti}
+ultima_data <- max(gol_inapp_mensile$data_riferimento)
+
+occupati <- gol_inapp_mensile[
+  tavola == 2.2 &
+    data_riferimento == ultima_data &
+    dimensione == "regione" &
+    percorso == "" &
+    variabile == "occupati_totale" &
+    etichetta != "Totale",
+  .(regione = etichetta, occupati_gol = valore)
+]
+
+setorder(occupati, -occupati_gol)
+head(occupati, 10)
+```
+
+# 2. Flusso COB della stessa regione, ultimo anno disponibile
+
+Aggreghiamo i flussi del 2025 (3 trimestri disponibili) per ciascuna regione, restando sugli avviamenti.
+
+```{r cob}
+cob_2025 <- cob_regionale_trimestrale[
+  flusso == "avviamenti" & anno == 2025,
+  .(avviamenti_2025 = sum(rapporti, na.rm = TRUE),
+    lavoratori_2025 = sum(lavoratori, na.rm = TRUE)),
+  by = regione
+]
+
+head(cob_2025, 5)
+```
+
+# 3. Merge sulla chiave regionale
+
+I due dataset condividono la stessa convenzione di naming: le 21 etichette regionali canoniche. Il merge è quindi diretto.
+
+```{r merge}
+panel <- merge(occupati, cob_2025, by = "regione", all = FALSE)
+
+panel[, quota_gol_su_avviamenti := occupati_gol / avviamenti_2025]
+setorder(panel, -quota_gol_su_avviamenti)
+panel
+```
+
+# 4. Serie temporale per una singola regione
+
+Concatenando le due serie possiamo costruire una visione regionale dell'andamento. Esempio per l'Emilia-Romagna.
+
+```{r serie-regione}
+serie_gol <- gol_inapp_mensile[
+  tavola == 2.2 &
+    etichetta == "Emilia-Romagna" &
+    percorso == "" &
+    variabile == "occupati_totale",
+  .(data = data_riferimento,
+    fonte = "GOL: occupati (INAPP)",
+    valore = valore)
+]
+
+serie_cob <- cob_regionale_trimestrale[
+  regione == "Emilia-Romagna" & flusso == "avviamenti",
+  .(data = data_inizio_trimestre,
+    fonte = "COB: avviamenti (INPS)",
+    valore = rapporti)
+]
+
+serie <- rbindlist(list(serie_gol, serie_cob))
+setorder(serie, data, fonte)
+serie[, .N, by = fonte]
+```
+
+# 5. Rotture di serie da tenere a mente
+
+Prima di costruire indicatori longitudinali, è importante ricordare le rotture di serie documentate in `dataset_long/README.md`:
+
+- **Cambio unità di osservazione** nel 2025 (presi in carico → individui).
+- **Cambio regola di assegnazione regionale** nel 2025 (regione di presa in carico → regione di ultima presa in carico).
+- **Passaggio da 4 a 5 percorsi GOL** con `ricollocazione_collettiva` introdotto nel 2025.
+
+Lo storico più lungo è disponibile in `gol_storico_regionale`, ma per i quattro temi A1, B, F, H il `col_index` non è confrontabile direttamente pre/post 2025.
+
+# 6. Convenzione regioni
+
+Le 21 etichette canoniche usate da tutti e tre i dataset:
+
+```{r etichette}
+sort(unique(cob_regionale_trimestrale$regione))
+```

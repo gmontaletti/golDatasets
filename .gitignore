@@ -17,3 +17,7 @@ renv/.cache/
 
 # Output di test / check temporanei
 golDatasets.Rcheck/
+inst/doc
+/doc/
+/Meta/
+docs

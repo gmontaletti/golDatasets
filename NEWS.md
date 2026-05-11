@@ -18,6 +18,13 @@ Prima release del package.
   (`dataset_long/`, `INAPP GOL/csv_long/`, `cob/`) e li salva come `.rda`
   in `data/`.
 
+## Documentazione
+
+* Vignette `merge-gol-cob`: esempio di merge cross-dataset tra serie
+  INAPP GOL e baseline COB INPS sulla chiave regionale canonica.
+* Sito pkgdown configurato (`_pkgdown.yml`) con deploy via GitHub Action
+  (`.github/workflows/pkgdown.yaml`) verso GitHub Pages.
+
 ## Convenzioni
 
 * Etichette regionali armonizzate alle 22 canoniche definite in
