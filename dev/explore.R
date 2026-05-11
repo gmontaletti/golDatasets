@@ -1,15 +1,20 @@
 # =============================================================================
-# Script di esplorazione interattiva del package golDatasets
+# Script di esplorazione interattiva del package golDatasets (v0.8.0)
 # -----------------------------------------------------------------------------
-# NON e' un test automatizzato. Va eseguito riga per riga o sezione per
-# sezione in una sessione R / RStudio, per ispezionare i tre dataset, le
-# funzioni di estrazione, gli indicatori COB e la visualizzazione con
-# rotture metodologiche.
+# NON e' un test automatizzato. Va eseguito riga per riga in RStudio:
+# Ctrl/Cmd+Enter su ogni riga, oppure selezione e Ctrl/Cmd+Enter.
 #
-# Prerequisiti:
-#   - Stare nella radice del repository (`gol_datasets/`)
-#   - Avere data.table, ggplot2 installati (renv: installati nel project)
-#   - Per il caricamento da sorgente: devtools (opzionale)
+# Sezioni:
+#   1. Setup e caricamento package
+#   2. Panoramica dei 6 dataset esposti + 3 metadati
+#   3. Tre dataset di storia lunga 2022-2025
+#   4. Grafici: presi in carico 2022-2025
+#   5. Grafici: caratteristiche dei beneficiari
+#   6. Grafici: esiti del programma (occupazione, LEP, politiche)
+#   7. Vulnerabilita' e target PNRR (v0.7/0.8)
+#   8. COB INPS: serie del mercato del lavoro
+#   9. Merge cross-dataset GOL + COB
+#  10. Diagnostica qualita' e rescanning
 # =============================================================================
 
 # 1. Setup -------------------------------------------------------------------
@@ -19,221 +24,353 @@ suppressPackageStartupMessages({
   library(ggplot2)
 })
 
-# Caricamento del package. Scegli UNA delle due modalita':
-# (a) dal sorgente nel repo (sviluppo)
-devtools::load_all(".")
-# (b) installato (utente finale)
+# Caricamento package dal sorgente (sviluppo). Per utente finale:
 # library(golDatasets)
+devtools::load_all(".")
 
-# 2. Panoramica dei tre dataset esposti --------------------------------------
 
-# Informazioni di alto livello su ciascun .rda
+# 2. Panoramica dei dataset --------------------------------------------------
+
 data(package = "golDatasets")$results[, c("Item", "Title")]
 
-# Dimensioni e tipo
+# Dimensioni dei dataset esposti
 sapply(
   list(
     gol_inapp_mensile = gol_inapp_mensile,
     gol_storico_regionale = gol_storico_regionale,
+    gol_storia_volumi = gol_storia_volumi,
+    gol_storia_caratteristiche = gol_storia_caratteristiche,
+    gol_storia_esiti = gol_storia_esiti,
     cob_regionale_trimestrale = cob_regionale_trimestrale,
     gol_method_ruptures = gol_method_ruptures,
-    gol_rescan_recommendations = gol_rescan_recommendations
+    gol_rescan_recommendations = gol_rescan_recommendations,
+    storico_decoder = storico_decoder
   ),
   function(x) c(nrow = nrow(x), ncol = ncol(x))
 )
 
-# Schema rapido
-str(gol_inapp_mensile, max.level = 1)
-str(gol_storico_regionale, max.level = 1)
-str(cob_regionale_trimestrale, max.level = 1)
+
+# 3. Storia lunga 2022-2025: copertura ---------------------------------------
+
+# Date distinte coperte
+gol_storia_volumi[, uniqueN(data_riferimento)]
+range(gol_storia_volumi$data_riferimento)
+
+# Variabili presenti per ciascun dataset di storia
+gol_storia_volumi[, .N, by = variabile][order(-N)]
+gol_storia_caratteristiche[, .N, by = .(caratteristica, modalita)][
+  order(caratteristica, -N)
+]
+gol_storia_esiti[, .N, by = variabile][order(-N)]
+
+# Verifica delle 3 rotture metodologiche
+gol_method_ruptures
 
 
-# 3. INAPP Focus GOL: copertura e contenuto ----------------------------------
+# 4. Grafici - Presi in carico ------------------------------------------------
 
-# Date disponibili
-sort(unique(gol_inapp_mensile$data_riferimento))
-
-# Tavole e variabili
-gol_inapp_mensile[, .N, by = .(tavola, variabile)][order(tavola, variabile)]
-
-# Etichette regionali (canoniche)
-sort(unique(gol_inapp_mensile$etichetta))
-
-# Esempio: presi in carico totali (tav 2.2) per regione, ultima data
-ultima <- max(gol_inapp_mensile$data_riferimento)
-gol_inapp_mensile[
-  tavola == 2.2 &
-    data_riferimento == ultima &
-    dimensione == "regione" &
-    variabile == "presi_in_carico" &
-    percorso == "",
-  .(regione = etichetta, presi_in_carico = valore)
-][order(-presi_in_carico)]
-
-
-# 4. gol_extract_series(): estrazione strutturata ----------------------------
-
-# 4.1 Serie singola - inferenza automatica della tavola
-s_er <- gol_extract_series(
-  variabile = "occupati_totale",
-  etichetta = "Emilia-Romagna"
+# 4.1 Italia, serie completa 2022-2025
+serie_pic_italia <- gol_storia_volumi_series(
+  variabile = "presi_in_carico_totale",
+  regione = "Totale"
 )
-s_er # 12 punti (Jun 2024 + 11 mesi 2025)
-
-# 4.2 Multi-regione
-s_multi <- gol_extract_series(
-  variabile = "raggiunti",
-  etichetta = c("Lombardia", "Lazio", "Campania", "Sicilia")
-)
-s_multi[, .N, by = regione]
-
-# 4.3 Override esplicito della tavola (per variabili meno comuni)
-s_perc <- gol_extract_series(
-  variabile = "1_reinserimento_lavorativo_ass",
-  etichetta = c("Emilia-Romagna", "Lombardia"),
-  tavola = 1.2
-)
-head(s_perc)
-
-
-# 5. plot_timeline() con rotture annotate ------------------------------------
-
-# 5.1 Singola regione + rotture 2025
 plot_timeline(
-  s_er,
+  serie_pic_italia,
   ruptures = gol_method_ruptures,
-  title = "Occupati GOL - Emilia-Romagna",
-  y_label = "N. occupati"
+  title = "Presi in carico GOL - Italia, 2022-2025",
+  subtitle = "Integrazione storico ANPAL/MLPS + INAPP mensile",
+  y_label = "N. presi in carico"
 )
 
-# 5.2 Multi-regione, palette CVD-safe Okabe-Ito
+# 4.2 Confronto multi-regione (4 grandi regioni)
+serie_pic_multi <- gol_storia_volumi_series(
+  variabile = "presi_in_carico_totale",
+  regione = c("Lombardia", "Lazio", "Campania", "Sicilia")
+)
 plot_timeline(
-  s_multi,
+  serie_pic_multi,
   group = "regione",
   ruptures = gol_method_ruptures,
-  title = "Raggiunti GOL per regione"
+  title = "Presi in carico GOL - 4 regioni a confronto",
+  y_label = "N. presi in carico"
 )
 
-# 5.3 Multi-percorso (loop di gol_extract_series + rbindlist)
+# 4.3 Per percorso GOL (5 percorsi, decomposizione)
 percorsi <- c(
-  "1_reinserimento_lavorativo_ass",
-  "2_aggiornamento_upskilling_ass",
-  "3_riqualificazione_reskilling_ass",
-  "4_lavoro_inclusione_ass",
-  "5_ricollocazione_collettiva_ass"
+  "1_reinserimento_lavorativo",
+  "2_aggiornamento_upskilling",
+  "3_riqualificazione_reskilling",
+  "4_lavoro_inclusione",
+  "5_ricollocazione_collettiva"
 )
-serie_percorsi <- rbindlist(lapply(percorsi, function(v) {
-  s <- gol_extract_series(variabile = v, etichetta = "Lombardia", tavola = 1.2)
-  s[, percorso := sub("_ass$", "", v)]
-  s[]
-}))
+serie_percorsi <- gol_storia_volumi_series(
+  variabile = "presi_in_carico_ass",
+  regione = "Totale",
+  percorso = percorsi
+)
 plot_timeline(
   serie_percorsi,
   group = "percorso",
   ruptures = gol_method_ruptures,
-  title = "Presi in carico per percorso - Lombardia"
+  title = "Presi in carico per percorso GOL - Italia",
+  y_label = "N. presi in carico"
 )
 
 
-# 6. Storico GOL 2022-2025: qualita' e provenienza ---------------------------
+# 5. Grafici - Caratteristiche dei beneficiari -------------------------------
 
-# 6.1 Distribuzione di severita' delle estrazioni
-q <- gol_storico_quality()
-q[, .N, by = severity][order(severity)]
+# 5.1 Composizione di genere (% riga)
+serie_genere <- gol_storia_caratteristiche_series(
+  caratteristica = "genere",
+  modalita = c("Maschi", "Femmine"),
+  regione = "Totale"
+)
+plot_timeline(
+  serie_genere,
+  group = "modalita",
+  ruptures = gol_method_ruptures,
+  title = "Composizione di genere dei beneficiari GOL",
+  subtitle = "Italia, % presi in carico"
+)
 
-# 6.2 File problematici (rescan recommendations)
-gol_rescan_recommendations
+# 5.2 Classi di eta'
+serie_eta <- gol_storia_caratteristiche_series(
+  caratteristica = "classe_eta",
+  modalita = c("15-29", "30-54", "55+"),
+  regione = "Totale"
+)
+plot_timeline(
+  serie_eta,
+  group = "modalita",
+  ruptures = gol_method_ruptures,
+  title = "Composizione per classe di eta'",
+  subtitle = "Italia, % presi in carico"
+)
 
-# 6.3 Tracciatura della fonte (originale vs rimpiazzata vs parziale)
-gol_storico_regionale[, .N, by = rescan_severity]
+# 5.3 Cittadinanza
+serie_citt <- gol_storia_caratteristiche_series(
+  caratteristica = "cittadinanza",
+  modalita = c("Italiana", "Straniera"),
+  regione = "Totale"
+)
+plot_timeline(
+  serie_citt,
+  group = "modalita",
+  ruptures = gol_method_ruptures,
+  title = "Composizione per cittadinanza"
+)
 
-# 6.4 Verifica del rimpiazzo INAPP A1/1.2: 22 anchor per file (era 1-3)
-gol_storico_regionale[
-  ente == "INAPP" & tema == "A1" & caption_num == "1.2",
-  .(n_anchor = uniqueN(anchor), n_col = uniqueN(col_index)),
-  by = file
-][order(file)]
-
-
-# 7. COB INPS: indicatori derivati -------------------------------------------
-
-ind <- cob_compute_indicators()
-str(ind, max.level = 1)
-
-# 7.1 Saldo netto trimestrale top 5 regioni 2025
-ind[anno == 2025 & trimestre == 3, .(regione, saldo_rapporti)][order(
-  -saldo_rapporti
-)][1:5]
-
-# 7.2 Indice di rotazione contrattuale (rapporti / lavoratori distinti)
-ind[
-  regione == "Emilia-Romagna" & anno >= 2023,
-  .(anno, trimestre, rotation_avviamenti, rotation_cessazioni)
-]
-
-# 7.3 Variazione YoY degli avviamenti
-ind[
-  regione == "Lombardia" & anno >= 2018,
-  .(anno, trimestre, yoy_avviamenti = round(yoy_avviamenti, 3))
-]
+# 5.4 Durata della disoccupazione precedente
+serie_dur <- gol_storia_caratteristiche_series(
+  caratteristica = "durata_disoccupazione",
+  regione = "Totale"
+)
+plot_timeline(
+  serie_dur,
+  group = "modalita",
+  ruptures = gol_method_ruptures,
+  title = "Durata disoccupazione - quote di lungo periodo",
+  y_label = "% presi in carico"
+)
 
 
-# 8. Plot COB ----------------------------------------------------------------
+# 6. Grafici - Esiti del programma -------------------------------------------
+
+# 6.1 LEP - 6 prestazioni essenziali, trend mensile 2024-2025
+leps <- c("lep_e", "lep_f1", "lep_f2", "lep_h", "lep_j", "lep_o")
+serie_lep <- rbindlist(lapply(leps, function(v) {
+  gol_storia_esiti_series(variabile = v, regione = "Totale")[, lep := v]
+}))
+plot_timeline(
+  serie_lep,
+  group = "lep",
+  ruptures = gol_method_ruptures,
+  title = "Prestazioni LEP - Italia",
+  y_label = "N. beneficiari LEP",
+  date_breaks = "3 months"
+)
+
+# 6.2 Politiche attivate vs raggiunti (volumi vs platea)
+serie_politiche <- rbindlist(list(
+  gol_storia_esiti_series(variabile = "raggiunti", regione = "Totale")[,
+    serie := "Raggiunti"
+  ],
+  gol_storia_esiti_series(variabile = "con_politica", regione = "Totale")[,
+    serie := "Con politica attivata"
+  ],
+  gol_storia_esiti_series(variabile = "tirocinio_co", regione = "Totale")[,
+    serie := "In tirocinio"
+  ]
+))
+plot_timeline(
+  serie_politiche,
+  group = "serie",
+  ruptures = gol_method_ruptures,
+  title = "Raggiunti, con politica, tirocini - Italia"
+)
+
+# 6.3 Esiti occupazionali storici (tasso a 60gg, era ANPAL)
+serie_t60 <- gol_storia_esiti_series(
+  variabile = "tasso_occupati_60gg",
+  regione = "Totale"
+)
+plot_timeline(
+  serie_t60,
+  title = "Tasso di occupazione a 60 giorni - Italia",
+  subtitle = "Serie storica ANPAL gennaio-aprile 2023",
+  y_label = "% occupati / presi in carico"
+)
+
+# 6.4 Occupazione totale 2024-2025 multi-regione
+serie_occ <- gol_storia_esiti_series(
+  variabile = "occupati_totale",
+  regione = c("Emilia-Romagna", "Lombardia", "Campania", "Sicilia")
+)
+plot_timeline(
+  serie_occ,
+  group = "regione",
+  ruptures = gol_method_ruptures,
+  title = "Occupati alla data di riferimento",
+  y_label = "N. occupati"
+)
+
+
+# 7. Vulnerabilita' e target PNRR (v0.7-0.8) --------------------------------
+
+# 7.1 Target patto di servizio per Italia (numerosita' per target)
+serie_target <- gol_storia_caratteristiche_series(
+  caratteristica = "target_patto_servizio",
+  regione = "Totale"
+)
+plot_timeline(
+  serie_target,
+  group = "modalita",
+  ruptures = gol_method_ruptures,
+  title = "Beneficiari con patto di servizio per target PNRR",
+  subtitle = "Italia, valori assoluti",
+  date_breaks = "3 months"
+)
+
+# 7.2 Vulnerabilita' per percorso GOL
+serie_vuln <- gol_storia_caratteristiche_series(
+  caratteristica = "vulnerabilita",
+  modalita = c("donne", "disocc_ge6mesi", "under_30", "over_55", "disabili")
+)
+plot_timeline(
+  serie_vuln,
+  group = "modalita",
+  ruptures = gol_method_ruptures,
+  title = "Caratteristiche di vulnerabilita' per percorso GOL",
+  subtitle = "Italia, sub-categorie",
+  date_breaks = "2 months"
+)
+
+
+# 8. COB INPS - mercato del lavoro -------------------------------------------
+
+ind_cob <- cob_compute_indicators()
 
 # 8.1 Saldo netto multi-regione 2017-2025
 plot_timeline(
-  ind[
-    regione %in% c("Emilia-Romagna", "Lombardia", "Veneto"),
+  ind_cob[
+    regione %in% c("Lombardia", "Emilia-Romagna", "Lazio", "Sicilia"),
     .(data = data_inizio_trimestre, valore = saldo_rapporti, regione)
   ],
   group = "regione",
   date_breaks = "1 year",
-  title = "Saldo netto avviamenti - cessazioni",
+  title = "Saldo netto avviamenti - cessazioni (rapporti)",
+  subtitle = "COB INPS, 2017-Q1 -> 2025-Q3",
   y_label = "Saldo trimestrale (rapporti)"
 )
 
-# 8.2 Confronto rotazione Nord vs Sud
+# 8.2 Indice di rotazione (rapporti / lavoratori) - Nord vs Sud
 plot_timeline(
-  ind[
+  ind_cob[
     regione %in% c("Lombardia", "Calabria"),
     .(data = data_inizio_trimestre, valore = rotation_avviamenti, regione)
   ],
   group = "regione",
   date_breaks = "1 year",
-  title = "Indice di rotazione (rapporti / lavoratori)",
-  y_label = "Rapporti per lavoratore"
+  title = "Rotazione contrattuale - rapporti per lavoratore",
+  y_label = "Rapporti / lavoratore"
+)
+
+# 8.3 Variazione YoY degli avviamenti - Italia (Totale)
+# Ricostruisce un aggregato sommando tutte le regioni
+italia_cob <- ind_cob[,
+  .(
+    avviamenti = sum(avviamenti_rapporti, na.rm = TRUE)
+  ),
+  by = .(anno, trimestre, data = data_inizio_trimestre)
+]
+italia_cob[, yoy := avviamenti / shift(avviamenti, 4) - 1]
+plot_timeline(
+  italia_cob[!is.na(yoy), .(data, valore = yoy * 100)],
+  date_breaks = "1 year",
+  title = "Variazione YoY avviamenti - Italia",
+  y_label = "Variazione % sullo stesso trimestre anno prec."
 )
 
 
 # 9. Merge GOL + COB sulla chiave regionale ----------------------------------
 
-# Stesse 21 etichette canoniche: il join e' diretto.
-occupati_gol <- gol_extract_series(variabile = "occupati_totale")[
+# Occupati GOL ultima data
+occ_gol <- gol_storia_esiti_series(variabile = "occupati_totale")[
   data == max(data),
   .(regione, occupati_gol = valore)
 ]
-cob_2025 <- ind[
+
+# Avviamenti COB 2025
+cob_2025 <- ind_cob[
   anno == 2025,
   .(avviamenti_2025 = sum(avviamenti_rapporti, na.rm = TRUE)),
   by = regione
 ]
-panel <- merge(occupati_gol, cob_2025, by = "regione")
+
+panel <- merge(occ_gol, cob_2025, by = "regione")
 panel[, quota := occupati_gol / avviamenti_2025]
 panel[order(-quota)]
 
-# 10. Help e documentazione --------------------------------------------------
 
-# Riferimenti rapidi
+# 10. Diagnostica qualita' ---------------------------------------------------
+
+# Severita' per (file, tema, caption_num)
+q <- gol_storico_quality()
+q[, .N, by = severity][order(severity)]
+
+# Raccomandazioni di re-estrazione
+gol_rescan_recommendations
+
+# Provenienza delle righe in gol_storico_regionale
+gol_storico_regionale[, .N, by = rescan_severity]
+
+# Distribuzione di confidenza nel decoder semantico
+storico_decoder[, .N, by = .(tema, confidenza)][order(tema, confidenza)]
+
+# 11. Riferimenti rapidi (help) ----------------------------------------------
+
+# Dataset
 # ?gol_inapp_mensile
+# ?gol_storia_volumi
+# ?gol_storia_caratteristiche
+# ?gol_storia_esiti
 # ?gol_storico_regionale
 # ?cob_regionale_trimestrale
 # ?gol_method_ruptures
 # ?gol_rescan_recommendations
+# ?storico_decoder
+
+# Funzioni
 # ?gol_extract_series
+# ?gol_storia_volumi_series
+# ?gol_storia_caratteristiche_series
+# ?gol_storia_esiti_series
+# ?gol_decode_storico
 # ?cob_compute_indicators
 # ?gol_storico_quality
 # ?plot_timeline
 # ?build_gol_datasets
+# ?build_inapp_focus_long
 
-# Vignette
-vignette("merge-gol-cob", package = "golDatasets")
+# Vignette: esempi narrativi con plot annotati
+# vignette("merge-gol-cob", package = "golDatasets")
