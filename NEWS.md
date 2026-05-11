@@ -1,3 +1,52 @@
+# golDatasets 0.8.0
+
+## Nuovi mapper INAPP focus_gol_all
+
+* **`.map_tab_1_3()`**: caratteristiche socio-anagrafiche per regione,
+  % riga. Schema gestisce sia 10 colonne (eta/cittadinanza fuse) sia
+  12 colonne (separate). 22 regioni × 9 modalita' (Maschi, Femmine,
+  15-29, 30-54, 55+, Italiana, Straniera, ge_6mesi, ge_12mesi).
+* **`.map_tab_1_5_per_percorso()`**: variante schema della tab 1.5
+  presente nei report mensili 3-16/2025. 5 percorsi GOL × 7 variabili
+  di vulnerabilita' (raggiunti, vulnerabili, vulnerabili_pc, donne,
+  disocc_ge6mesi, under_30, over_55, disabili).
+* Orchestratore `build_inapp_focus_long()` esteso: per tab 1.5 prova
+  prima il mapper "per regione" e in fallback quello "per percorso".
+
+## Dataset aggiornati
+
+| Dataset | v0.7.0 | v0.8.0 |
+|---|---:|---:|
+| `gol_storia_caratteristiche` | 7.215 | **9.767** |
+| `gol_storia_esiti` | 15.515 | 15.515 |
+
+Breakdown caratteristiche v0.8.0:
+
+| caratteristica | righe |
+|---|---:|
+| classe_eta | 3.119 |
+| genere | 2.290 |
+| cittadinanza | 2.270 |
+| durata_disoccupazione | 1.662 |
+| target_patto_servizio | 219 |
+| vulnerabilita | 207 |
+
+12 date INAPP (2024-06 → 2025-12) coperte per tutte le caratteristiche
+da tab 1.3.
+
+## Future work (v0.9.0)
+
+* **Tab 1.4** composizione per percorso (% colonna): schema a sezioni,
+  ma duplica info gia' presente in altre tabelle (caratteristiche x
+  percorso da 1.5 per percorso). Da valutare se il valore aggiunto
+  giustifica un mapper dedicato.
+* **Tab 1.6** patto di servizio per target × caratteristiche: schema
+  a sezioni con 5 colonne target. Richiede mapping target_pnrr ×
+  caratteristica × modalita.
+* **Tab 1.7** composizione per regione (38 colonne irregolari):
+  necessita di header recovery dedicato per le varie sotto-colonne
+  (LEP, formazione, tirocini, CO).
+
 # golDatasets 0.7.0
 
 ## Java + tabula attivati
