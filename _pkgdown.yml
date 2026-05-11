@@ -22,6 +22,12 @@ reference:
   contents:
   - plot_timeline
 
+- title: Qualita' delle estrazioni
+  desc: Valutazione delle estrazioni PDF e identificazione delle tavole da ri-estrarre.
+  contents:
+  - gol_storico_quality
+  - gol_quality_classify
+
 - title: Dataset
   desc: Dataset esposti dal package, accessibili con `data()` o direttamente come oggetti.
   contents:
@@ -29,6 +35,7 @@ reference:
   - gol_storico_regionale
   - cob_regionale_trimestrale
   - gol_method_ruptures
+  - gol_rescan_recommendations
 
 navbar:
   structure:

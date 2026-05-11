@@ -80,7 +80,7 @@ build_gol_datasets <- function(
 
   # 1.2 Costruzione dataset --------------------------------------------------
   gol_inapp_mensile <- .build_gol_inapp_mensile(paths$inapp)
-  gol_storico_regionale <- .build_gol_storico_regionale(long_files)
+  gol_storico_regionale <- .build_gol_storico_regionale(long_files, input_root)
   cob_regionale_trimestrale <- .build_cob_regionale_trimestrale(paths$cob)
 
   # 1.3 Salvataggio .rda -----------------------------------------------------
@@ -154,8 +154,16 @@ build_gol_datasets <- function(
 # 3. Helper: storico GOL temi stabili ----------------------------------------
 
 #' Costruisce `gol_storico_regionale` da `dataset_long/gol_{A1,B,F,H}_long.csv`
+#'
+#' Per il caso INAPP A1/1.2 (estrazione fallita nel ~91% dei file di
+#' `dataset_long/`, vedi `gol_storico_quality()`), sostituisce le righe rotte
+#' con la versione decodificata di `INAPP GOL/csv_long/tab_1_2_long.csv`.
+#' Aggiunge una colonna `rescan_severity` per tracciare la provenienza.
+#'
+#' @param files  Vettore dei 4 CSV `dataset_long/gol_{A1,B,F,H}_long.csv`.
+#' @param inapp_root  Cartella radice degli output `INAPP GOL/csv_long/`.
 #' @noRd
-.build_gol_storico_regionale <- function(files) {
+.build_gol_storico_regionale <- function(files, inapp_root) {
   dt <- data.table::rbindlist(
     lapply(files, function(f) {
       data.table::fread(
@@ -183,7 +191,133 @@ build_gol_datasets <- function(
   dt[, valore_num := as.numeric(valore_num)]
   dt[, col_index := as.integer(col_index)]
   dt[, page := as.integer(page)]
+  dt[, rescan_severity := "ok"]
+
+  # Rimpiazzo INAPP A1/1.2: 10-11 file con extraction fallita
+  dt <- .replace_inapp_a1_12(dt, inapp_root)
+
+  # Marca i rimanenti file ANPAL con n_anchor < 21 come rescan_low
+  dt <- .flag_partial_files(dt)
+
   data.table::setkey(dt, tema, file, anchor, col_index)
+  dt[]
+}
+
+#' Sostituisce le righe INAPP A1/1.2 inaffidabili con la versione INAPP csv_long
+#' @noRd
+.replace_inapp_a1_12 <- function(dt, inapp_root) {
+  inapp_csv <- file.path(
+    inapp_root,
+    "INAPP GOL",
+    "csv_long",
+    "tab_1_2_long.csv"
+  )
+  if (!file.exists(inapp_csv)) {
+    warning(
+      "File INAPP tab_1_2 non trovato: ",
+      inapp_csv,
+      "\nLo storico mantiene le righe INAPP A1/1.2 originali (rotte).",
+      call. = FALSE
+    )
+    return(dt)
+  }
+
+  # 1. Identifica file INAPP A1/1.2 da rimpiazzare (qualunque conteggio
+  # anchor): l'estrazione `dataset_long/` non e' affidabile per questa
+  # combinazione e l'alternativa esiste sempre.
+  to_replace <- unique(dt[
+    ente == "INAPP" & tema == "A1" & caption_num == "1.2",
+    .(file, data_riferimento)
+  ])
+  if (nrow(to_replace) == 0L) {
+    return(dt)
+  }
+
+  # 2. Rimuovi le righe rotte
+  dt <- dt[!(ente == "INAPP" & tema == "A1" & caption_num == "1.2")]
+
+  # 3. Carica INAPP csv_long e mappa nello schema gol_storico_regionale
+  inapp <- data.table::fread(inapp_csv)
+  inapp[, data_riferimento := data.table::as.IDate(data_riferimento)]
+
+  # Tieni solo le date che corrispondono a file INAPP nello storico
+  inapp <- inapp[data_riferimento %in% to_replace$data_riferimento]
+  if (nrow(inapp) == 0L) {
+    return(dt)
+  }
+
+  inapp <- inapp[etichetta %in% .canonical_regioni]
+  inapp <- inapp[!is.na(valore)]
+
+  # Ordine canonico delle 10 colonne (5 percorsi x {abs, pc})
+  variable_order <- c(
+    "1_reinserimento_lavorativo_ass",
+    "1_reinserimento_lavorativo_pc",
+    "2_aggiornamento_upskilling_ass",
+    "2_aggiornamento_upskilling_pc",
+    "3_riqualificazione_reskilling_ass",
+    "3_riqualificazione_reskilling_pc",
+    "4_lavoro_inclusione_ass",
+    "4_lavoro_inclusione_pc",
+    "5_ricollocazione_collettiva_ass",
+    "5_ricollocazione_collettiva_pc"
+  )
+  col_map <- data.table::data.table(
+    variabile = variable_order,
+    col_index = seq_along(variable_order) - 1L
+  )
+  inapp <- merge(inapp, col_map, by = "variabile", all.x = FALSE)
+
+  # Mappa file storico via data_riferimento
+  inapp <- merge(inapp, to_replace, by = "data_riferimento", all.x = FALSE)
+
+  unit_map <- c(
+    valore_assoluto = "count",
+    percentuale_riga = "percent",
+    percentuale = "percent"
+  )
+
+  injected <- data.table::data.table(
+    file = inapp$file,
+    ente = "INAPP",
+    data_riferimento = inapp$data_riferimento,
+    tema = "A1",
+    caption_num = "1.2",
+    caption_title = inapp$titolo_tabella,
+    page = NA_integer_,
+    anchor = inapp$etichetta,
+    col_index = inapp$col_index,
+    header_above = paste0(
+      "INAPP_csv_long | ",
+      inapp$variabile,
+      " | ",
+      inapp$unita_misura
+    ),
+    valore_raw = format(inapp$valore, scientific = FALSE, trim = TRUE),
+    valore_num = inapp$valore,
+    unit_guess = unname(unit_map[inapp$unita_misura]),
+    quality_flag = "ok",
+    rescan_severity = "replaced_from_inapp_csv_long"
+  )
+
+  data.table::rbindlist(list(dt, injected), use.names = TRUE, fill = TRUE)
+}
+
+#' Marca i file con copertura regionale parziale (19-20 anchor) come rescan_low
+#' @noRd
+.flag_partial_files <- function(dt) {
+  partial <- dt[,
+    .(n_anchor = data.table::uniqueN(anchor)),
+    by = .(file, tema, caption_num)
+  ][n_anchor >= 19 & n_anchor < 21, .(file, tema, caption_num)]
+  if (nrow(partial) == 0L) {
+    return(dt)
+  }
+  dt[
+    partial,
+    rescan_severity := "rescan_low",
+    on = c("file", "tema", "caption_num")
+  ]
   dt[]
 }
 

@@ -178,7 +178,28 @@ plot_timeline(
 )
 ```
 
-## 5.2 Plot COB
+## 5.2 Qualità delle estrazioni storiche
+
+Il dataset `gol_storico_regionale` deriva dall'estrazione automatica di 27 PDF di monitoraggio GOL. Non tutte le combinazioni `(file, tema, caption_num)` hanno la stessa qualità: la funzione `gol_storico_quality()` calcola metriche di copertura e completamento e classifica ogni estrazione in 5 tier di severità.
+
+```{r quality}
+q <- gol_storico_quality()
+q[, .N, by = severity][order(severity)]
+```
+
+Le anomalie residue (tutte non `ok`) sono esposte come dataset `gol_rescan_recommendations`. La maggior parte sono **file ANPAL 2022-2024 con 19-20 regioni invece di 21**, che si possono recuperare ri-estraendo direttamente dal PDF.
+
+```{r recommendations}
+gol_rescan_recommendations[, .(file, tema, caption_num, n_anchor, severity)]
+```
+
+Il caso più grave (INAPP A1/1.2 — 10 file su 11 con extraction fallita in `dataset_long/`) è già stato risolto in fase di build sostituendo le righe rotte con la versione decodificata di `INAPP GOL/csv_long/tab_1_2_long.csv`. La colonna `rescan_severity` traccia la provenienza di ciascuna riga.
+
+```{r provenienza}
+gol_storico_regionale[, .N, by = rescan_severity]
+```
+
+## 5.3 Plot COB
 
 Per le serie COB (che non hanno rotture metodologiche note) il parametro `ruptures` rimane `NULL` e si usa una palette CVD-safe (Okabe-Ito) per il confronto multi-regione.
 

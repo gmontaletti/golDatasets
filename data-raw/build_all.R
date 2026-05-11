@@ -16,6 +16,7 @@ suppressPackageStartupMessages(library(data.table))
 # Sorgenti R: load_all manuale (non c'e' ancora DESCRIPTION / NAMESPACE).
 source("R/utils-regioni.R")
 source("R/build_datasets.R")
+source("R/gol_quality.R")
 
 # 2. Build -------------------------------------------------------------------
 out <- build_gol_datasets(
@@ -66,6 +67,20 @@ stopifnot(
   )
 )
 message("Tutte le verifiche superate.")
+
+# 3.5 Snapshot raccomandazioni di rescanning ---------------------------------
+gol_rescan_recommendations <- gol_storico_quality(out$gol_storico_regionale)
+gol_rescan_recommendations <- gol_rescan_recommendations[severity != "ok"]
+save(
+  gol_rescan_recommendations,
+  file = "data/gol_rescan_recommendations.rda",
+  compress = "xz"
+)
+message(
+  "Salvato: data/gol_rescan_recommendations.rda (",
+  nrow(gol_rescan_recommendations),
+  " righe non-ok)"
+)
 
 # 4. File generati -----------------------------------------------------------
 message("\nFile in data/:")

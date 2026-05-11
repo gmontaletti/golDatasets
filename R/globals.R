@@ -48,5 +48,20 @@ utils::globalVariables(c(
   # plot_timeline
   "evento",
   "label",
-  "."
+  ".",
+  # gol_quality
+  "n_anchor",
+  "pct_na_valore",
+  "n_header_variants",
+  "n_col_index",
+  "header_per_col",
+  "n_rows",
+  "severity",
+  "rescan_severity",
+  "header_above",
+  "caption_num",
+  "caption_title",
+  "ente",
+  "file",
+  "titolo_tabella"
 ))

@@ -1,3 +1,39 @@
+# golDatasets 0.4.0
+
+## Quality assessment
+
+* `gol_quality_classify(n_anchor, pct_na_valore, n_header_variants,
+  n_col_index)`: classificatore basato su 4 metriche, produce 5 tier di
+  severita': `ok`, `review`, `rescan_low`, `rescan_high`,
+  `rescan_critical`.
+* `gol_storico_quality(data = NULL)`: applica il classificatore al
+  dataset storico e produce una tabella diagnostica per
+  `(file, tema, caption_num)`.
+
+## Rebuild di gol_storico_regionale
+
+* **INAPP A1/1.2**: le 10-11 estrazioni rotte (1-3 anchor invece di 21)
+  in `dataset_long/gol_A1_long.csv` sono sostituite automaticamente con
+  la versione decodificata di `INAPP GOL/csv_long/tab_1_2_long.csv`.
+  Risultato: tutti i file INAPP per quella tavola hanno ora 22 anchor
+  e 10 col_index (5 percorsi × {abs, pc}).
+* Aggiunta colonna `rescan_severity` con valori `ok`, `rescan_low`,
+  `replaced_from_inapp_csv_long` per tracciare la provenienza.
+* Le 3 estrazioni ANPAL 2022 e 3 ANPAL/ALTRO F/2.1 con 19-20 anchor
+  sono marcate `rescan_low` e raccolte in
+  `gol_rescan_recommendations` come future-work per re-estrazione
+  manuale.
+
+## Dataset esposti
+
+* `gol_rescan_recommendations`: snapshot delle anomalie residue dopo
+  la build, una riga per `(file, tema, caption_num)` da ri-estrarre.
+
+## Documentazione
+
+* Vignette `merge-gol-cob` estesa con sezione "Qualità delle
+  estrazioni storiche".
+
 # golDatasets 0.3.0
 
 ## Funzioni
