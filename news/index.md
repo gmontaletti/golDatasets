@@ -1,5 +1,58 @@
 # Changelog
 
+## golDatasets 0.7.0
+
+### Java + tabula attivati
+
+Con l’installazione di Temurin 21 il backend `tabula` torna disponibile.
+Il parser `estrai_tavole_focus_gol_all.py` ora estrae con `tabula`
+(invece di `pdfplumber`), con netto miglioramento sulla qualita’ di
+estrazione delle tabelle complesse:
+
+| Tabella                 | pdfplumber (mediana) | tabula (mediana) |
+|-------------------------|---------------------:|-----------------:|
+| 1.3 caratteristiche     |            2.5 righe |           **24** |
+| 1.4 percorsi            |                    4 |           **27** |
+| 1.5 vulnerabilita’      |                    3 |           **19** |
+| 2.3 formazione digitale |                  6.5 |            **8** |
+
+### Mapper INAPP focus_gol_all (parziali)
+
+- [`build_inapp_focus_long()`](https://gmontaletti.github.io/golDatasets/reference/build_inapp_focus_long.md):
+  orchestratore che invoca i mapper su tutti i CSV in
+  `INAPP GOL/focus_gol_all/<report_id>/`.
+- `.map_tab_1_5()`: tabella 1.5 “patto di servizio attivo per target ×
+  regione” - **219 righe** estratte (~2 report con struttura canonica).
+  Output: `caratteristica = "target_patto_servizio"` con modalita
+  `Totale, SFL_domanda_accolta, ADI_attivabili, NASpI_domanda_presentata, Altri_disoccupati`.
+- `.map_tab_2_3()`: tabella “corsi di formazione competenze digitali”
+  per dimensione (area geografica, percorso, eta’, genere, …) - **88
+  righe** estratte (solo report 17/2025 ha la struttura canonica).
+  Output: `corsi_totali`, `corsi_completati` con `unita = count` o
+  `percentage`.
+
+### Dataset aggiornati
+
+| Dataset                      | v0.6.0 |     v0.7.0 |
+|------------------------------|-------:|-----------:|
+| `gol_storia_caratteristiche` |  6.996 |  **7.215** |
+| `gol_storia_esiti`           | 15.427 | **15.515** |
+
+### Future work (v0.8.0)
+
+Non ancora coperto dai mapper:
+
+- **Tab 1.3 / 1.4** caratteristiche socio-anagrafiche per regione: 22+
+  righe × 12 report disponibili, ma duplicano informazione già nel tema
+  B del decoder storico. Va decisa la strategia di deduplicazione.
+- **Tab 1.6** patto di servizio per target × caratteristiche
+  trasversali: schema a sezioni complesso, richiede mapper dedicato.
+- **Tab 1.7** composizione patto di servizio per regione: 38 colonne
+  irregolari, richiede header recovery custom.
+- **Tab 1.5** versione “per percorso” (presente nei report mensili in
+  alternativa alla versione “per regione”): mapper aggiuntivo che
+  riconosca lo schema alternativo.
+
 ## golDatasets 0.6.0
 
 ### Refinement del decoder semantico

@@ -106,6 +106,9 @@ visualizzazione.
 - [`cob_compute_indicators()`](https://gmontaletti.github.io/golDatasets/reference/cob_compute_indicators.md)
   : Calcola indicatori derivati dai flussi COB
 
+- [`build_inapp_focus_long()`](https://gmontaletti.github.io/golDatasets/reference/build_inapp_focus_long.md)
+  : Costruisce il long format delle tabelle INAPP focus_gol_all
+
 ## Visualizzazione
 
 Timeline regionali con annotazione delle rotture metodologiche.

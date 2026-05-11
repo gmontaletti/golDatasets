@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golDatasets</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +35,61 @@
 
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.0" id="goldatasets-070">golDatasets 0.7.0<a class="anchor" aria-label="anchor" href="#goldatasets-070"></a></h2>
+<div class="section level3">
+<h3 id="java--tabula-attivati-0-7-0">Java + tabula attivati<a class="anchor" aria-label="anchor" href="#java--tabula-attivati-0-7-0"></a></h3>
+<p>Con l’installazione di Temurin 21 il backend <code>tabula</code> torna disponibile. Il parser <code>estrai_tavole_focus_gol_all.py</code> ora estrae con <code>tabula</code> (invece di <code>pdfplumber</code>), con netto miglioramento sulla qualita’ di estrazione delle tabelle complesse:</p>
+<table class="table"><thead><tr><th>Tabella</th>
+<th align="right">pdfplumber (mediana)</th>
+<th align="right">tabula (mediana)</th>
+</tr></thead><tbody><tr><td>1.3 caratteristiche</td>
+<td align="right">2.5 righe</td>
+<td align="right"><strong>24</strong></td>
+</tr><tr><td>1.4 percorsi</td>
+<td align="right">4</td>
+<td align="right"><strong>27</strong></td>
+</tr><tr><td>1.5 vulnerabilita’</td>
+<td align="right">3</td>
+<td align="right"><strong>19</strong></td>
+</tr><tr><td>2.3 formazione digitale</td>
+<td align="right">6.5</td>
+<td align="right"><strong>8</strong></td>
+</tr></tbody></table></div>
+<div class="section level3">
+<h3 id="mapper-inapp-focus_gol_all-parziali-0-7-0">Mapper INAPP focus_gol_all (parziali)<a class="anchor" aria-label="anchor" href="#mapper-inapp-focus_gol_all-parziali-0-7-0"></a></h3>
+<ul><li>
+<code><a href="../reference/build_inapp_focus_long.html">build_inapp_focus_long()</a></code>: orchestratore che invoca i mapper su tutti i CSV in <code>INAPP GOL/focus_gol_all/&lt;report_id&gt;/</code>.</li>
+<li>
+<code>.map_tab_1_5()</code>: tabella 1.5 “patto di servizio attivo per target × regione” - <strong>219 righe</strong> estratte (~2 report con struttura canonica). Output: <code>caratteristica = "target_patto_servizio"</code> con modalita <code>Totale, SFL_domanda_accolta, ADI_attivabili, NASpI_domanda_presentata, Altri_disoccupati</code>.</li>
+<li>
+<code>.map_tab_2_3()</code>: tabella “corsi di formazione competenze digitali” per dimensione (area geografica, percorso, eta’, genere, …) - <strong>88 righe</strong> estratte (solo report 17/2025 ha la struttura canonica). Output: <code>corsi_totali</code>, <code>corsi_completati</code> con <code>unita = count</code> o <code>percentage</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="dataset-aggiornati-0-7-0">Dataset aggiornati<a class="anchor" aria-label="anchor" href="#dataset-aggiornati-0-7-0"></a></h3>
+<table class="table"><thead><tr><th>Dataset</th>
+<th align="right">v0.6.0</th>
+<th align="right">v0.7.0</th>
+</tr></thead><tbody><tr><td><code>gol_storia_caratteristiche</code></td>
+<td align="right">6.996</td>
+<td align="right"><strong>7.215</strong></td>
+</tr><tr><td><code>gol_storia_esiti</code></td>
+<td align="right">15.427</td>
+<td align="right"><strong>15.515</strong></td>
+</tr></tbody></table></div>
+<div class="section level3">
+<h3 id="future-work-v080-0-7-0">Future work (v0.8.0)<a class="anchor" aria-label="anchor" href="#future-work-v080-0-7-0"></a></h3>
+<p>Non ancora coperto dai mapper:</p>
+<ul><li>
+<strong>Tab 1.3 / 1.4</strong> caratteristiche socio-anagrafiche per regione: 22+ righe × 12 report disponibili, ma duplicano informazione già nel tema B del decoder storico. Va decisa la strategia di deduplicazione.</li>
+<li>
+<strong>Tab 1.6</strong> patto di servizio per target × caratteristiche trasversali: schema a sezioni complesso, richiede mapper dedicato.</li>
+<li>
+<strong>Tab 1.7</strong> composizione patto di servizio per regione: 38 colonne irregolari, richiede header recovery custom.</li>
+<li>
+<strong>Tab 1.5</strong> versione “per percorso” (presente nei report mensili in alternativa alla versione “per regione”): mapper aggiuntivo che riconosca lo schema alternativo.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.0" id="goldatasets-060">golDatasets 0.6.0<a class="anchor" aria-label="anchor" href="#goldatasets-060"></a></h2>
 <div class="section level3">
