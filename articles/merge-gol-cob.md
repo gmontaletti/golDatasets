@@ -459,7 +459,7 @@ str(ind[1])
 #>  $ yoy_avviamenti       : num NA
 #>  $ yoy_cessazioni       : num NA
 #>  $ yoy_saldo            : num NA
-#>  - attr(*, ".internal.selfref")=<pointer: 0x5573df491010> 
+#>  - attr(*, ".internal.selfref")=<pointer: 0x55cda6d3c010> 
 #>  - attr(*, "sorted")= chr [1:3] "regione" "anno" "trimestre"
 ```
 
